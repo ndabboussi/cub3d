@@ -12,20 +12,7 @@
 
 #include "cub3d.h"
 
-static void	free_map_copy(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
-
-static int	get_max_width(char **map)
+int	get_max_width(char **map)
 {
 	int	i;
 	int	max_width;
@@ -45,7 +32,7 @@ static int	get_max_width(char **map)
 	return (max_width);
 }
 
-static char	**copy_and_normalize_map(char **map, int height, int *width_out)
+char	**copy_and_normalize_map(char **map, int height, int *width_out)
 {
 	char	**copy;
 	int		width;
@@ -84,7 +71,7 @@ static char	**copy_and_normalize_map(char **map, int height, int *width_out)
 	return (copy);
 }
 
-static int	fill(char **map, int x, int y, int height, int width)
+int	fill(char **map, int x, int y, int height, int width)
 {
 	if (x < 0 || y < 0 || y >= height || x >= width)
 		return (0);
@@ -125,10 +112,10 @@ int	flood_fill(t_game *game)
 		map_copy[game->map.player_y][game->map.player_x] = '0';
 	if (!fill(map_copy, game->map.player_x, game->map.player_y, height, width))
 	{
-		free_map_copy(map_copy);
+		free_map(map_copy);
 		return (0);
 	}
-	free_map_copy(map_copy);
+	free_map(map_copy);
 	return (1);
 }
 

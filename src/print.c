@@ -19,7 +19,6 @@ void	ft_putstr(char *str)
 	}
 }
 
-
 void	print_map(char **map)
 {
 	int	i;
