@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 11:55:38 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/23 14:40:05 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:40:46 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,33 +147,33 @@ char	*lecture_map(char *filename)
 	return (content);
 }
 
-int	wall_check(char **map)
-{
-	int	x;
-	int	y;
+// int	wall_check(char **map)
+// {
+// 	int	x;
+// 	int	y;
 
-	if (!map || !map[0])
-		return (-1);
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x] && map[y][x] != '\n')
-		{
-			if ((y == 0 || !map[y + 1] || x == 0 || !map[y][x + 1])
-				&& map[y][x] != '1')
-				return (-1);
-			if (map[y][x] != 'N' && map[y][x] != 'S' && map[y][x] != 'E' && map[y][x] != 'W'
-				&& map[y][x] != '1' && map[y][x] != '0')
-			{
-				return (perror("ya du nimporte quoi dans la map"), -1);
-			}
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
+// 	if (!map || !map[0])
+// 		return (-1);
+// 	y = 0;
+// 	while (map[y])
+// 	{
+// 		x = 0;
+// 		while (map[y][x] && map[y][x] != '\n')
+// 		{
+// 			if ((y == 0 || !map[y + 1] || x == 0 || !map[y][x + 1])
+// 				&& map[y][x] != '1')
+// 				return (-1);
+// 			if (map[y][x] != 'N' && map[y][x] != 'S' && map[y][x] != 'E' && map[y][x] != 'W'
+// 				&& map[y][x] != '1' && map[y][x] != '0')
+// 			{
+// 				return (perror("ya du nimporte quoi dans la map"), -1);
+// 			}
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	return (0);
+// }
 
 char	**ft_map(char *filename)
 {
@@ -188,19 +188,24 @@ char	**ft_map(char *filename)
 	free(content);
 	if (!map)
 		return (perror("Err: map alloc failed\n"), NULL);
-	if (wall_check(map) == -1)
-	{
-		perror("Erreur: la map n'est pas entourée de murs\n");
-		free_map(map);
-		return (NULL);
-	}
+	// if (wall_check(map) == -1)
+	// {
+	// 	perror("Erreur: la map n'est pas entourée de murs\n");
+	// 	free_map(map);
+	// 	return (NULL);
+	// }
 	return (map);
+}
+char *texture_check(game)
+{
+	return (*fin_de_texture)
 }
 
 int	initialize_game(t_map *game, char *filename)
 {
 	int	len;
-
+	char *fin_de_texture;
+	
 	len = ft_strlen(filename);
 	if (filename[len - 1] != 'b' || filename[len - 2] != 'u'
 		|| filename[len - 3] != 'c' || filename[len - 4] != '.')
@@ -210,25 +215,20 @@ int	initialize_game(t_map *game, char *filename)
 		return (perror("échec du chargement de la map\n"), 1);
 	if (check_inside(game) == -1)
 		return (free_map(game->map), 1);
-	flood_fill(game);
+	texture_check(game)
+	
+	flood_fill(*fin de texture);
 	return (0);
 }
 
 int	main(int ac, char **av)
 {
-	t_map	cursor;
 	t_game	game;
 
 	if (ac != 2)
-	{
-		perror("Error\n");
-		return (1);
-	}
-	ft_memset(&cursor, 0, sizeof(t_map));
-	if (initialize_game(&cursor, av[1]))
-		return (1);
-	game.map = cursor;
-	if (display_game(&game))
+		return (perror("Usage: ./cub3D map.cub\n"), 1);
+	ft_memset(&game, 0, sizeof(t_game));
+	if (initialize_game(game, av[1]))
 		return (1);
 	return (0);
 }

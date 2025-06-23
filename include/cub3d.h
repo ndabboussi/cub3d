@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/23 14:43:26 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/23 15:13:04 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,15 @@ typedef struct s_map
 	char	player_dir;
 }	t_map;
 
-typedef struct s_img
+typedef struct s_config
 {
-	void	*floor;
-	void	*wall;
-	void	*player;
-	int		width;
-	int		height;
-}	t_img;
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
+	int		floor_color;
+	int		ceiling_color;
+}	t_config;
 
 typedef struct s_game
 {
