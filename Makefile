@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror -g3
 MLXFLAG = -lmlx -lXext -lX11 -Lminilibx-linux -Iminilibx-linux -lXext -lX11 -lm -lz
 
 LIBFT_DIR = ./libft
-SRCS_DIR = ./srcs/
+SRC_DIR = ./src/
 OBJ_DIR = ./obj/
 INC_DIR = ./include/
 MLX_DIR = ./minilibx-linux/
@@ -31,7 +31,7 @@ $(NAME_EXE): $(OBJ)
 	@echo "$(GREEN)$(NAME_EXE) compiled!$(DEFAULT)"
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) -L$(LIBFT_DIR) -L$(MLX_DIR) -lft -o $(NAME_EXE) $(MLXFLAG)
 
-$(OBJ_DIR)%.o: $(SRCS_DIR)%.c | $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
