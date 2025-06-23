@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndabbous <ndabbous@student.42.fr>          #+#  +:+       +#+        */
+/*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-06-23 12:20:45 by ndabbous          #+#    #+#             */
-/*   Updated: 2025-06-23 12:20:45 by ndabbous         ###   ########.fr       */
+/*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
+/*   Updated: 2025/06/23 14:43:26 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+# pragma once
 
+# include "mlx.h"
 # include "libft.h"
 # include "mlx.h"
 # include <X11/X.h>
@@ -27,7 +27,29 @@
 # include <stdio.h>
 # include <string.h>
 # include <fcntl.h>
-# include <math.h>
+
+typedef struct s_map
+{
+	char	**map;
+	int		player_x;
+	int		player_y;
+	char	player_dir;
+}	t_map;
+
+typedef struct s_img
+{
+	void	*floor;
+	void	*wall;
+	void	*player;
+	int		width;
+	int		height;
+}	t_img;
+
+typedef struct s_game
+{
+	t_config	config;
+	t_map		map;
+}	t_game;
 
 typedef struct s_window
 {
@@ -45,5 +67,3 @@ typedef struct s_world
 	t_window	*mlx;
 	char		*map_name;
 }				t_world;
-
-#endif
