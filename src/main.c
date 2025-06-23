@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-
-
 void	free_map(char **map)
 {
 	int	j;
@@ -31,7 +29,7 @@ void	free_map(char **map)
 }
 
 
-int	check_player(t_map *game)
+int	check_player(t_game *game)
 {
 	int	x;
 	int	y;
@@ -39,16 +37,17 @@ int	check_player(t_map *game)
 
 	nb_p = 0;
 	y = 0;
-	while (game->map[y])
+	while (game->map.map[y])
 	{
 		x = 0;
-		while (game->map[y][x])
+		while (game->map.map[y][x])
 		{
-			if (game->map[y][x] == 'N' || game->map[y][x] == 'S' || game->map[y][x] == 'E' || game->map[y][x] == 'W')
+			if (game->map.map[y][x] == 'N' || game->map.map[y][x] == 'S' \
+				|| game->map.map[y][x] == 'E' || game->map.map[y][x] == 'W')
 			{
 				nb_p++;
-				game->player_x = x;
-				game->player_y = y;
+				game->map.player_x = x;
+				game->map.player_y = y;
 			}
 			x++;
 		}
@@ -59,58 +58,9 @@ int	check_player(t_map *game)
 	return (0);
 }
 
-void	fill(t_map *game, int x, int y, char **map_copy)
+int	check_inside(t_game *game)
 {
-	int	map_height;
-
-	if (!game || !game->map)
-		return ;
-	map_height = 0;
-	while (game->map[map_height])
-		map_height++;
-	if (y < 0 || y >= map_height)
-		return ;
-	if (x < 0 || x >= (int)ft_strlen(map_copy[y]))
-		return ;
-	if (map_copy[y][x] == '1' || map_copy[y][x] == 'V')
-		return ;
-	map_copy[y][x] = 'V';
-	fill(game, x + 1, y, map_copy);
-	fill(game, x - 1, y, map_copy);
-	fill(game, x, y + 1, map_copy);
-	fill(game, x, y - 1, map_copy);
-}
-
-void	flood_fill(t_map *game)
-{
-	char	**map_copy;
-	int		i;
-	int		height;
-
-	if (!game || !game->map)
-		return ;
-	height = 0;
-	while (game->map[height])
-		height++;
-	map_copy = malloc(sizeof(char *) * (height + 1));
-	if (!map_copy)
-		return ;
-	i = -1;
-	while (++i < height)
-	{
-		map_copy[i] = strdup(game->map[i]);
-		if (!map_copy[i])
-			return (free_map(map_copy));
-	}
-	map_copy[height] = NULL;
-	fill(game, game->player_x, game->player_y, map_copy);
-	free_map(map_copy);
-}
-
-
-int	check_inside(t_map *game)
-{
-	if (!game || !game->map)
+	if (!game || !game->map.map)
 		return (perror("impossible de charger la map"), -1);
 	if (check_player(game) == -1)
 		return (perror("erreur player"), -1);
@@ -163,7 +113,8 @@ char	*lecture_map(char *filename)
 // 			if ((y == 0 || !map[y + 1] || x == 0 || !map[y][x + 1])
 // 				&& map[y][x] != '1')
 // 				return (-1);
-// 			if (map[y][x] != 'N' && map[y][x] != 'S' && map[y][x] != 'E' && map[y][x] != 'W'
+// 			if (map[y][x] != 'N' && map[y][x] != 'S' && map[y][x] != 'E'
+//				&& map[y][x] != 'W'
 // 				&& map[y][x] != '1' && map[y][x] != '0')
 // 			{
 // 				return (perror("ya du nimporte quoi dans la map"), -1);
@@ -196,28 +147,28 @@ char	**ft_map(char *filename)
 	// }
 	return (map);
 }
-char *texture_check(game)
-{
-	return (*fin_de_texture)
-}
+// char *texture_check(game)
+// {
+// 	return (*texture_end);
+// }
 
-int	initialize_game(t_map *game, char *filename)
+int	initialize_game(t_game *game, char *filename)
 {
-	int	len;
-	char *fin_de_texture;
-	
+	//char	*texture_end;
+	int		len;
+
 	len = ft_strlen(filename);
 	if (filename[len - 1] != 'b' || filename[len - 2] != 'u'
 		|| filename[len - 3] != 'c' || filename[len - 4] != '.')
 		return (perror("pas de fichier.cub\n"), 1);
-	game->map = ft_map(filename);
-	if (!game->map)
+	game->map.map = ft_map(filename);
+	if (!game->map.map)
 		return (perror("échec du chargement de la map\n"), 1);
 	if (check_inside(game) == -1)
-		return (free_map(game->map), 1);
-	texture_check(game)
-	
-	flood_fill(*fin de texture);
+		return (free_map(game->map.map), 1);
+	//texture_check(game)
+	if (flood_fill(game) < 0)
+		return (1);
 	return (0);
 }
 
@@ -228,7 +179,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (perror("Usage: ./cub3D map.cub\n"), 1);
 	ft_memset(&game, 0, sizeof(t_game));
-	if (initialize_game(game, av[1]))
-		return (1);
+	if (initialize_game(&game, av[1]))
+		return (perror("Error : invalid map\n"), 1);
 	return (0);
 }
