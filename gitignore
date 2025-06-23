@@ -1,0 +1,8 @@
+*/*.o
+/libft/*.o
+/obj/
+.vscode
+.vscode/
+/libft/libft.a
+cub3d
+a.out
