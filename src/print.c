@@ -19,11 +19,6 @@ void	ft_putstr(char *str)
 	}
 }
 
-void	ft_putendl(char *str)
-{
-	ft_putstr(str);
-	ft_putchar('\n');
-}
 
 void	print_map(char **map)
 {
@@ -34,7 +29,8 @@ void	print_map(char **map)
 		return ;
 	while (map[i])
 	{
-		ft_putendl(map[i]);
+		ft_putstr(map[i]);
+		ft_putchar('\n');
 		i++;
 	}
 }
