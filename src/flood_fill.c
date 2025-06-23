@@ -12,46 +12,51 @@
 
 #include "cub3d.h"
 
-int	get_max_width(char **map)
+void	get_map_borders(t_game *game)
 {
 	int	i;
-	int	max_width;
 	int	len;
+	int	max_w;
 
 	i = 0;
-	max_width = 0;
-	while (map[i])
+	max_w = 0;
+	game->map.height = 0;
+	game->map.width = 0;
+	while (game->map.map[i])
 	{
-		len = 0;
-		while (map[i][len])
-			len++;
-		if (len > max_width)
-			max_width = len;
+		game->map.height++;
 		i++;
 	}
-	return (max_width);
+	i = 0;
+	while (game->map.map[i])
+	{
+		len = 0;
+		while (game->map.map[i][len])
+			len++;
+		if (len > max_w)
+			max_w = len;
+		i++;
+	}
+	game->map.width = max_w;
 }
 
-char	**copy_and_normalize_map(char **map, int height, int *width_out)
+char	**normalize_map_copy(t_game *game, char **map)
 {
-	char	**copy;
-	int		width;
 	int		i;
 	int		j;
+	char	**copy;
 
-	width = get_max_width(map);
-	*width_out = width;
-	copy = malloc(sizeof(char *) * (height + 1));
+	copy = malloc(sizeof(char *) * (game->map.height + 1));
 	if (!copy)
 		return (NULL);
 	i = 0;
-	while (i < height)
+	while (i < game->map.height)
 	{
-		copy[i] = malloc(sizeof(char) * (width + 1));
+		copy[i] = malloc(sizeof(char) * (game->map.width + 1));
 		if (!copy[i])
 			return (NULL);
 		j = 0;
-		while (j < width)
+		while (j < game->map.width)
 		{
 			if (j < (int)ft_strlen(map[i]))
 			{
@@ -64,29 +69,29 @@ char	**copy_and_normalize_map(char **map, int height, int *width_out)
 				copy[i][j] = '-';
 			j++;
 		}
-		copy[i][width] = '\0';
+		copy[i][game->map.width] = '\0';
 		i++;
 	}
-	copy[height] = NULL;
+	copy[game->map.height] = NULL;
 	return (copy);
 }
 
-int	fill(char **map, int x, int y, int height, int width)
+int	fill(t_game *game, char **map, int x, int y)
 {
-	if (x < 0 || y < 0 || y >= height || x >= width)
+	if (x < 0 || y < 0 || y >= game->map.height || x >= game->map.width)
 		return (0);
 	if (map[y][x] == '-' || map[y][x] == ' ')
 		return (0);
 	if (map[y][x] == '1' || map[y][x] == 'V')
 		return (1);
 	map[y][x] = 'V';
-	if (!fill(map, x + 1, y, height, width))
+	if (!fill(game, map, x + 1, y))
 		return (0);
-	if (!fill(map, x - 1, y, height, width))
+	if (!fill(game, map, x - 1, y))
 		return (0);
-	if (!fill(map, x, y + 1, height, width))
+	if (!fill(game, map, x, y + 1))
 		return (0);
-	if (!fill(map, x, y - 1, height, width))
+	if (!fill(game, map, x, y - 1))
 		return (0);
 	return (1);
 }
@@ -94,23 +99,16 @@ int	fill(char **map, int x, int y, int height, int width)
 int	flood_fill(t_game *game)
 {
 	char	**map_copy;
-	int		height;
-	int		width;
+	int		i;
 
+	i = 0;
 	if (!game || !game->map.map)
 		return (0);
-	height = 0;
-	while (game->map.map[height])
-		height++;
-	map_copy = copy_and_normalize_map(game->map.map, height, &width);
+	get_map_borders(game);
+	map_copy = normalize_map_copy(game, game->map.map);
 	if (!map_copy)
 		return (perror("Error : alloc failure\n"), 1);
-	if (map_copy[game->map.player_y][game->map.player_x] == 'N'
-		|| map_copy[game->map.player_y][game->map.player_x] == 'S'
-		|| map_copy[game->map.player_y][game->map.player_x] == 'E'
-		|| map_copy[game->map.player_y][game->map.player_x] == 'W')
-		map_copy[game->map.player_y][game->map.player_x] = '0';
-	if (!fill(map_copy, game->map.player_x, game->map.player_y, height, width))
+	if (!fill(game, map_copy, game->map.player_x, game->map.player_y))
 	{
 		free_map(map_copy);
 		return (0);
@@ -118,51 +116,3 @@ int	flood_fill(t_game *game)
 	free_map(map_copy);
 	return (1);
 }
-
-// void	fill(t_game *game, int x, int y, char **map_copy)
-// {
-// 	int	map_height;
-
-// 	if (!game || !game->map.map)
-// 		return ;
-// 	map_height = 0;
-// 	while (game->map.map[map_height])
-// 		map_height++;
-// 	if (y < 0 || y >= map_height)
-// 		return ;
-// 	if (x < 0 || x >= (int)ft_strlen(map_copy[y]))
-// 		return ;
-// 	if (map_copy[y][x] == '1' || map_copy[y][x] == 'V')
-// 		return ;
-// 	map_copy[y][x] = 'V';
-// 	fill(game, x + 1, y, map_copy);
-// 	fill(game, x - 1, y, map_copy);
-// 	fill(game, x, y + 1, map_copy);
-// 	fill(game, x, y - 1, map_copy);
-// }
-
-// void	flood_fill(t_game *game, char **map)
-// {
-// 	char	**map_copy;
-// 	int		i;
-// 	int		height;
-
-// 	if (!map)
-// 		return ;
-// 	height = 0;
-// 	while (map[height])
-// 		height++;
-// 	map_copy = malloc(sizeof(char *) * (height + 1));
-// 	if (!map_copy)
-// 		return ;
-// 	i = -1;
-// 	while (++i < height)
-// 	{
-// 		map_copy[i] = strdup(map[i]);
-// 		if (!map_copy[i])
-// 			return (free_map(map_copy));
-// 	}
-// 	map_copy[height] = NULL;
-// 	fill(game, game->map.player_x, game->map.player_y, map_copy);
-// 	free_map(map_copy);
-// }

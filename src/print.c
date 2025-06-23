@@ -32,4 +32,5 @@ void	print_map(char **map)
 		ft_putchar('\n');
 		i++;
 	}
+	printf("\n\n\n");
 }

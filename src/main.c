@@ -167,7 +167,7 @@ int	initialize_game(t_game *game, char *filename)
 	if (check_inside(game) == -1)
 		return (free_map(game->map.map), 1);
 	//texture_check(game)
-	if (flood_fill(game) < 0)
+	if (!flood_fill(game))
 		return (1);
 	return (0);
 }
