@@ -10,3 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
+
+int	main(int ac, char **av)
+{
+	//t_world	world;
+	(void)ac;
+	(void)av;
+	printf("Hello\n");
+	return(0);
+}
