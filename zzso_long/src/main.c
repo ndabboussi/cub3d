@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 13:03:07 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/02/20 11:04:43 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/24 12:11:06 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,7 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	if (ac != 2)
-	{
-		perror("Error\n");
-		return (1);
-	}
+		return (perror("Error\n"), -1);
 	ft_memset(&cursor, 0, sizeof(t_map));
 	if (initialize_game(&cursor, av[1]))
 		return (1);
