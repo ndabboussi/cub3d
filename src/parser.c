@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:26:47 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/24 15:06:15 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:47:39 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,56 +59,6 @@ int parse_texture(char *line, t_texture *cfg)
 	return (0);
 }
 
-
-int parse_file(char *filename, t_game *game)
-{
-	int		fd;
-	char	*line;
-	char	*map_text;
-	char	*tmp;
-	int		is_map_started = 0;
-	int		res_texture;
-
-	map_text = ft_strdup("");
-	if (!map_text)
-        return (perror("Memory allocation failed"), -1);
-	
-	if (!game)
-		return (perror("Game struct is NULL"), -1);
-		
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (free(map_text), perror("Failed to open .cub"), -1);
-
-	while ((line = get_next_line(fd)))
-	{
-		if (!is_map_started)
-		{
-			res_texture = parse_texture(line, &game->texture);
-			if (res_texture == 1)
-				return (printf("Error\nInvalid config line: %s\n", line), 1);
-			else if (res_texture == 2)
-				is_map_started = 1; // Line is not a config, must be map
-		}
-		if (is_map_started)
-		{
-			tmp = map_text;
-			map_text = ft_strjoin(map_text, line); // Accumulate map
-			free(tmp);
-		}
-		free(line);
-	}
-	close(fd);
-
-	game->map.map = ft_split(map_text, '\n');
-	free(map_text);
-
-	if (!game->map.map)
-		return (printf("Error\nFailed to allocate map\n"), 1);
-
-	return (0);
-}
-
 int parse_textures_and_map_lines(char *filename, t_game *game, char **map_text_out)
 {
 	int		fd;
@@ -117,7 +67,7 @@ int parse_textures_and_map_lines(char *filename, t_game *game, char **map_text_o
 	int		is_map_started = 0;
 	int		res_texture;
 
-	*map_text_out = ft_strdup("");
+	*map_text_out = calloc(1, sizeof(char));
 	if (!*map_text_out)
 		return (perror("Memory allocation failed"), -1);
 
@@ -156,14 +106,12 @@ int parse_file(char *filename, t_game *game)
 		return (perror("Game struct is NULL"), -1);
 
 	if (parse_textures_and_map_lines(filename, game, &map_text) != 0)
-		return (1);
+		return (-1);
 
 	game->map.map = ft_split(map_text, '\n');
 	free(map_text);
 
 	if (!game->map.map)
 		return (printf("Error\nFailed to allocate map\n"), 1);
-
-	free(map_text);
 	return (0);
 }

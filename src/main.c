@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 11:55:38 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/24 15:01:52 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:21:01 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int ac, char **av)
 {
 	t_game	game;
+	int len;
   
 	if (ac != 2)
 		return (printf("Usage: ./cub3D map.cub\n"), 1);
