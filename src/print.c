@@ -2,7 +2,10 @@
 
 void	ft_putchar(char c)
 {
-	write(1, &c, 1);
+	if (c == 'V')
+		ft_putstr_fd(RED "V" RESET, 2);
+	else
+		write(1, &c, 1);
 }
 
 void	ft_putstr(char *str)

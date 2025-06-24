@@ -64,6 +64,9 @@ typedef struct s_game
 	t_map		map;
 }	t_game;
 
+#define RED "\033[31;01m"
+#define RESET "\033[00m"
+
 //PARSING
 // void	flood_fill(t_game *game, char **map);
 int	flood_fill(t_game *game);
