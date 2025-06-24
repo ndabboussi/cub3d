@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:26:47 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/24 14:11:33 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:06:15 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,16 +109,61 @@ int parse_file(char *filename, t_game *game)
 	return (0);
 }
 
+int parse_textures_and_map_lines(char *filename, t_game *game, char **map_text_out)
+{
+	int		fd;
+	char	*line;
+	char	*tmp;
+	int		is_map_started = 0;
+	int		res_texture;
 
-// int main(int ac, char **av)
-// {
-// 	t_game game;
+	*map_text_out = ft_strdup("");
+	if (!*map_text_out)
+		return (perror("Memory allocation failed"), -1);
 
-// 	if (ac != 2)
-// 		return (printf("Usage: ./cub3D map.cub\n"), 1);
-// 	ft_memset(&game, 0, sizeof(t_game));
-// 	if (parse_file(av[1], &game) != 0)
-// 		return (1);
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (free(*map_text_out), perror("Failed to open .cub"), -1);
 
-// 	return (0);
-// }
+	while ((line = get_next_line(fd)))
+	{
+		if (!is_map_started)
+		{
+			res_texture = parse_texture(line, &game->texture);
+			if (res_texture == 1)
+				return (printf("Error\nInvalid config line: %s\n", line), free(line), close(fd), free(*map_text_out), 1);
+			else if (res_texture == 2)
+				is_map_started = 1;
+		}
+		if (is_map_started)
+		{
+			tmp = *map_text_out;
+			*map_text_out = ft_strjoin(*map_text_out, line);
+			free(tmp);
+		}
+		free(line);
+	}
+	close(fd);
+	return (0);
+}
+
+
+int parse_file(char *filename, t_game *game)
+{
+	char *map_text;
+
+	if (!game)
+		return (perror("Game struct is NULL"), -1);
+
+	if (parse_textures_and_map_lines(filename, game, &map_text) != 0)
+		return (1);
+
+	game->map.map = ft_split(map_text, '\n');
+	free(map_text);
+
+	if (!game->map.map)
+		return (printf("Error\nFailed to allocate map\n"), 1);
+
+	free(map_text);
+	return (0);
+}

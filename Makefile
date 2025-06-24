@@ -26,8 +26,8 @@ CYAN = \033[0;96m
 all: $(NAME_EXE)
 
 $(NAME_EXE): $(OBJ)
-	@$(MAKE) -C $(LIBFT_DIR)
-	@$(MAKE) -C $(MLX_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
+	@$(MAKE) -C $(MLX_DIR) > /dev/null
 	@echo "$(GREEN)$(NAME_EXE) compiled!$(DEFAULT)"
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) -L$(LIBFT_DIR) -L$(MLX_DIR) -lft -o $(NAME_EXE) $(MLXFLAG)
 
@@ -40,14 +40,14 @@ $(OBJ_DIR):
 
 clean:
 	@rm -rf $(OBJ)
-	@$(MAKE) clean -C $(LIBFT_DIR)
-#	@$(MAKE) clean -C $(MLX_DIR)
+	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null
+	@$(MAKE) clean -C $(MLX_DIR) > /dev/null
 	@echo "$(GREEN)$(NAME_EXE) object files cleaned!$(DEFAULT)"
 
 fclean: clean
 	@rm -rf $(NAME_EXE)
 	@echo "$(CYAN)$(NAME_EXE) executables and objects removed successfully!$(DEFAULT)"
-	@$(MAKE) fclean -C $(LIBFT_DIR)
+	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
 	@echo "$(CYAN) executables and objects removed successfully!$(DEFAULT)"
 
 re: fclean all
