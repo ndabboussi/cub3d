@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/23 15:13:04 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/24 12:22:24 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,41 @@ typedef struct s_map
 	char	player_dir;
 }	t_map;
 
-typedef struct s_config
+typedef struct s_color {
+	int r;
+	int g;
+	int b;
+}	t_color;
+
+typedef struct s_texture
 {
 	char	*no_texture;
 	char	*so_texture;
 	char	*we_texture;
 	char	*ea_texture;
-	int		floor_color;
-	int		ceiling_color;
-}	t_config;
+	t_color floor;
+	t_color ceiling;
+}	t_texture;
 
 typedef struct s_game
 {
-	t_config	config;
+	t_texture	texture;
 	t_map		map;
 }	t_game;
 
-typedef struct s_window
-{
-	void	*mlx_ptr;
-	void	*mlx_window;
-	void	*img;	
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_window;
+// typedef struct s_window
+// {
+// 	void	*mlx_ptr;
+// 	void	*mlx_window;
+// 	void	*img;	
+// 	char	*addr;
+// 	int		bits_per_pixel;
+// 	int		line_length;
+// 	int		endian;
+// }				t_window;
 
-typedef struct s_world
-{
-	t_window	*mlx;
-	char		*map_name;
-}				t_world;
+// typedef struct s_world
+// {
+// 	t_window	*mlx;
+// 	char		*map_name;
+// }				t_world;

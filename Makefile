@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror -g3
 MLXFLAG = -lmlx -lXext -lX11 -Lminilibx-linux -Iminilibx-linux -lXext -lX11 -lm -lz
 
 LIBFT_DIR = ./libft
-SRCS_DIR = ./srcs/
+SRCS_DIR = ./src/
 OBJ_DIR = ./obj/
 INC_DIR = ./include/
 MLX_DIR = ./minilibx-linux/

@@ -6,40 +6,13 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 19:08:22 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/01/28 19:13:20 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/24 12:14:29 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*lecture_map(char *filename)
-{
-	int		fd;
-	char	*line;
-	char	*content;
-	char	*temp;
 
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (perror("Erreur: fichier non trouvé ou illisible\n"), NULL);
-	content = ft_strdup("");
-	if (!content)
-		return (perror("Err: alloc failed\n"), close(fd), NULL);
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		temp = content;
-		content = ft_strjoin(content, line);
-		if (!content)
-			return (perror("Err: alloc failed\n"), close(fd), NULL);
-		free(line);
-		free(temp);
-		line = NULL;
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (content);
-}
 
 int	wall_check(char **map)
 {
@@ -107,6 +80,35 @@ void	free_map(char **map)
 	}
 	free(map);
 	map = NULL;
+}
+
+char	*lecture_map(char *filename)
+{
+	int		fd;
+	char	*line;
+	char	*content;
+	char	*temp;
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		return (perror("Erreur: fichier non trouvé ou illisible\n"), NULL);
+	content = ft_strdup("");
+	if (!content)
+		return (perror("Err: alloc failed\n"), close(fd), NULL);
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		temp = content;
+		content = ft_strjoin(content, line);
+		if (!content)
+			return (perror("Err: alloc failed\n"), close(fd), NULL);
+		free(line);
+		free(temp);
+		line = NULL;
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (content);
 }
 
 char	**ft_map(char *filename)
