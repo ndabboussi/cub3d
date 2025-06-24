@@ -10,7 +10,7 @@ OBJ_DIR = ./obj/
 INC_DIR = ./include/
 MLX_DIR = ./minilibx-linux/
 
-FILES = main.c flood_fill.c print.c parser.c
+FILES = print.c main.c parser.c map_checker.c flood_fill.c 
 
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 

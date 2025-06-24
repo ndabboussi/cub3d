@@ -74,10 +74,10 @@ typedef struct s_game
 #define RESET "\033[00m"
 
 //PARSING
-// void	flood_fill(t_game *game, char **map);
-int	flood_fill(t_game *game);
+int		parse_file(char *filename, t_game *game);
+int		check_map_validity(t_game *game);
+int		flood_fill(t_game *game);
 void	free_map(char **map);
-int parse_file(char *filename, t_game *game);
 
 //utils print
 void	print_map(char **map);
