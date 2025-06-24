@@ -110,15 +110,15 @@ int parse_file(char *filename, t_game *game)
 }
 
 
-int main(int ac, char **av)
-{
-	t_game game;
+// int main(int ac, char **av)
+// {
+// 	t_game game;
 
-	if (ac != 2)
-		return (printf("Usage: ./cub3D map.cub\n"), 1);
-	ft_memset(&game, 0, sizeof(t_game));
-	if (parse_file(av[1], &game) != 0)
-		return (1);
+// 	if (ac != 2)
+// 		return (printf("Usage: ./cub3D map.cub\n"), 1);
+// 	ft_memset(&game, 0, sizeof(t_game));
+// 	if (parse_file(av[1], &game) != 0)
+// 		return (1);
 
-	return (0);
-}
+// 	return (0);
+// }
