@@ -15,11 +15,10 @@
 int	main(int ac, char **av)
 {
 	t_game	game;
-	int len;
-  
+	int		len;
+
 	if (ac != 2)
 		return (printf("Usage: ./cub3D map.cub\n"), 1);
-		
 	len = ft_strlen(av[1]);
 	if (av[1][len - 1] != 'b' || av[1][len - 2] != 'u'
 		|| av[1][len - 3] != 'c' || av[1][len - 4] != '.')
@@ -29,6 +28,11 @@ int	main(int ac, char **av)
 		return (1);
 	if (check_map_validity(&game) != 0)
 		return (1);
-
-  return (0);
+	init_window(&game);
+	mlx_hook(game.window.mlx_window, 17, 0, ft_close_window, &game);
+	mlx_hook(game.window.mlx_window, 2, 1L << 0, ft_key_handler, &game);
+	mlx_loop(game.window.mlx_ptr);
+	ft_exit_all(&game, 0);
+	return (0);
 }
+

@@ -12,22 +12,6 @@
 
 #include "cub3d.h"
 
-void	free_map(char **map)
-{
-	int	j;
-
-	j = 0;
-	if (!map)
-		return ;
-	while (map[j])
-	{
-		free(map[j]);
-		j++;
-	}
-	free(map);
-	map = NULL;
-}
-
 int	check_player(t_game *game)
 {
 	int	x;
@@ -45,6 +29,7 @@ int	check_player(t_game *game)
 				|| game->map.map[y][x] == 'E' || game->map.map[y][x] == 'W')
 			{
 				nb_p++;
+				game->map.player_dir = game->map.map[y][x];
 				game->map.player_x = x;
 				game->map.player_y = y;
 			}
