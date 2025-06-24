@@ -70,12 +70,6 @@ typedef struct s_game
 // 	int		endian;
 // }				t_window;
 
-typedef struct s_game
-{
-	t_config	config;
-	t_map		map;
-}	t_game;
-
 #define RED "\033[31;01m"
 #define RESET "\033[00m"
 
@@ -83,6 +77,7 @@ typedef struct s_game
 // void	flood_fill(t_game *game, char **map);
 int	flood_fill(t_game *game);
 void	free_map(char **map);
+int parse_file(char *filename, t_game *game);
 
 //utils print
 void	print_map(char **map);
