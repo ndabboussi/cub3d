@@ -40,7 +40,7 @@ void	get_map_borders(t_game *game)
 	game->map.width = max_w;
 }
 
-char	**normalize_map_copy(t_game *game, char **map)
+char	**create_map_copy(t_game *game, char **map)
 {
 	int		i;
 	int		j;
@@ -98,10 +98,10 @@ int	flood_fill(t_game *game)
 	if (!game || !game->map.map)
 		return (0);
 	get_map_borders(game);
-	map_copy = normalize_map_copy(game, game->map.map);
+	map_copy = create_map_copy(game, game->map.map);
 	//print_map(map_copy);
 	if (!map_copy)
-		return (perror("Error : alloc failure\n"), 1);
+		return (perror("Error : alloc failure.\n"), 1);
 	if (!fill(game, map_copy, game->map.player_x, game->map.player_y))
 	{
 	//	print_map(map_copy);
