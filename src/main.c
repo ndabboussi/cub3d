@@ -58,12 +58,39 @@ int	check_player(t_game *game)
 	return (0);
 }
 
+int	check_forbidden_char(t_game *game)
+{
+	int	x;
+	int	y;
+	int	nb_p;
+
+	nb_p = 0;
+	y = 0;
+	while (game->map.map[y])
+	{
+		x = 0;
+		while (game->map.map[y][x])
+		{
+			if (game->map.map[y][x] != '0' && game->map.map[y][x] != '1' \
+				&& game->map.map[y][x] != 'N' && game->map.map[y][x] != 'S' \
+				&& game->map.map[y][x] != 'E' && game->map.map[y][x] != 'W' \
+				&& game->map.map[y][x] != ' ')
+				return (-1);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
 int	check_inside(t_game *game)
 {
 	if (!game || !game->map.map)
 		return (perror("impossible de charger la map"), -1);
 	if (check_player(game) == -1)
-		return (perror("erreur player"), -1);
+		return (perror("Error : more than one player"), -1);
+	if (check_forbidden_char(game) == -1)
+		return (perror("Error : map should only be composed of 0 & 1"), -1);
 	return (0);
 }
 
@@ -160,10 +187,10 @@ int	initialize_game(t_game *game, char *filename)
 	len = ft_strlen(filename);
 	if (filename[len - 1] != 'b' || filename[len - 2] != 'u'
 		|| filename[len - 3] != 'c' || filename[len - 4] != '.')
-		return (perror("pas de fichier.cub\n"), 1);
+		return (perror("Error : \n"), 1);
 	game->map.map = ft_map(filename);
 	if (!game->map.map)
-		return (perror("échec du chargement de la map\n"), 1);
+		return (perror("Error : échec du chargement de la map\n"), 1);
 	if (check_inside(game) == -1)
 		return (free_map(game->map.map), 1);
 	//texture_check(game)

@@ -58,15 +58,8 @@ char	**normalize_map_copy(t_game *game, char **map)
 		j = 0;
 		while (j < game->map.width)
 		{
-			if (j < (int)ft_strlen(map[i]))
-			{
-				if (map[i][j] == ' ')
-					copy[i][j] = '-';
-				else
+			if (j < ft_strlen(map[i]))
 					copy[i][j] = map[i][j];
-			}
-			else
-				copy[i][j] = '-';
 			j++;
 		}
 		copy[i][game->map.width] = '\0';
@@ -80,7 +73,7 @@ int	fill(t_game *game, char **map, int x, int y)
 {
 	if (x < 0 || y < 0 || y >= game->map.height || x >= game->map.width)
 		return (0);
-	if (map[y][x] == '-' || map[y][x] == ' ')
+	if (map[y][x] == ' ')
 		return (0);
 	if (map[y][x] == '1' || map[y][x] == 'V')
 		return (1);
@@ -106,13 +99,16 @@ int	flood_fill(t_game *game)
 		return (0);
 	get_map_borders(game);
 	map_copy = normalize_map_copy(game, game->map.map);
+	//print_map(map_copy);
 	if (!map_copy)
 		return (perror("Error : alloc failure\n"), 1);
 	if (!fill(game, map_copy, game->map.player_x, game->map.player_y))
 	{
+	//	print_map(map_copy);
 		free_map(map_copy);
 		return (0);
 	}
+	//print_map(map_copy);
 	free_map(map_copy);
 	return (1);
 }
