@@ -12,25 +12,26 @@
 
 # pragma once
 
-# include "mlx.h"
-# include "libft.h"
-# include "mlx.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
-# include <string.h>
-# include <stdbool.h>
-# include <errno.h>
-# include <math.h>
-# include <sys/time.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <string.h>
-# include <fcntl.h>
+#include "mlx.h"
+#include "libft.h"
+#include <X11/X.h>
+#include <X11/keysym.h>
+#include <string.h>
+#include <stdbool.h>
+#include <errno.h>
+#include <math.h>
+#include <sys/time.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <fcntl.h>
 
 typedef struct s_map
 {
 	char	**map;
+	int		height;
+	int		width;
 	int		player_x;
 	int		player_y;
 	char	player_dir;
@@ -46,12 +47,6 @@ typedef struct s_config
 	int		ceiling_color;
 }	t_config;
 
-typedef struct s_game
-{
-	t_config	config;
-	t_map		map;
-}	t_game;
-
 typedef struct s_window
 {
 	void	*mlx_ptr;
@@ -63,8 +58,16 @@ typedef struct s_window
 	int		endian;
 }				t_window;
 
-typedef struct s_world
+typedef struct s_game
 {
-	t_window	*mlx;
-	char		*map_name;
-}				t_world;
+	t_config	config;
+	t_map		map;
+}	t_game;
+
+//PARSING
+// void	flood_fill(t_game *game, char **map);
+int	flood_fill(t_game *game);
+void	free_map(char **map);
+
+//utils print
+void	print_map(char **map);
