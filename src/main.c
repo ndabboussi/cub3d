@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 11:55:38 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/23 16:40:46 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:01:52 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,8 @@ int	check_inside(t_game *game)
 	return (0);
 }
 
-int	initialize_game(t_game *game, char *filename)
+int	initialize_game(t_game *game)
 {
-	int		len;
-
-	len = ft_strlen(filename);
-	if (filename[len - 1] != 'b' || filename[len - 2] != 'u'
-		|| filename[len - 3] != 'c' || filename[len - 4] != '.')
-		return (perror("Error : \n"), 1);
 	if (check_inside(game) == -1)
 		return (free_map(game->map.map), 1);
 	if (!flood_fill(game))
@@ -108,28 +102,23 @@ int	initialize_game(t_game *game, char *filename)
 	return (0);
 }
 
-// int	main(int ac, char **av)
-// {
-// 	t_game	game;
-
-// 	if (ac != 2)
-// 		return (perror("Usage: ./cub3D map.cub\n"), 1);
-// 	ft_memset(&game, 0, sizeof(t_game));
-// 	if (initialize_game(&game, av[1]))
-// 		return (perror("Error : invalid map\n"), 1);
-// 	return (0);
-// }
-
 int main(int ac, char **av)
 {
 	t_game game;
+	int		len;
 
 	if (ac != 2)
 		return (printf("Usage: ./cub3D map.cub\n"), 1);
+		
+	len = ft_strlen(av[1]);
+	if (av[1][len - 1] != 'b' || av[1][len - 2] != 'u'
+		|| av[1][len - 3] != 'c' || av[1][len - 4] != '.')
+		return (perror("Error : \n"), 1);
+	
 	ft_memset(&game, 0, sizeof(t_game));
 	if (parse_file(av[1], &game) != 0)
 		return (1);
-	if (initialize_game(&game, av[1]))
+	if (initialize_game(&game))
  		return (perror("Error : invalid map\n"), 1);
 	return (0);
 }
