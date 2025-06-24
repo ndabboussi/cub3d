@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 11:55:38 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/24 15:21:01 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/24 16:23:50 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int	main(int ac, char **av)
 	if (check_map_validity(&game) != 0)
 		return (1);
 
+	// print_map(game.map.map);
+		
   return (0);
 }

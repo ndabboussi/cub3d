@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndabbous <ndabbous@student.42.fr>          #+#  +:+       +#+        */
+/*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-06-24 12:50:07 by ndabbous          #+#    #+#             */
-/*   Updated: 2025-06-24 12:50:07 by ndabbous         ###   ########.fr       */
+/*   Created: 2025/06/24 12:50:07 by ndabbous          #+#    #+#             */
+/*   Updated: 2025/06/24 16:54:05 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	check_forbidden_char(t_game *game)
 				&& game->map.map[y][x] != 'N' && game->map.map[y][x] != 'S' \
 				&& game->map.map[y][x] != 'E' && game->map.map[y][x] != 'W' \
 				&& game->map.map[y][x] != ' ')
-				return (perror("Error : map should only be of 0 & 1.\n"), -1);
+				return (perror("Error\n map should only be of 0 & 1.\n"), -1);
 			x++;
 		}
 		y++;

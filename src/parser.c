@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:26:47 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/24 15:47:39 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:05:10 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,14 @@ int parse_color(char *str, t_color *color)
 }
 
 
-int parse_texture(char *line, t_texture *cfg)
+int parse_texture_color(char *line, t_texture *cfg)
 {
-	line = ft_strtrim(line, " \t\n");
-
+	while (line[0] == ' ' || line[0] == '	' || line[0] == '\n')
+	{
+		line = ft_strtrim(line, "\n");
+		line = ft_strtrim(line, " ");
+		line = ft_strtrim(line, "\t");
+	}
 	if (ft_strncmp(line, "NO ", 3) == 0)
 		cfg->no_texture = ft_strdup(trim_prefix(line, "NO"));
 	else if (ft_strncmp(line, "SO ", 3) == 0)
@@ -67,7 +71,7 @@ int parse_textures_and_map_lines(char *filename, t_game *game, char **map_text_o
 	int		is_map_started = 0;
 	int		res_texture;
 
-	*map_text_out = calloc(1, sizeof(char));
+	*map_text_out = ft_calloc(1, sizeof(char));
 	if (!*map_text_out)
 		return (perror("Memory allocation failed"), -1);
 
@@ -79,7 +83,7 @@ int parse_textures_and_map_lines(char *filename, t_game *game, char **map_text_o
 	{
 		if (!is_map_started)
 		{
-			res_texture = parse_texture(line, &game->texture);
+			res_texture = parse_texture_color(line, &game->texture);
 			if (res_texture == 1)
 				return (printf("Error\nInvalid config line: %s\n", line), free(line), close(fd), free(*map_text_out), 1);
 			else if (res_texture == 2)
