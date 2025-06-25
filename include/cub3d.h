@@ -27,13 +27,24 @@
 #include <string.h>
 #include <fcntl.h>
 
+#define WIN_WIDTH 800
+#define WIN_HEIGHT 600
+
+#define KEY_W 119
+#define KEY_A 97
+#define KEY_S 115
+#define KEY_D 100
+#define KEY_LEFT 65361
+#define KEY_RIGHT 65363
+#define KEY_ESC 65307
+
 typedef struct s_map
 {
 	char	**map;
 	int		height;
 	int		width;
-	int		player_x;
-	int		player_y;
+	float		player_x;
+	float		player_y;
 	char	player_dir;
 }	t_map;
 
@@ -53,22 +64,26 @@ typedef struct s_texture
 	t_color ceiling;
 }	t_texture;
 
+typedef struct s_window
+{
+	void	*mlx_ptr;
+	void	*mlx_window;
+	void	*img;
+	char	*addr;
+	int		screen_width;
+	int		screen_height;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_window;
+
 typedef struct s_game
 {
 	t_texture	texture;
+	t_window	window;
 	t_map		map;
 }	t_game;
 
-// typedef struct s_window
-// {
-// 	void	*mlx_ptr;
-// 	void	*mlx_window;
-// 	void	*img;	
-// 	char	*addr;
-// 	int		bits_per_pixel;
-// 	int		line_length;
-// 	int		endian;
-// }				t_window;
 
 #define RED "\033[31;01m"
 #define RESET "\033[00m"
@@ -78,6 +93,14 @@ int		parse_file(char *filename, t_game *game);
 int		check_map_validity(t_game *game);
 int		flood_fill(t_game *game);
 void	free_map(char **map);
+
+//INIT
+void	init_window(t_game *game);
+int		ft_key_handler(int keycode, t_game *game);
+
+//CLEAN
+int		ft_close_window(t_game *game);
+void	ft_exit_all(t_game *game, int d);
 
 //utils print
 void	print_map(char **map);
