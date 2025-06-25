@@ -46,3 +46,43 @@ void	print_texture(t_path *tex)
 	printf("Floor color:   R=%d G=%d B=%d\n", tex->floor.r, tex->floor.g, tex->floor.b);
 	printf("Ceiling color: R=%d G=%d B=%d\n", tex->ceiling.r, tex->ceiling.g, tex->ceiling.b);
 }
+
+void print_path(t_path *path)
+{
+	if (!path)
+	{
+		printf("t_path pointer is NULL.\n");
+		return;
+	}
+	printf("==== DEBUG t_path ====\n");
+	printf("North texture path: %s\n", path->no_texture);
+	printf("South texture path: %s\n", path->so_texture);
+	printf("West texture path:  %s\n", path->we_texture);
+	printf("East texture path:  %s\n", path->ea_texture);
+
+	printf("Floor color: R=%d, G=%d, B=%d\n", path->floor.r, path->floor.g, path->floor.b);
+	printf("Ceiling color: R=%d, G=%d, B=%d\n", path->ceiling.r, path->ceiling.g, path->ceiling.b);
+	printf("======================\n");
+}
+
+void print_coordinates(t_coordinates *coord, const char *label)
+{
+	if (!coord)
+	{
+		printf("%s: Coordinates pointer is NULL.\n", label);
+		return;
+	}
+	printf("%s -> x: %.2f, y: %.2f, angle: %.2f\n", label, coord->x, coord->y, coord->angle);
+}
+void print_player(t_player *player)
+{
+	if (!player)
+	{
+		printf("t_player pointer is NULL.\n");
+		return;
+	}
+	printf("==== DEBUG t_player ====\n");
+	print_coordinates(&player->pos, "Position");
+	printf("Orientation: %.c\n", player->orientation);
+	printf("========================\n");
+}

@@ -38,6 +38,8 @@
 #define KEY_RIGHT 65363
 #define KEY_ESC 65307
 
+#define FOV 60
+#define PI 3.14159265358979323846
 
 typedef struct s_coordinates
 {
@@ -48,10 +50,9 @@ typedef struct s_coordinates
 
 typedef struct s_player
 {
-	int				size;
 	t_coordinates	pos;
-	t_coordinates	dir;
-	double			orientation;
+	char			orientation;
+	double			angle;
 }			t_player;
 
 typedef struct s_map
@@ -131,6 +132,9 @@ int		ft_key_handler(int keycode, t_game *game);
 
 void	init_player(t_game *game);
 
+//DISPLAY
+int		render_frame(t_game *game);
+
 //CLEAN
 int		ft_close_window(t_game *game);
 void	ft_exit_all(t_game *game, int d);
@@ -138,3 +142,6 @@ void	ft_exit_all(t_game *game, int d);
 //utils print
 void	print_map(char **map);
 void	print_texture(t_path *tex);
+void	print_path(t_path *path);
+void	print_coordinates(t_coordinates *coord, const char *label);
+void	print_player(t_player *player);
