@@ -27,8 +27,8 @@
 #include <string.h>
 #include <fcntl.h>
 
-#define WIN_WIDTH 800
-#define WIN_HEIGHT 600
+#define WIN_WIDTH 2048
+#define WIN_HEIGHT 1080
 
 #define KEY_W 119
 #define KEY_A 97
@@ -38,13 +38,29 @@
 #define KEY_RIGHT 65363
 #define KEY_ESC 65307
 
+
+typedef struct s_coordinates
+{
+	float 	x;
+	float 	y;
+	float 	angle;
+}			t_coordinates;
+
+typedef struct s_player
+{
+	int				size;
+	t_coordinates	pos;
+	t_coordinates	dir;
+	double			orientation;
+}			t_player;
+
 typedef struct s_map
 {
 	char	**map;
 	int		height;
 	int		width;
-	float		player_x;
-	float		player_y;
+	float	player_x;
+	float	player_y;
 	char	player_dir;
 }	t_map;
 
@@ -56,13 +72,24 @@ typedef struct s_color {
 
 typedef struct s_texture
 {
+	void	*img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_texture;
+
+typedef struct s_path
+{
 	char	*no_texture;
 	char	*so_texture;
 	char	*we_texture;
 	char	*ea_texture;
 	t_color floor;
 	t_color ceiling;
-}	t_texture;
+}	t_path;
 
 typedef struct s_window
 {
@@ -79,11 +106,15 @@ typedef struct s_window
 
 typedef struct s_game
 {
-	t_texture	texture;
+	t_texture	no_texture;
+	t_texture	so_texture;
+	t_texture	we_texture;
+	t_texture	ea_texture;
+	t_player	player;
+	t_path		texture;
 	t_window	window;
 	t_map		map;
 }	t_game;
-
 
 #define RED "\033[31;01m"
 #define RESET "\033[00m"
@@ -98,10 +129,12 @@ void	free_map(char **map);
 void	init_window(t_game *game);
 int		ft_key_handler(int keycode, t_game *game);
 
+void	init_player(t_game *game);
+
 //CLEAN
 int		ft_close_window(t_game *game);
 void	ft_exit_all(t_game *game, int d);
 
 //utils print
 void	print_map(char **map);
-void	print_texture(t_texture *tex);
+void	print_texture(t_path *tex);

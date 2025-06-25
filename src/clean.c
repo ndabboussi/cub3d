@@ -28,16 +28,6 @@ void	free_map(char **map)
 	map = NULL;
 }
 
-void	free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab);
-}
-
 void	ft_exit_all(t_game *game, int code)
 {
 	(void)code;
