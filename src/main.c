@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 11:55:38 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/25 14:54:10 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:58:18 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,8 @@ int	main(int ac, char **av)
 	if (parse_file(av[1], &game) < 0)
 		return (-1);
 
-	// ✅ Print texture paths
-	printf("NO texture: %s\n", game.texture.no_texture);
-	printf("SO texture: %s\n", game.texture.so_texture);
-	printf("WE texture: %s\n", game.texture.we_texture);
-	printf("EA texture: %s\n", game.texture.ea_texture);
-
-	// ✅ Print floor and ceiling RGB values
-	printf("Floor color:   R=%d G=%d B=%d\n", game.texture.floor.r, game.texture.floor.g, game.texture.floor.b);
-	printf("Ceiling color: R=%d G=%d B=%d\n", game.texture.ceiling.r, game.texture.ceiling.g, game.texture.ceiling.b);
-	
-	// print_map(game.map.map);
+	print_texture(&game.texture);
+	print_map(game.map.map);
 	
 	if (check_map_validity(&game) != 0)
 		return (1);
