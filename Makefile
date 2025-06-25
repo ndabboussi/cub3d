@@ -1,4 +1,4 @@
-NAME_EXE = cub3d
+NAME_EXE = cub3D
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
@@ -23,11 +23,31 @@ GREEN = \033[0;92m
 YELLOW = \033[0;93m
 CYAN = \033[0;96m
 
+INVALID_MAPS = \
+	map/invalid_map/additionnal_element.cub \
+	map/invalid_map/doople_element.cub \
+	map/invalid_map/doople_F_C.cub \
+	map/invalid_map/invalid_path.cub \
+	map/invalid_map/invalid_path_2.cub \
+	map/invalid_map/lower_case.cub \
+	map/invalid_map/missing_F_C.cub \
+	map/invalid_map/missing_link.cub \
+	map/invalid_map/missing_player.cub \
+	map/invalid_map/wrong_border.cub \
+	map/invalid_map/wrong_border_2.cub \
+	map/invalid_map/wrong_char.cub \
+	map/invalid_map/wrong_color.cub \
+	map/invalid_map/map.txt \
+	map/invalid_map/inexistant_map.cub \
+	map/invalid_map/invalid_texture.cub \
+	map/invalid_map/vide.cub \
+	map/invalid_map/wrong_color_2.cub 
+
 all: $(NAME_EXE)
 
 $(NAME_EXE): $(OBJ)
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
-	@$(MAKE) -C $(MLX_DIR) > /dev/null
+	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
 	@echo "$(GREEN)$(NAME_EXE) compiled!$(DEFAULT)"
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) -L$(LIBFT_DIR) -L$(MLX_DIR) -lft -o $(NAME_EXE) $(MLXFLAG)
 
@@ -48,8 +68,17 @@ fclean: clean
 	@rm -rf $(NAME_EXE)
 	@echo "$(CYAN)$(NAME_EXE) executables and objects removed successfully!$(DEFAULT)"
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
-	@echo "$(CYAN) executables and objects removed successfully!$(DEFAULT)"
+	@echo "$(CYAN)executables and objects removed successfully!$(DEFAULT)"
 
 re: fclean all
+
+test: all
+	@for file in $(INVALID_MAPS); do \
+		echo ""; \
+		echo "Testing $$file..."; \
+		./$(NAME_EXE) $$file || true; \
+	done
+	@echo ""; echo "Testing without arguments..."; \
+	./$(NAME_EXE) || true
 
 .PHONY: all clean fclean re

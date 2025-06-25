@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/24 12:22:24 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:58:32 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,3 +104,4 @@ void	ft_exit_all(t_game *game, int d);
 
 //utils print
 void	print_map(char **map);
+void	print_texture(t_texture *tex);

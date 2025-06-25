@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndabbous <ndabbous@student.42.fr>          #+#  +:+       +#+        */
+/*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-06-23 14:54:34 by ndabbous          #+#    #+#             */
-/*   Updated: 2025-06-23 14:54:34 by ndabbous         ###   ########.fr       */
+/*   Created: 2025/06/23 14:54:34 by ndabbous          #+#    #+#             */
+/*   Updated: 2025/06/24 16:24:23 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	flood_fill(t_game *game)
 		return (0);
 	get_map_borders(game);
 	map_copy = create_map_copy(game, game->map.map);
-	//print_map(map_copy);
+	// print_map(map_copy);
 	if (!map_copy)
 		return (perror("Error : alloc failure.\n"), 1);
 	if (!fill(game, map_copy, game->map.player_x, game->map.player_y))

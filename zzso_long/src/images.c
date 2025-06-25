@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:16:53 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/01/28 19:22:25 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/24 16:38:52 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,23 @@ int	init_images(t_game *game)
 	game->img.floor = mlx_xpm_file_to_image(game->mlx,
 			"textures/floor.xpm", &game->img.width, &game->img.height);
 	if (!game->img.floor)
-		return (ft_printf("Error: Failed to load 'floor.xpm'\n"), 0);
+		return (ft_printf("Error\nFailed to load 'floor.xpm'\n"), 0);
 	game->img.wall = mlx_xpm_file_to_image(game->mlx,
 			"textures/wall.xpm", &game->img.width, &game->img.height);
 	if (!game->img.wall)
-		return (ft_printf("Error: Failed to load 'wall.xpm'\n"), 0);
+		return (ft_printf("Error\nFailed to load 'wall.xpm'\n"), 0);
 	game->img.player = mlx_xpm_file_to_image(game->mlx,
 			"textures/player.xpm", &game->img.width, &game->img.height);
 	if (!game->img.player)
-		return (ft_printf("Error: Failed to load 'player.xpm'\n"), 0);
+		return (ft_printf("Error\nFailed to load 'player.xpm'\n"), 0);
 	game->img.collectible = mlx_xpm_file_to_image(game->mlx,
 			"textures/collectible.xpm", &game->img.width, &game->img.height);
 	if (!game->img.collectible)
-		return (ft_printf("Error: Failed to load 'collectible.xpm'\n"), 0);
+		return (ft_printf("Error\nFailed to load 'collectible.xpm'\n"), 0);
 	game->img.exit = mlx_xpm_file_to_image(game->mlx,
 			"textures/exit.xpm", &game->img.width, &game->img.height);
 	if (!game->img.exit)
-		return (ft_printf("Error: Failed to load 'exit.xpm'\n"), 0);
+		return (ft_printf("Error\nFailed to load 'exit.xpm'\n"), 0);
 	if (!game->img.floor || !game->img.wall || !game->img.player
 		|| !game->img.collectible || !game->img.exit)
 		return (0);

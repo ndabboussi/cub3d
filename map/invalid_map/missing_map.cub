@@ -1,0 +1,7 @@
+NO ./texture/pics/greystone.xpm
+SO ./texture/pics/bluestone.xpm
+WE ./texture/pics/colorstone.xpm
+EA ./texture/pics/purplestone.xpm
+
+F 220,100,0
+C 220, 102, 24
