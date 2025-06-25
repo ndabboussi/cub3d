@@ -10,7 +10,7 @@ OBJ_DIR = ./obj/
 INC_DIR = ./include/
 MLX_DIR = ./minilibx-linux/
 
-FILES = print.c main.c parser.c map_checker.c flood_fill.c 
+FILES = print.c main.c parser.c map_checker.c flood_fill.c init.c events.c clean.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
@@ -61,7 +61,7 @@ $(OBJ_DIR):
 clean:
 	@rm -rf $(OBJ)
 	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null
-	@$(MAKE) clean -C $(MLX_DIR) > /dev/null
+#	@$(MAKE) clean -C $(MLX_DIR) > /dev/null
 	@echo "$(GREEN)$(NAME_EXE) object files cleaned!$(DEFAULT)"
 
 fclean: clean
