@@ -29,6 +29,7 @@
 
 #define WIN_WIDTH 2048
 #define WIN_HEIGHT 1080
+#define TILE_SIZE 16
 
 #define KEY_W 119
 #define KEY_A 97
@@ -133,7 +134,7 @@ int		ft_key_handler(int keycode, t_game *game);
 void	init_player(t_game *game);
 
 //DISPLAY
-int		render_frame(t_game *game);
+int		print_map_2d(t_game *game);
 
 //CLEAN
 int		ft_close_window(t_game *game);

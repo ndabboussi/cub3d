@@ -22,29 +22,47 @@ void	my_mlx_pixel_put(t_window *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_vertical_line(t_window *win, int x, int start, int end, int color)
+void	draw_square(t_game *game, int x, int y, int color)
 {
-	int	y;
+	int	i;
+	int	j;
 
-	y = start;
-	while (y < end)
+	i = 0;
+	j = 0;
+	while (i < TILE_SIZE)
 	{
-		my_mlx_pixel_put(win, x, y, color);
-		y++;
+		while (j < TILE_SIZE)
+		{
+			mlx_pixel_put(game->window.mlx_ptr, game->window.mlx_window, \
+				x + (WIN_WIDTH / 2 + j), y + (WIN_HEIGHT / 2 + i), color);
+			j++;
+		}
+		j = 0;
+		i++;
 	}
 }
 
-int	is_wall(t_game *game, float x, float y)
+void	draw_map2d(t_game *game)
 {
-	int	map_x;
-	int	map_y;
+	int	x;
+	int	y;
 
-	map_x = (int)x;
-	map_y = (int)y;
-	if (map_y < 0 || map_y >= game->map.height || map_x < 0 \
-				|| map_x >= (int)ft_strlen(game->map.map[map_y]))
-		return (1);
-	return (game->map.map[map_y][map_x] == '1');
+	y = 0;
+	while (game->map.map[y])
+	{
+		x = 0;
+		while (game->map.map[y][x])
+		{
+			if (game->map.map[y][x] == '1')
+				draw_square(game, x * TILE_SIZE, y * TILE_SIZE, \
+					0xFFFFFF); //white for walls
+			else if (game->map.map[y][x] == '0' || game->map.map[y][x] == ' ')
+				draw_square(game, x * TILE_SIZE, y * TILE_SIZE, \
+					0x000000); //black for floor
+			x++;
+		}
+		y++;
+	}
 }
 
 void	clear_image(t_window *win)
@@ -65,38 +83,9 @@ void	clear_image(t_window *win)
 	}
 }
 
-int	render_frame(t_game *game)
+int	print_map_2d(t_game *game)
 {
-	int		x;
-	float	ray_angle, ray_x, ray_y, step, distance;
-	int		line_height, wall_top, wall_bottom;
-
-	x = 0;
 	clear_image(&game->window);
-	while (x < WIN_WIDTH)
-	{
-		ray_angle = (game->map.player_dir * PI / 180.0) - \
-			(FOV * PI / 180.0 / 2.0) + (x * (FOV * PI / 180.0) / WIN_WIDTH);
-		ray_x = game->map.player_x + 0.5;
-		ray_y = game->map.player_y + 0.5;
-		step = 0.01;
-		distance = 0;
-		while (!is_wall(game, ray_x, ray_y))
-		{
-			ray_x += cos(ray_angle) * step;
-			ray_y += sin(ray_angle) * step;
-			distance += step;
-		}
-		if (distance == 0)
-			distance = 0.0001;
-		line_height = (int)(WIN_HEIGHT / distance);
-		wall_top = (WIN_HEIGHT / 2) - (line_height / 2);
-		wall_bottom = (WIN_HEIGHT / 2) + (line_height / 2);
-		draw_vertical_line(&game->window, x, 0, wall_top, 0xFF9B55); // sky
-		draw_vertical_line(&game->window, x, wall_top, wall_bottom, 0xFFFFFF); // wall
-		draw_vertical_line(&game->window, x, wall_bottom, WIN_HEIGHT, 0xD50062); // floor
-		x++;
-	}
-	mlx_put_image_to_window(game->window.mlx_ptr, game->window.mlx_window, game->window.img, 0, 0);
+	draw_map2d(game);
 	return (0);
 }
