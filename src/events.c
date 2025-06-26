@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndabbous <ndabbous@student.42.fr>          #+#  +:+       +#+        */
+/*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-06-24 16:11:24 by ndabbous          #+#    #+#             */
-/*   Updated: 2025-06-24 16:11:24 by ndabbous         ###   ########.fr       */
+/*   Created: 2025/06/24 16:11:24 by ndabbous          #+#    #+#             */
+/*   Updated: 2025/06/26 14:42:03 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ int	ft_key_handler(int keycode, t_game *game)
 	if (keycode == KEY_ESC)
 		ft_close_window(game);
 	else if (keycode == KEY_W)
-		printf("[KEY] W\n");
+		move_forward(game);
 	else if (keycode == KEY_S)
-		printf("[KEY] S\n");
+		move_backward(game);
 	else if (keycode == KEY_A)
-		printf("[KEY] A\n");
+		strafe_left(game);
 	else if (keycode == KEY_D)
-		printf("[KEY] D\n");
+		strafe_right(game);
 	else if (keycode == KEY_LEFT)
-		printf("[KEY] LEFT\n");
+		rotate_left(game);
 	else if (keycode == KEY_RIGHT)
-		printf("[KEY] RIGHT\n");
+		rotate_right(game);
 	return (0);
 }

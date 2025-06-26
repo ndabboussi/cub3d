@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/25 14:58:32 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/26 14:44:52 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 #define WIN_WIDTH 2048
 #define WIN_HEIGHT 1080
 #define TILE_SIZE 16
+
+#define MOVE_SPEED 0.1
+#define ROT_SPEED (PI / 30)
 
 #define KEY_W 119
 #define KEY_A 97
@@ -148,3 +151,12 @@ void	print_texture(t_path *tex);
 void	print_path(t_path *path);
 void	print_coordinates(t_coordinates *coord, const char *label);
 void	print_player(t_player *player);
+
+//Movement
+int	is_walkable(t_game *g, float x, float y);
+void	move_forward(t_game *g);
+void	move_backward(t_game *g);
+void	strafe_left(t_game *g);
+void	strafe_right(t_game *g);
+void	rotate_left(t_game *g);
+void	rotate_right(t_game *g);
