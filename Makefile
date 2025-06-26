@@ -1,5 +1,7 @@
 NAME_EXE = cub3D
 
+ARGS = ./map/valid_map/map_1.cub
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
 MLXFLAG = -lmlx -lXext -lX11 -Lminilibx-linux -Iminilibx-linux -lXext -lX11 -lm -lz
@@ -83,4 +85,12 @@ test: all
 	@echo ""; echo "Testing without arguments..."; \
 	./$(NAME_EXE) || true
 
-.PHONY: all clean fclean re
+go: all
+	@./$(NAME_EXE) $(ARGS)
+	@rm -rf $(NAME_EXE)
+
+gov: all
+	@valgrind --leak-check=full ./$(NAME_EXE) $(ARGS)
+	@rm -rf $(NAME_EXE)
+
+.PHONY: all clean fclean re go gov
