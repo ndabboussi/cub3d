@@ -46,7 +46,7 @@ static int	is_empty_line(const char *line)
 	return (0);
 }
 
-static int	assign_texture(char *line, t_texture *cfg)
+static int	assign_texture(char *line, t_path *cfg)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 		cfg->no_texture = ft_strdup(trim_prefix(line, "NO"));
@@ -61,7 +61,7 @@ static int	assign_texture(char *line, t_texture *cfg)
 	return (0);
 }
 
-static int	assign_color(char *line, t_texture *cfg)
+static int	assign_color(char *line, t_path *cfg)
 {
 	if (ft_strncmp(line, "F ", 2) == 0)
 	{
@@ -78,7 +78,7 @@ static int	assign_color(char *line, t_texture *cfg)
 	return (0);
 }
 
-int	parse_texture_color(char *line, t_texture *cfg)
+int	parse_texture_color(char *line, t_path *cfg)
 {
 	if (is_empty_line(line))
 		return (0);

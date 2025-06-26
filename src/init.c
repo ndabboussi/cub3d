@@ -12,6 +12,11 @@
 
 #include "cub3d.h"
 
+// void	init_map_textures(t_game *game)
+// {
+
+// }
+
 void	init_window(t_game *game)
 {
 	game->window.mlx_ptr = mlx_init();
@@ -39,7 +44,7 @@ void	init_window(t_game *game)
 	game->window.addr = mlx_get_data_addr(game->window.img, \
 		&game->window.bits_per_pixel, &game->window.line_length, \
 		&game->window.endian);
-	//ft_init_map(game);
-	//get_textures(game);
-	//get_colors(game);
+	//init_map_textures(game);
+	//init_textures(game);
+	//init_colors(game);
 }
