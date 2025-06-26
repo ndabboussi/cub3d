@@ -1,4 +1,4 @@
-*/*.o
+.o
 /libft/*.o
 /obj/
 .vscode
