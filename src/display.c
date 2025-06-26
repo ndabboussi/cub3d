@@ -33,13 +33,42 @@ void	draw_square(t_game *game, int x, int y, int color)
 	{
 		while (j < TILE_SIZE)
 		{
-			mlx_pixel_put(game->window.mlx_ptr, game->window.mlx_window, \
-				x + (WIN_WIDTH / 2 + j), y + (WIN_HEIGHT / 2 + i), color);
+			my_mlx_pixel_put(&game->window, \
+				x + j, y + i, color);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
+}
+
+void	draw_player(t_game *game)
+{
+	int	player_map_x;
+	int	player_map_y;
+
+	player_map_x = game->player.pos.x * TILE_SIZE;
+	player_map_y = game->player.pos.y * TILE_SIZE;
+	draw_square(game, player_map_x, player_map_y, \
+					0xff00ff);
+}
+
+void	draw_ray(t_game *game)
+{
+	int		ray_length;
+	double	end_x;
+	double	end_y;
+
+	ray_length = 50;
+	end_x = game->player.pos.x * TILE_SIZE \
+				+ cos(game->player.angle) * ray_length;
+	end_y = game->player.pos.y * TILE_SIZE \
+					+ sin(game->player.angle) * ray_length;
+	// while ()
+	// {
+		my_mlx_pixel_put(&game->window, \
+				(int)end_x, (int)end_y, 0x00FF00);
+	// }
 }
 
 void	draw_map2d(t_game *game)
@@ -87,5 +116,9 @@ int	print_map_2d(t_game *game)
 {
 	clear_image(&game->window);
 	draw_map2d(game);
+	draw_player(game);
+	draw_ray(game);
+	mlx_put_image_to_window(game->window.mlx_ptr, \
+		game->window.mlx_window, game->window.img, 0, 0);
 	return (0);
 }

@@ -25,8 +25,8 @@ void	init_window(t_game *game)
 		perror("Error : mlx_init failed.\n");
 		exit(EXIT_FAILURE);
 	}
-	game->window.screen_width = WIN_WIDTH;
-	game->window.screen_height = WIN_HEIGHT;
+	game->window.screen_width = game->map.width;
+	game->window.screen_height = game->map.height;
 	game->window.mlx_window = mlx_new_window(game->window.mlx_ptr, \
 								WIN_WIDTH, WIN_HEIGHT, "Cub3d - Pierna");
 	if (!game->window.mlx_window)
