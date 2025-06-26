@@ -1,5 +1,5 @@
-.o
-.a
+*.o
+*.a
 .vscode
 .vscode/*
 
