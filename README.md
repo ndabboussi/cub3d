@@ -53,3 +53,9 @@ Gestion des Mouvements
 	Avancer, reculer.
 
 	Rotation gauche/droite.
+
+
+- fenetre dynamique
+- afficher le player
+- bouger dans la map
+- calculer les rayons

@@ -66,7 +66,8 @@ typedef struct s_map
 	char	player_dir;
 }	t_map;
 
-typedef struct s_color {
+typedef struct s_color
+{
 	int r;
 	int g;
 	int b;
@@ -135,7 +136,7 @@ void	init_player(t_game *game);
 
 //DISPLAY
 int		print_map_2d(t_game *game);
-int	render_frame(t_game *game);
+int		render_frame(t_game *game);
 
 //CLEAN
 int		ft_close_window(t_game *game);
