@@ -1,0 +1,8 @@
+*.o
+*.a
+.vscode
+.vscode/*
+
+# Exec files 
+cub3d
+a.out
