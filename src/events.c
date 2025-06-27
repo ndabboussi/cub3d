@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 16:11:24 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/06/26 14:42:03 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/26 18:48:51 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	ft_key_handler(int keycode, t_game *game)
 	else if (keycode == KEY_S)
 		move_backward(game);
 	else if (keycode == KEY_A)
-		strafe_left(game);
+		move_left(game);
 	else if (keycode == KEY_D)
-		strafe_right(game);
+		move_right(game);
 	else if (keycode == KEY_LEFT)
 		rotate_left(game);
 	else if (keycode == KEY_RIGHT)

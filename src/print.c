@@ -72,7 +72,7 @@ void print_coordinates(t_coordinates *coord, const char *label)
 		printf("%s: Coordinates pointer is NULL.\n", label);
 		return;
 	}
-	printf("%s -> x: %.2f, y: %.2f, angle: %.2f\n", label, coord->x, coord->y, coord->angle);
+	// printf("%s -> x: %.2f, y: %.2f, angle: %.2f\n", label, coord->x, coord->y, coord->angle);
 }
 void print_player(t_player *player)
 {
@@ -83,6 +83,5 @@ void print_player(t_player *player)
 	}
 	printf("==== DEBUG t_player ====\n");
 	print_coordinates(&player->pos, "Position");
-	printf("Orientation: %.c\n", player->orientation);
 	printf("========================\n");
 }

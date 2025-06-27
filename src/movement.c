@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:43:19 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/26 15:10:56 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/26 18:48:51 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	move_backward(t_game *g)
 		g->player.pos.y = new_y;
 }
 
-void	strafe_left(t_game *g)
+void	move_left(t_game *g)
 {
 	float new_x = g->player.pos.x + sin(g->player.angle) * MOVE_SPEED;
 	float new_y = g->player.pos.y - cos(g->player.angle) * MOVE_SPEED;
@@ -49,7 +49,7 @@ void	strafe_left(t_game *g)
 		g->player.pos.y = new_y;
 }
 
-void	strafe_right(t_game *g)
+void	move_right(t_game *g)
 {
 	float new_x = g->player.pos.x - sin(g->player.angle) * MOVE_SPEED;
 	float new_y = g->player.pos.y + cos(g->player.angle) * MOVE_SPEED;

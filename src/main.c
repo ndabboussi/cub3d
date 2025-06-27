@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 11:55:38 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/25 14:58:18 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/27 11:57:59 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	main(int ac, char **av)
 	init_player(&game);
 	mlx_hook(game.window.mlx_window, 17, 0, ft_close_window, &game);
 	mlx_hook(game.window.mlx_window, 2, 1L << 0, ft_key_handler, &game);
-	mlx_loop_hook(game.window.mlx_ptr, print_map_2d, &game);
+	// mlx_loop_hook(game.window.mlx_ptr, print_map_2d, &game);
+	mlx_loop_hook(game.window.mlx_ptr, render_frame, &game);
 	mlx_loop(game.window.mlx_ptr);
 	ft_exit_all(&game, 0);
 	return (0);
