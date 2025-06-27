@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 16:11:24 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/06/26 18:48:51 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:15:11 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 int	ft_close_window(t_game *game)
 {
+	if (game->window.mlx_window)
+		mlx_destroy_window(game->window.mlx_ptr, game->window.mlx_window);
+	if (game->window.img)
+		mlx_destroy_image(game->window.mlx_ptr, game->window.img);
 	mlx_loop_end(game->window.mlx_ptr);
-	return (0);
+	exit(0);
 }
+
 
 int	ft_key_handler(int keycode, t_game *game)
 {

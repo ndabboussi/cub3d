@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/27 12:07:28 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:00:40 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_color
 	int b;
 }	t_color;
 
+
 typedef struct s_texture
 {
 	void	*img;
@@ -107,6 +108,23 @@ typedef struct s_window
 	int		line_length;
 	int		endian;
 }				t_window;
+
+typedef struct s_dda
+{
+	int map_x;
+	int map_y;
+	float ray_x;
+	float ray_y;
+	float ray_dir_x;
+	float ray_dir_y;
+	float delta_dist_x;
+	float delta_dist_y;
+	float side_dist_x;
+	float side_dist_y;
+	int step_x;
+	int step_y;
+	int side;
+}	t_dda;
 
 typedef struct s_game
 {
@@ -163,3 +181,4 @@ void	rotate_right(t_game *g);
 
 //Raycasting
 void	draw_vertical_line(t_window *win, int x, int start, int end, int color);
+int color_to_int(t_color color);

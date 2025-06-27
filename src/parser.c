@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:26:47 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/25 14:54:32 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:49:13 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,11 @@ char *trim_prefix(char *line, char *prefix)
 	return (line);
 }
 
-int parse_color(char *str, t_color *color)
-{
-	if (sscanf(str, "%d,%d,%d", &color->r, &color->g, &color->b) != 3)
-		return (1);
-	if (color->r < 0 || color->r > 255 ||
-		color->g < 0 || color->g > 255 ||
-		color->b < 0 || color->b > 255)
-		return (1);
-	return (0);
-}
-
-
 static int	is_empty_line(const char *line)
 {
 	char *trimmed = ft_strtrim(line, " \t\n");
 	if (!trimmed)
-		return (1);
+		return (-1);
 	if (ft_strlen(trimmed) == 0)
 	{
 		free(trimmed);
@@ -46,53 +34,64 @@ static int	is_empty_line(const char *line)
 	return (0);
 }
 
-static int	assign_texture(char *line, t_path *cfg)
+int	parse_color(char *str, t_color *color)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		cfg->no_texture = ft_strdup(trim_prefix(line, "NO"));
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-		cfg->so_texture = ft_strdup(trim_prefix(line, "SO"));
-	else if (ft_strncmp(line, "WE ", 3) == 0)
-		cfg->we_texture = ft_strdup(trim_prefix(line, "WE"));
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-		cfg->ea_texture = ft_strdup(trim_prefix(line, "EA"));
-	else
-		return (2); // Not a texture directive
+	int		i;
+	char	**components;
+
+	i = 0;
+	components = ft_split(str, ',');
+	if (!components)
+		return (-1);
+	while (components[i])
+		i++;
+	if (i != 3)
+		return (free_map(components), 1);
+	color->r = ft_atoi(components[0]);
+	color->g = ft_atoi(components[1]);
+	color->b = ft_atoi(components[2]);
+	free_map(components);
+	if (color->r < 0 || color->r > 255 ||
+		color->g < 0 || color->g > 255 ||
+		color->b < 0 || color->b > 255)
+		return (-1);
 	return (0);
 }
 
-static int	assign_color(char *line, t_path *cfg)
+int	parse_till_map(char *line, t_path *config)
 {
-	if (ft_strncmp(line, "F ", 2) == 0)
-	{
-		if (parse_color(trim_prefix(line, "F"), &cfg->floor))
-			return (1);
-	}
-	else if (ft_strncmp(line, "C ", 2) == 0)
-	{
-		if (parse_color(trim_prefix(line, "C"), &cfg->ceiling))
-			return (1);
-	}
-	else
-		return (2); // Not a color line
-	return (0);
-}
+	char	*trimmed;
 
-int	parse_texture_color(char *line, t_path *cfg)
-{
 	if (is_empty_line(line))
 		return (0);
 
-	if (assign_texture(line, cfg) == 0)
-		return (0);
-
-	if (assign_color(line, cfg) == 0)
-		return (0);
-
-	return (2); // Not a texture or color line
+	if (ft_strncmp(line, "NO", 2) == 0)
+		config->no_texture = ft_strdup(trim_prefix(line, "NO"));
+	else if (ft_strncmp(line, "SO", 2) == 0)
+		config->so_texture = ft_strdup(trim_prefix(line, "SO"));
+	else if (ft_strncmp(line, "WE", 2) == 0)
+		config->we_texture = ft_strdup(trim_prefix(line, "WE"));
+	else if (ft_strncmp(line, "EA", 2) == 0)
+		config->ea_texture = ft_strdup(trim_prefix(line, "EA"));
+	else if (ft_strncmp(line, "F", 1) == 0)
+	{
+		trimmed = trim_prefix(line, "F");
+		if (parse_color(trimmed, &config->floor))
+			return (-1);
+	}
+	else if (ft_strncmp(line, "C", 1) == 0)
+	{
+		trimmed = trim_prefix(line, "C");
+		if (parse_color(trimmed, &config->ceiling))
+			return (-1);
+	}
+	else
+		return (2); // Not a recognized texture or color line
+	return (0);
 }
 
-int parse_textures_and_map_lines(char *filename, t_game *game, char **map_text)
+
+int parse_line_by_line(char *filename, t_game *game, char **map_text)
 {
 	int		fd;
 	char	*line;
@@ -108,7 +107,7 @@ int parse_textures_and_map_lines(char *filename, t_game *game, char **map_text)
 	{
 		if (!is_map_started)
 		{
-			res_texture = parse_texture_color(line, &game->texture);
+			res_texture = parse_till_map(line, &game->texture);
 			if (res_texture == 1)
 				return (printf("Error\nInvalid config line: %s\n", line), free(line), close(fd), free(*map_text), -1);
 			else if (res_texture == 2)
@@ -134,7 +133,7 @@ int parse_file(char *filename, t_game *game)
 	map_text = ft_calloc(1, sizeof(char));
 	if (!map_text)
 		return (perror("Memory allocation failed"), -1);
-	if (parse_textures_and_map_lines(filename, game, &map_text) != 0)
+	if (parse_line_by_line(filename, game, &map_text) != 0)
 		return (-1);
 
 	game->map.map = ft_split(map_text, '\n');

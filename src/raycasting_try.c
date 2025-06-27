@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:02:16 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/06/27 12:56:45 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:01:20 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,26 @@ int	is_wall(t_game *game, float x, float y)
 	return (game->map.map[map_y][map_x] == '1');
 }
 
-float	cast_ray(t_game *game, float ray_angle)
-{
-	float	ray_x = game->player.pos.x + 0.5;
-	float	ray_y = game->player.pos.y + 0.5;
-	float	step = 0.01;
-	float	distance = 0;
+// float	cast_ray(t_game *game, float ray_angle)
+// {
+// 	float	ray_x = game->player.pos.x + 0.5;
+// 	float	ray_y = game->player.pos.y + 0.5;
+// 	float	step = 0.01;
+// 	float	distance = 0;
 
-	while (!is_wall(game, ray_x, ray_y))
-	{
-		ray_x += cos(ray_angle) * step;
-		ray_y += sin(ray_angle) * step;
-		distance += step;
-	}
-	// Fisheye correction
-	// distance *= cos(ray_angle - game->player.angle);
-	if (distance == 0) 
-		return (0.0001);
-	else 
-		return (distance);
-}
+// 	while (!is_wall(game, ray_x, ray_y))
+// 	{
+// 		ray_x += cos(ray_angle) * step;
+// 		ray_y += sin(ray_angle) * step;
+// 		distance += step;
+// 	}
+// 	// Fisheye correction
+// 	// distance *= cos(ray_angle - game->player.angle);
+// 	if (distance == 0) 
+// 		return (0.0001);
+// 	else
+// 		return(distance);
+// }
 
 int color_to_int(t_color color)
 {
@@ -64,36 +64,36 @@ int color_to_int(t_color color)
 }
 
 
-void render_column(t_game *game, int x, float distance)
-{
-	int line_height = (int)(WIN_HEIGHT / distance);
-	int wall_top = (WIN_HEIGHT / 2) - (line_height / 2);
-	int wall_bottom = (WIN_HEIGHT / 2) + (line_height / 2);
+// void render_column(t_game *game, int x, float distance)
+// {
+// 	int line_height = (int)(WIN_HEIGHT / distance);
+// 	int wall_top = (WIN_HEIGHT / 2) - (line_height / 2);
+// 	int wall_bottom = (WIN_HEIGHT / 2) + (line_height / 2);
 
-	int ceiling_color = color_to_int(game->texture.ceiling);
-	int floor_color = color_to_int(game->texture.floor);
+// 	int ceiling_color = color_to_int(game->texture.ceiling);
+// 	int floor_color = color_to_int(game->texture.floor);
 
-	draw_vertical_line(&game->window, x, 0, wall_top, ceiling_color);	   // sky
-	draw_vertical_line(&game->window, x, wall_top, wall_bottom, 0xFFFFFF);  // wall (keep white for now)
-	draw_vertical_line(&game->window, x, wall_bottom, WIN_HEIGHT, floor_color);  // floor
-}
+// 	draw_vertical_line(&game->window, x, 0, wall_top, ceiling_color);	   // sky
+// 	draw_vertical_line(&game->window, x, wall_top, wall_bottom, 0xFFFFFF);  // wall (keep white for now)
+// 	draw_vertical_line(&game->window, x, wall_bottom, WIN_HEIGHT, floor_color);  // floor
+// }
 
-int	render_frame(t_game *game)
-{
-	int		x;
-	float	ray_angle;
-	float	distance;
+// int	render_frame(t_game *game)
+// {
+// 	int		x;
+// 	float	ray_angle;
+// 	float	distance;
 
-	clear_image(&game->window);
-	x = 0;
-	while (x < WIN_WIDTH)
-	{
-		ray_angle = game->player.angle - (FOV * PI / 180.0 / 2.0) + \
-					(x * (FOV * PI / 180.0) / WIN_WIDTH);
-		distance = cast_ray(game, ray_angle);
-		render_column(game, x, distance);
-		x++;
-	}
-	mlx_put_image_to_window(game->window.mlx_ptr, game->window.mlx_window, game->window.img, 0, 0);
-	return (0);
-}
+// 	clear_image(&game->window);
+// 	x = 0;
+// 	while (x < WIN_WIDTH)
+// 	{
+// 		ray_angle = game->player.angle - (FOV * PI / 180.0 / 2.0) + \
+// 					(x * (FOV * PI / 180.0) / WIN_WIDTH);
+// 		distance = cast_ray(game, ray_angle);
+// 		render_column(game, x, distance);
+// 		x++;
+// 	}
+// 	mlx_put_image_to_window(game->window.mlx_ptr, game->window.mlx_window, game->window.img, 0, 0);
+// 	return (0);
+// }
