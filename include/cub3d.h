@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/26 14:44:52 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:00:40 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,11 @@ typedef struct s_coordinates
 {
 	float 	x;
 	float 	y;
-	float 	angle;
 }			t_coordinates;
 
 typedef struct s_player
 {
 	t_coordinates	pos;
-	char			orientation;
 	double			angle;
 }			t_player;
 
@@ -75,6 +73,7 @@ typedef struct s_color
 	int g;
 	int b;
 }	t_color;
+
 
 typedef struct s_texture
 {
@@ -110,6 +109,23 @@ typedef struct s_window
 	int		endian;
 }				t_window;
 
+typedef struct s_dda
+{
+	int map_x;
+	int map_y;
+	float ray_x;
+	float ray_y;
+	float ray_dir_x;
+	float ray_dir_y;
+	float delta_dist_x;
+	float delta_dist_y;
+	float side_dist_x;
+	float side_dist_y;
+	int step_x;
+	int step_y;
+	int side;
+}	t_dda;
+
 typedef struct s_game
 {
 	t_texture	no_texture;
@@ -140,6 +156,8 @@ void	init_player(t_game *game);
 //DISPLAY
 int		print_map_2d(t_game *game);
 int		render_frame(t_game *game);
+void	clear_image(t_window *win);
+void	my_mlx_pixel_put(t_window *img, int x, int y, int color);
 
 //CLEAN
 int		ft_close_window(t_game *game);
@@ -156,7 +174,11 @@ void	print_player(t_player *player);
 int	is_walkable(t_game *g, float x, float y);
 void	move_forward(t_game *g);
 void	move_backward(t_game *g);
-void	strafe_left(t_game *g);
-void	strafe_right(t_game *g);
+void	move_left(t_game *g);
+void	move_right(t_game *g);
 void	rotate_left(t_game *g);
 void	rotate_right(t_game *g);
+
+//Raycasting
+void	draw_vertical_line(t_window *win, int x, int start, int end, int color);
+int color_to_int(t_color color);

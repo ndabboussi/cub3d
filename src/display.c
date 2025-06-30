@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndabbous <ndabbous@student.42.fr>          #+#  +:+       +#+        */
+/*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-06-25 18:02:16 by ndabbous          #+#    #+#             */
-/*   Updated: 2025-06-25 18:02:16 by ndabbous         ###   ########.fr       */
+/*   Created: 2025/06/25 18:02:16 by ndabbous          #+#    #+#             */
+/*   Updated: 2025/06/27 12:44:40 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,18 @@ void	clear_image(t_window *win)
 		y++;
 	}
 }
+//meilleure version ??
+
+// void clear_image(t_window *win) 
+// {
+// 	int i;
+// 	int total_pixels = WIN_WIDTH * WIN_HEIGHT;
+// 	int *pixels = (int *)win->addr;
+
+// 	i = 0;
+// 	while (i < total_pixels)
+// 		pixels[i++] = 0x000000;
+// }
 
 int	print_map_2d(t_game *game)
 {
