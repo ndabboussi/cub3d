@@ -14,7 +14,7 @@ MLX_DIR = ./minilibx-linux/
 
 FILES = print.c main.c parser.c map_checker.c flood_fill.c \
 		init.c events.c player.c display.c clean.c raycasting_try.c \
-		movement.c DDA_try.c
+		movement.c DDA_textures.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
