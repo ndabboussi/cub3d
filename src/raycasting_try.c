@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:02:16 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/06/27 16:01:20 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/01 12:22:47 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,6 @@ int	is_wall(t_game *game, float x, float y)
 		return (1);
 	return (game->map.map[map_y][map_x] == '1');
 }
-
-// float	cast_ray(t_game *game, float ray_angle)
-// {
-// 	float	ray_x = game->player.pos.x + 0.5;
-// 	float	ray_y = game->player.pos.y + 0.5;
-// 	float	step = 0.01;
-// 	float	distance = 0;
-
-// 	while (!is_wall(game, ray_x, ray_y))
-// 	{
-// 		ray_x += cos(ray_angle) * step;
-// 		ray_y += sin(ray_angle) * step;
-// 		distance += step;
-// 	}
-// 	// Fisheye correction
-// 	// distance *= cos(ray_angle - game->player.angle);
-// 	if (distance == 0) 
-// 		return (0.0001);
-// 	else
-// 		return(distance);
-// }
 
 int color_to_int(t_color color)
 {
