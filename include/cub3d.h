@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/06/27 16:00:40 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/01 14:33:18 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ void	free_map(char **map);
 //INIT
 void	init_window(t_game *game);
 int		ft_key_handler(int keycode, t_game *game);
+void init_colors(t_color *floor, t_color *ceiling);
 
 void	init_player(t_game *game);
 
@@ -195,5 +196,7 @@ void	rotate_right(t_game *g);
 //Raycasting
 void	draw_vertical_line(t_window *win, int x, int start, int end, int color);
 int color_to_int(t_color color);
+int	perform_dda(t_game *game, t_dda *d);
+float cast_ray(t_game *game, float ray_angle);
 
 #endif

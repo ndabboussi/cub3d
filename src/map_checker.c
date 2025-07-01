@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:50:07 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/06/24 16:54:05 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/01 11:32:28 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_player(t_game *game)
 		y++;
 	}
 	if (nb_p != 1)
-		return (perror("Error : more than one player.\n"), -1);
+		return (perror("Error : need one player.\n"), -1);
 	return (0);
 }
 
