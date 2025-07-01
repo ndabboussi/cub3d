@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:26:47 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/01 12:21:00 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/01 15:09:19 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ char *trim_prefix(char *line, char *prefix)
 
 static int	is_empty_line(const char *line)
 {
-	char *trimmed = ft_strtrim(line, " \t\n");
+	char	*trimmed;
+
+	trimmed = ft_strtrim(line, " \t\n");
 	if (!trimmed)
 		return (-1);
 	if (ft_strlen(trimmed) == 0)
@@ -76,7 +78,7 @@ int	assign_texture(char *line, char *prefix, char **dest)
 
 int	assign_color(char *line, char *prefix, t_color *dest)
 {
-	char *trimmed;
+	char	*trimmed;
 
 	if (ft_strncmp(line, prefix, ft_strlen(prefix)) == 0)
 	{
@@ -122,7 +124,7 @@ int	parse_till_map(char *line, t_path *config)
 
 
 
-int parse_line_by_line(char *filename, t_game *game, char **map_text)
+int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 {
 	int		fd;
 	char	*line;
@@ -156,7 +158,7 @@ int parse_line_by_line(char *filename, t_game *game, char **map_text)
 	return (0);
 }
 
-int check_config_complete(t_path *config)
+int	check_config_complete(t_path *config)
 {
 	if (!config->no_texture || !config->so_texture || !config->we_texture
 		|| !config->ea_texture)
@@ -169,9 +171,9 @@ int check_config_complete(t_path *config)
 }
 
 
-int parse_file(char *filename, t_game *game)
+int	parse_file(char *filename, t_game *game)
 {
-	char *map_text;
+	char	*map_text;
 
 	map_text = ft_calloc(1, sizeof(char));
 	if (!map_text)
