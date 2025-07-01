@@ -118,8 +118,8 @@ void render_column(t_game *game, int x, float distance)
 	int wall_top = (WIN_HEIGHT / 2) - (line_height / 2);
 	int wall_bottom = (WIN_HEIGHT / 2) + (line_height / 2);
 
-	int ceiling_color = color_to_int(game->texture.ceiling);
-	int floor_color = color_to_int(game->texture.floor);
+	int ceiling_color = color_to_int(game->path.ceiling);
+	int floor_color = color_to_int(game->path.floor);
 
 	draw_vertical_line(&game->window, x, 0, wall_top, ceiling_color);	   // sky
 	draw_vertical_line(&game->window, x, wall_top, wall_bottom, 0xFF00FF);  // wall (keep white for now)
@@ -204,8 +204,8 @@ void	render_column(t_game *game, int x, float distance)
 	int wall_top = (WIN_HEIGHT / 2) - (line_height / 2);
 	int wall_bottom = (WIN_HEIGHT / 2) + (line_height / 2);
 
-	int ceiling_color = color_to_int(game->texture.ceiling);
-	int floor_color = color_to_int(game->texture.floor);
+	int ceiling_color = color_to_int(game->path.ceiling);
+	int floor_color = color_to_int(game->path.floor);
 
 	draw_vertical_line(&game->window, x, 0, wall_top, ceiling_color);	   // sky
 	draw_vertical_line(&game->window, x, wall_top, wall_bottom, 0xFFFFFF);  // wall (keep wraye for now)

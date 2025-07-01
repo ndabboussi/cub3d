@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	free_map(char **map)
+void	free_double_tab(char **map)
 {
 	int	j;
 
@@ -28,6 +28,30 @@ void	free_map(char **map)
 	map = NULL;
 }
 
+void	free_texture(t_game *game, t_texture *texture)
+{
+	if (texture->img)
+		mlx_destroy_image(game->window.mlx_ptr, texture->img);
+	texture->img = NULL;
+	texture->addr = NULL;
+}
+
+void	free_paths(t_path *path)
+{
+	if (path->no_texture)
+		free(path->no_texture);
+	if (path->so_texture)
+		free(path->so_texture);
+	if (path->we_texture)
+		free(path->we_texture);
+	if (path->ea_texture)
+		free(path->ea_texture);
+	path->no_texture = NULL;
+	path->so_texture = NULL;
+	path->we_texture = NULL;
+	path->ea_texture = NULL;
+}
+
 void	ft_exit_all(t_game *game, int code)
 {
 	(void)code;
@@ -40,9 +64,13 @@ void	ft_exit_all(t_game *game, int code)
 		mlx_destroy_display(game->window.mlx_ptr);
 		free(game->window.mlx_ptr);
 	}
+	free_texture(game, &game->no_texture);
+	free_texture(game, &game->so_texture);
+	free_texture(game, &game->we_texture);
+	free_texture(game, &game->ea_texture);
+	free_paths(&game->path);
 	if (game->map.map)
-		free_map(game->map.map);
-	// ft_free_textures;
-	// ft_free_colors;
-	//put_error(NULL);
+		free_double_tab(game->map.map);
+	// put_error(NULL);
+	exit (0);
 }
