@@ -185,7 +185,7 @@ void	print_coordinates(t_coordinates *coord, const char *label);
 void	print_player(t_player *player);
 
 //Movement
-int	is_walkable(t_game *g, float x, float y);
+int		is_walkable(t_game *g, float x, float y);
 void	move_forward(t_game *g);
 void	move_backward(t_game *g);
 void	move_left(t_game *g);
@@ -195,8 +195,8 @@ void	rotate_right(t_game *g);
 
 //Raycasting
 void	draw_vertical_line(t_window *win, int x, int start, int end, int color);
-int color_to_int(t_color color);
-int	perform_dda(t_game *game, t_dda *d);
-float cast_ray(t_game *game, float ray_angle);
+int		color_to_int(t_color color);
+int		perform_dda(t_game *game, t_dda *d);
+t_rays	cast_ray(t_game *game, float ray_angle);
 
 #endif

@@ -95,6 +95,7 @@ void draw_rays(t_game *game)
 	double ray_angle;
 	double start_x = game->player.pos.x * TILE_SIZE;
 	double start_y = game->player.pos.y * TILE_SIZE;
+	t_rays distance;
 		
 	i = 0;
 	while (i < num_rays)
@@ -104,11 +105,11 @@ void draw_rays(t_game *game)
 			+ ((double)(i * 4) / WIN_WIDTH) * (FOV * PI / 180.0);
 		
 		// Cast the ray to get distance
-		float distance = cast_ray(game, ray_angle);
+		distance = cast_ray(game, ray_angle);
 		
 		// Convert distance to 2D map coordinates
-		double end_x = start_x + cos(ray_angle) * distance * TILE_SIZE;
-		double end_y = start_y + sin(ray_angle) * distance * TILE_SIZE;
+		double end_x = start_x + cos(ray_angle) * distance.distance * TILE_SIZE;
+		double end_y = start_y + sin(ray_angle) * distance.distance * TILE_SIZE;
 		
 		// Draw the ray line
 		draw_line(game, (int)start_x, (int)start_y, (int)end_x, (int)end_y, 0x00FF00);
