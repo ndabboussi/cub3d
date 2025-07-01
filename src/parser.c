@@ -141,8 +141,14 @@ int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 		{
 			res_texture = parse_till_map(line, &game->path);
 			if (res_texture == -1)
-				return (printf("Error\nInvalid config line: %s\n", line), free(line), close(fd), free(*map_text), -1);
-			else if (res_texture == 2)
+			{
+				printf("Error\nInvalid config line: %s\n", line);
+				free(line);
+				close(fd);
+				free(*map_text);
+				return (-1);
+			}
+				else if (res_texture == 2)
 				is_map_started = 1;
 		}
 		if (is_map_started)

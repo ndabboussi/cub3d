@@ -19,8 +19,6 @@ int	ft_close_window(t_game *game)
 	if (game->window.img)
 		mlx_destroy_image(game->window.mlx_ptr, game->window.img);
 	mlx_loop_end(game->window.mlx_ptr);
-	//ft_exit_all(game, 0);
-	//return (0);
 	exit(0);
 }
 
