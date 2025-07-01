@@ -118,7 +118,7 @@ t_rays	cast_ray(t_game *game, float ray_angle)
 	else
 		ray.distance = (d.map_y - d.ray_y \
 			+ (1 - d.step_y) / 2.0f) / d.ray_dir_y;
-	if (ray.distance == 0)
+	if (ray.distance == 0)//si on est hyper pret, on evite de mettre une distance a 0 pour pas diviser par 0
 		ray.distance = 0.0001f;
 	if (d.side == 0 && d.ray_dir_x > 0)//east wall
 		ray.texture = &game->ea_texture;
@@ -130,17 +130,19 @@ t_rays	cast_ray(t_game *game, float ray_angle)
 		ray.texture = &game->no_texture;//north wall
 	// if (ray.texture == NULL)
 	// 	ray.texture = &game->no_texture;
-	if (d.side == 0)
+	if (d.side == 0)//calcule de l'intersection exacte sur le mur, on utilise y si vertical
 		wall_x = d.ray_y + ray.distance * d.ray_dir_y;
 	else
 		wall_x = d.ray_x + ray.distance * d.ray_dir_x;
-	wall_x -= floor(wall_x);
+	if (wall_x < 0)
+		wall_x += 1.0;
+	wall_x -= (int)wall_x;
 	ray.texture_x = (int)(wall_x * (double)TEXTURE_W);
-	if (d.side == 0 && d.ray_dir_x > 0)
+	if (d.side == 0 && d.ray_dir_x > 0)//correction de l'inversion de la texture
 		ray.texture_x = TEXTURE_W - ray.texture_x - 1;
 	if (d.side == 1 && d.ray_dir_y < 0)
 		ray.texture_x = TEXTURE_W - ray.texture_x - 1;
-	ray.side = d.side;
+	ray.side = d.side;//sauvegarde de si on a touche un mur evrtical ou horizontal
 	return (ray);
 }
 
