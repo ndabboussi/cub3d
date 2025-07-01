@@ -1,3 +1,12 @@
+NO ./textures/azulejo.xpm
+SO ./textures/flowers.xpm
+WE ./textures/window.xpm
+EA ./textures/planches.xpm
+
+F 0,0,255
+C 0,35,155
+
+
           1111111111111111111111111
           1000000000110000000000001
           1011000001110000000000001

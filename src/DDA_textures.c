@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DDA_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndabbous <ndabbous@student.42.fr>          #+#  +:+       +#+        */
+/*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-01 10:28:46 by ndabbous          #+#    #+#             */
-/*   Updated: 2025-07-01 10:28:46 by ndabbous         ###   ########.fr       */
+/*   Created: 2025/07/01 10:28:46 by ndabbous          #+#    #+#             */
+/*   Updated: 2025/07/01 15:19:01 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ t_rays	cast_ray(t_game *game, float ray_angle)
 		ray.distance = (d.map_y - d.ray_y \
 			+ (1 - d.step_y) / 2.0f) / d.ray_dir_y;
 	if (ray.distance == 0)//si on est hyper pret, on evite de mettre une distance a 0 pour pas diviser par 0
-		ray.distance = 0.0001f;
+		ray.distance = 0.01f;
 	if (d.side == 0 && d.ray_dir_x > 0)//east wall
 		ray.texture = &game->ea_texture;
 	else if (d.side == 0)

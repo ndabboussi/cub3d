@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 16:12:42 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/06/26 18:36:48 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/01 15:04:31 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_player(t_game *game)
 {
-	game->player.pos.x = game->map.player_x + 0.5;
-	game->player.pos.y = game->map.player_y + 0.5;
+	game->player.pos.x = game->map.player_x;
+	game->player.pos.y = game->map.player_y;
 	// game->player.orientation = game->map.player_dir;
 	if (game->map.player_dir == 'S')
 		game->player.angle = PI / 2; //90° vers le haut
