@@ -45,7 +45,7 @@
 # define WIN_WIDTH 2048
 # define WIN_HEIGHT 1080
 
-# define MINIMAP_TILE_SIZE 16
+# define TILE_SIZE 16
 # define MINIMAP_SIZE 10
 
 #define MINIMAP_WIDTH  200
@@ -54,7 +54,7 @@
 
 # define TEXTURE_W 64
 # define TEXTURE_H 64
-#define PLAYER_SIZE 20
+#define PLAYER_SIZE 8
 
 # define FOV 60
 # define PI 3.14159265358979323846
@@ -228,6 +228,6 @@ void	print_player(t_player *player);
 //2D
 void	draw_map2d(t_game *game);
 void	draw_player(t_game *game);
-void draw_rays(t_game *game);
+void	draw_rays(t_game *game);
 
 #endif
