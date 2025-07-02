@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:28:46 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/07/01 15:19:01 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/01 15:28:19 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	get_texture_pixel(t_texture *texture, int x, int y)
 // Step 1: Ray start position and direction setup
 void	init_ray_position_and_direction(t_game *game, t_dda *d, float ray_angle)
 {
-	d->ray_x = game->player.pos.x + 0.5;
-	d->ray_y = game->player.pos.y + 0.5;
+	d->ray_x = game->player.pos.x;
+	d->ray_y = game->player.pos.y;
 	d->ray_dir_x = cos(ray_angle);
 	d->ray_dir_y = sin(ray_angle);
 	d->map_x = (int)d->ray_x;
