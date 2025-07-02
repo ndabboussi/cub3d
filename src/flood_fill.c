@@ -105,10 +105,10 @@ int	flood_fill(t_game *game)
 	if (!fill(game, map_copy, game->map.player_x, game->map.player_y))
 	{
 	//	print_map(map_copy);
-		free_map(map_copy);
+		free_double_tab(map_copy);
 		return (0);
 	}
 	//print_map(map_copy);
-	free_map(map_copy);
+	free_double_tab(map_copy);
 	return (1);
 }

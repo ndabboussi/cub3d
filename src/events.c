@@ -22,7 +22,6 @@ int	ft_close_window(t_game *game)
 	exit(0);
 }
 
-
 int	ft_key_handler(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)

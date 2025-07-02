@@ -5,8 +5,8 @@ SO ./textures/flowers.xpm
 WE ./textures/window.xpm
 EA ./textures/planches.xpm
 
-F 125,125,125
-C 125,125,125
+F 181,86,144
+C 255,154,86
 
 111111111111111111111111111111
 100000000000000000000000000001

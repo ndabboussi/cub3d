@@ -27,8 +27,8 @@ int	get_texture_pixel(t_texture *texture, int x, int y)
 // Step 1: Ray start position and direction setup
 void	init_ray_position_and_direction(t_game *game, t_dda *d, float ray_angle)
 {
-	d->ray_x = game->player.pos.x + 0.5;
-	d->ray_y = game->player.pos.y + 0.5;
+	d->ray_x = game->player.pos.x;
+	d->ray_y = game->player.pos.y;
 	d->ray_dir_x = cos(ray_angle);
 	d->ray_dir_y = sin(ray_angle);
 	d->map_x = (int)d->ray_x;
@@ -165,7 +165,7 @@ void	render_column(t_game *game, int x, t_rays ray)
 	if (wall_bottom >= WIN_HEIGHT)
 		wall_bottom = WIN_HEIGHT - 1;
 	draw_vertical_line(&game->window, x, 0, \
-		wall_top, color_to_int(game->texture.ceiling));
+		wall_top, color_to_int(game->path.ceiling));
 	step = 1.0 * TEXTURE_H / line_height;
 	texture_pos = (wall_top - WIN_HEIGHT / 2 + line_height / 2) * step;
 	y = wall_top;
@@ -177,7 +177,7 @@ void	render_column(t_game *game, int x, t_rays ray)
 		my_mlx_pixel_put(&game->window, x, y, color);
 		y++;
 	}
-	draw_vertical_line(&game->window, x, wall_bottom, WIN_HEIGHT, color_to_int(game->texture.floor));
+	draw_vertical_line(&game->window, x, wall_bottom, WIN_HEIGHT, color_to_int(game->path.floor));
 }
 
 int	render_frame(t_game *game)
