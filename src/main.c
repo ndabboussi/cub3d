@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 11:55:38 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/01 18:27:55 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/02 11:57:27 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	main(int ac, char **av)
 	game.path.floor = (t_color){-1, -1, -1};
 	game.path.ceiling = (t_color){-1, -1, -1};
 	if (parse_file(av[1], &game) < 0)
-		return (-1);
+		ft_exit_all(&game, 1);
 	if (check_map_validity(&game) != 0)
-		return (1);
+		ft_exit_all(&game, 1);
 	init_window(&game);
 	init_player(&game);
 	mlx_hook(game.window.mlx_window, 17, 0, ft_close_window, &game);
@@ -37,7 +37,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(game.window.mlx_ptr, render_frame, &game);
 	// mlx_loop_hook(game.window.mlx_ptr, print_map_2d, &game);
 	mlx_loop(game.window.mlx_ptr);
-	printf("HELLO\n\n");
+	// printf("HELLO\n\n");
 	ft_exit_all(&game, 0);
 	return (0);
 }
