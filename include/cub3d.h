@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/01 18:35:59 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/02 16:02:11 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define WIN_HEIGHT 1080
 # define TEXTURE_W 64
 # define TEXTURE_H 64
-# define TILE_SIZE 16
+# define TILE_SIZE 10
 
 # define FOV 60
 # define PI 3.14159265358979323846
@@ -211,5 +211,10 @@ void	print_texture(t_path *tex);
 void	print_path(t_path *path);
 void	print_coordinates(t_coordinates *coord, const char *label);
 void	print_player(t_player *player);
+
+//2D
+void	draw_map2d(t_game *game);
+void	draw_player(t_game *game);
+void draw_rays(t_game *game);
 
 #endif

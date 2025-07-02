@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:14:56 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/07/02 11:42:34 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/02 15:28:09 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,6 @@ void	free_paths(t_path *path)
 	path->we_texture = NULL;
 	path->ea_texture = NULL;
 }
-
-// void	ft_exit_all(t_game *game, int status)
-// {
-// 	if (game->path.no_texture)
-// 		free(game->path.no_texture);
-// 	if (game->path.so_texture)
-// 		free(game->path.so_texture);
-// 	if (game->path.we_texture)
-// 		free(game->path.we_texture);
-// 	if (game->path.ea_texture)
-// 		free(game->path.ea_texture);
-// 	if (game->map.map)
-// 		free_double_tab(game->map.map);
-// 	if (game->window.mlx_window)
-// 		mlx_destroy_window(game->window.mlx_ptr, game->window.mlx_window);
-// 	if (game->window.img)
-// 		mlx_destroy_image(game->window.mlx_ptr, game->window.img);
-// 	mlx_loop_end(game->window.mlx_ptr);
-// 	// put_error(NULL);
-// 	exit(status);
-// }
-
 
 void ft_exit_all(t_game *game, int status)
 {
