@@ -40,3 +40,18 @@ int	ft_key_handler(int keycode, t_game *game)
 		rotate_right(game);
 	return (0);
 }
+
+int	ft_mouse_hook(int x, int y, void *data)
+{
+	t_game	*game;
+
+	(void)y;
+	game = (t_game *)data;
+	if (x > WIN_WIDTH / 2)
+		rotate_right_mouse(game);
+	if (x < WIN_WIDTH / 2)
+		rotate_left_mouse(game);
+	mlx_mouse_move(game->window.mlx_ptr, game->window.mlx_window, \
+			WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	return (0);
+}

@@ -174,6 +174,7 @@ int		flood_fill(t_game *game);
 //INIT
 void	init_window(t_game *game);
 int		ft_key_handler(int keycode, t_game *game);
+int		ft_mouse_hook(int x, int y, void *data);
 void	init_colors(t_color *floor, t_color *ceiling);
 
 void	init_player(t_game *game);
@@ -198,6 +199,8 @@ void	move_left(t_game *g);
 void	move_right(t_game *g);
 void	rotate_left(t_game *g);
 void	rotate_right(t_game *g);
+void	rotate_left_mouse(t_game *g);
+void	rotate_right_mouse(t_game *g);
 
 //RAYCASTING
 void	draw_vertical_line(t_window *win, int x, int start, int end, int color);
