@@ -45,7 +45,7 @@ void	free_double_tab(char **map)
 	map = NULL;
 }
 
-void free_texture(t_game *game, t_texture *texture)
+void	free_texture(t_game *game, t_texture *texture)
 {
 	if (texture->img && game->window.mlx_ptr)
 		mlx_destroy_image(game->window.mlx_ptr, texture->img);
@@ -69,34 +69,24 @@ void	free_paths(t_path *path)
 	path->ea_texture = NULL;
 }
 
-void ft_exit_all(t_game *game, int status)
+void	ft_exit_all(t_game *game, int status)
 {
-    // Clean up texture images
-    free_texture(game, &game->no_texture);
-    free_texture(game, &game->so_texture);
-    free_texture(game, &game->we_texture);
-    free_texture(game, &game->ea_texture);
-    
-    // Clean up paths
-    free_paths(&game->path);
-    
-    // Clean up map
-    if (game->map.map)
-        free_double_tab(game->map.map);
-    
-    // Clean up window resources
-    if (game->window.img)
-        mlx_destroy_image(game->window.mlx_ptr, game->window.img);
-    if (game->window.mlx_window)
-        mlx_destroy_window(game->window.mlx_ptr, game->window.mlx_window);
-    
-    // Clean up MLX
-    if (game->window.mlx_ptr)
-    {
-        mlx_loop_end(game->window.mlx_ptr);
-        mlx_destroy_display(game->window.mlx_ptr);
-        free(game->window.mlx_ptr);
-    }
-    
-    exit(status);
+	free_texture(game, &game->no_texture);
+	free_texture(game, &game->so_texture);
+	free_texture(game, &game->we_texture);
+	free_texture(game, &game->ea_texture);
+	free_paths(&game->path);
+	if (game->map.map)
+		free_double_tab(game->map.map);
+	if (game->window.img)
+		mlx_destroy_image(game->window.mlx_ptr, game->window.img);
+	if (game->window.mlx_window)
+		mlx_destroy_window(game->window.mlx_ptr, game->window.mlx_window);
+	if (game->window.mlx_ptr)
+	{
+		mlx_loop_end(game->window.mlx_ptr);
+		mlx_destroy_display(game->window.mlx_ptr);
+		free(game->window.mlx_ptr);
+	}
+	exit(status);
 }
