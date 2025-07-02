@@ -50,9 +50,9 @@ int	parse_color(char *str, t_color *color)
 	color->g = ft_atoi(components[1]);
 	color->b = ft_atoi(components[2]);
 	free_double_tab(components);
-	if (color->r < 0 || color->r > 255 ||\
-		color->g < 0 || color->g > 255 ||\
-		color->b < 0 || color->b > 255)
+	if (color->r < 0 || color->r > 255
+		|| color->g < 0 || color->g > 255
+		|| color->b < 0 || color->b > 255)
 		return (-1);
 	return (0);
 }
@@ -126,7 +126,6 @@ int	parse_till_map(char *line, t_path *config)
 	return (2);
 }
 
-
 int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 {
 	int		fd;
@@ -142,7 +141,8 @@ int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 		return (ft_puterr_fd(ERR_OPEN, 2), -1);
 	}
 	is_map_started = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (!is_map_started)
 		{
@@ -167,10 +167,10 @@ int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 				return (free(line), close(fd), -1);
 		}
 		free(line);
+		line = get_next_line(fd);
 	}
 	return (close(fd), 0);
 }
-
 
 int	check_config_complete(t_path *config)
 {
