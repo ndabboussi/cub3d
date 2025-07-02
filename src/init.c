@@ -48,10 +48,6 @@ int	check_textures_path(t_path path)
 
 void	init_textures(t_game *game)
 {
-	game->path.no_texture = ft_strtrim(game->path.no_texture, " \n\t");
-	game->path.so_texture = ft_strtrim(game->path.so_texture, " \n\t");
-	game->path.we_texture = ft_strtrim(game->path.we_texture, " \n\t");
-	game->path.ea_texture = ft_strtrim(game->path.ea_texture, " \n\t");
 	if (check_textures_path(game->path) < 0)
 		return (ft_exit_all(game, 0));
 	get_textures(game, &game->no_texture, game->path.no_texture);

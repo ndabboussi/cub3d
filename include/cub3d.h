@@ -28,6 +28,20 @@
 # include <string.h>
 # include <fcntl.h>
 
+# define ERR_USAGE "Usage: ./cub3D map.cub\n"
+# define ERR_FORMAT "Format: need a .cub\n"
+
+# define ERR_MAP "Parse_file: ft_split fail and no map allocation\n"
+# define ERR_OPEN "Parse_line_by_line : Failed to open .cub\n"
+# define ERR_NO_T_PATH "Check_config_complete: Missing texture path\n"
+# define ERR_NO_F_COLOR "Check_config_complete: Missing floor color\n"
+# define ERR_NO_C_COLOR "Check_config_complete: Missing ceiling color\n"
+# define ERR_MAP_VALIDITY "Check_map_validity : no map send\n"
+# define ERR_PLAYER "Check_player : 0 or more than 1 player found\n"
+# define ERR_MAP_CHAR "Check_forbidden_char : invalid char found\n"
+
+# define ERR_ALLOC "Memory allocation failed\n"
+
 # define WIN_WIDTH 2048
 # define WIN_HEIGHT 1080
 # define TEXTURE_W 64
@@ -170,19 +184,13 @@ int		render_frame(t_game *game);
 void	clear_image(t_window *win);
 void	my_mlx_pixel_put(t_window *img, int x, int y, int color);
 
-//CLEAN
+//CLEAN & ERRORS
+void	ft_puterr_fd(char *s, int fd);
 void	free_double_tab(char **map);
 int		ft_close_window(t_game *game);
-void	ft_exit_all(t_game *game, int d);
+void	ft_exit_all(t_game *game, int status);
 
-//utils print
-void	print_map(char **map);
-void	print_texture(t_path *tex);
-void	print_path(t_path *path);
-void	print_coordinates(t_coordinates *coord, const char *label);
-void	print_player(t_player *player);
-
-//Movement
+//MOVEMENT
 int		is_walkable(t_game *g, float x, float y);
 void	move_forward(t_game *g);
 void	move_backward(t_game *g);
@@ -191,10 +199,17 @@ void	move_right(t_game *g);
 void	rotate_left(t_game *g);
 void	rotate_right(t_game *g);
 
-//Raycasting
+//RAYCASTING
 void	draw_vertical_line(t_window *win, int x, int start, int end, int color);
 int		color_to_int(t_color color);
 int		perform_dda(t_game *game, t_dda *d);
 t_rays	cast_ray(t_game *game, float ray_angle);
+
+//UTILS PRINT
+void	print_map(char **map);
+void	print_texture(t_path *tex);
+void	print_path(t_path *path);
+void	print_coordinates(t_coordinates *coord, const char *label);
+void	print_player(t_player *player);
 
 #endif
