@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:22:12 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/07/02 12:21:38 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:59:59 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	get_textures(t_game *game, t_texture *texture, char *path)
 {
-	// int	width;
-	// int	height;
-
 	texture->img = mlx_xpm_file_to_image(game->window.mlx_ptr, path, \
 					&texture->width, &texture->height);
 	if (!texture->img)
@@ -35,35 +32,32 @@ void	get_textures(t_game *game, t_texture *texture, char *path)
 
 int	check_textures_path(t_path path)
 {
-	int fd;
+	int	fd;
 
 	fd = open(path.no_texture, O_RDONLY);
 	if (fd < 0)
 		return (-1);
 	close(fd);
-
 	fd = open(path.so_texture, O_RDONLY);
 	if (fd < 0)
 		return (-1);
 	close(fd);
-
 	fd = open(path.ea_texture, O_RDONLY);
 	if (fd < 0)
 		return (-1);
 	close(fd);
-
 	fd = open(path.we_texture, O_RDONLY);
 	if (fd < 0)
 		return (-1);
 	close(fd);
-
 	return (0);
 }
 
 void	init_textures(t_game *game)
 {
 	if (check_textures_path(game->path) < 0)
-		return (printf("Error: Invalid texture path(s)\n"), ft_exit_all(game, EXIT_FAILURE));
+		return (printf("Error: Invalid texture path(s)\n")
+			, ft_exit_all(game, EXIT_FAILURE));
 	get_textures(game, &game->no_texture, game->path.no_texture);
 	get_textures(game, &game->so_texture, game->path.so_texture);
 	get_textures(game, &game->we_texture, game->path.we_texture);
