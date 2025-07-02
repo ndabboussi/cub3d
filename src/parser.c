@@ -6,13 +6,13 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:26:47 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/01 15:09:19 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/01 17:04:45 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char *trim_prefix(char *line, char *prefix)
+char	*trim_prefix(char *line, char *prefix)
 {
 	line += ft_strlen(prefix);
 	while (*line == ' ' || *line == '\t')
@@ -64,17 +64,23 @@ int	parse_color(char *str, t_color *color)
 
 int	assign_texture(char *line, char *prefix, char **dest)
 {
+	char	*trimmed;
+	char	*stripped;
+
 	if (ft_strncmp(line, prefix, ft_strlen(prefix)) == 0)
 	{
 		if (*dest != NULL)
 			return (-1); // Already assigned
-		*dest = ft_strdup(trim_prefix(line, prefix));
-		if (!*dest)
-			return (-1); // Memory allocation or trim failed
+		trimmed = trim_prefix(line, prefix);
+		stripped = ft_strtrim(trimmed, " \n\t");
+		if (!stripped)
+			return (-1); // Trim or allocation failed
+		*dest = stripped;
 		return (1); // Match and assignment successful
 	}
 	return (0); // Not a match
 }
+
 
 int	assign_color(char *line, char *prefix, t_color *dest)
 {
@@ -82,7 +88,7 @@ int	assign_color(char *line, char *prefix, t_color *dest)
 
 	if (ft_strncmp(line, prefix, ft_strlen(prefix)) == 0)
 	{
-		// Check if color is already set by checking if r, g, b are -1 (you should initialize them as -1)
+// Check if color already set by checking if r, g, b are -1
 		if (dest->r != -1 || dest->g != -1 || dest->b != -1)
 			return (-1); // already assigned
 
@@ -94,47 +100,57 @@ int	assign_color(char *line, char *prefix, t_color *dest)
 	return (0); // not matched
 }
 
-
-
 int	parse_till_map(char *line, t_path *config)
 {
-	int		res;
+	int	res;
 
 	if (is_empty_line(line))
 		return (0);
-
-	if ((res = assign_texture(line, "NO", &config->no_texture)) != 0)
-		return (res == 1 ? 0 : -1);
-	if ((res = assign_texture(line, "SO", &config->so_texture)) != 0)
-		return (res == 1 ? 0 : -1);
-	if ((res = assign_texture(line, "WE", &config->we_texture)) != 0)
-		return (res == 1 ? 0 : -1);
-	if ((res = assign_texture(line, "EA", &config->ea_texture)) != 0)
-		return (res == 1 ? 0 : -1);
-	if ((res = assign_color(line, "F", &config->floor)) != 0)
-		return (res == 1 ? 0 : -1);
-	if ((res = assign_color(line, "C", &config->ceiling)) != 0)
-		return (res == 1 ? 0 : -1);
-	else
-		return (2);
-
-	return (0);
+	res = assign_texture(line, "NO", &config->no_texture);
+	if (res == 1)
+		return (0);
+	if (res == -1)
+		return (-1);
+	res = assign_texture(line, "SO", &config->so_texture);
+	if (res == 1)
+		return (0);
+	if (res == -1)
+		return (-1);
+	res = assign_texture(line, "WE", &config->we_texture);
+	if (res == 1)
+		return (0);
+	if (res == -1)
+		return (-1);
+	res = assign_texture(line, "EA", &config->ea_texture);
+	if (res == 1)
+		return (0);
+	if (res == -1)
+		return (-1);
+	res = assign_color(line, "F", &config->floor);
+	if (res == 1)
+		return (0);
+	if (res == -1)
+		return (-1);
+	res = assign_color(line, "C", &config->ceiling);
+	if (res == 1)
+		return (0);
+	if (res == -1)
+		return (-1);
+	return (2);
 }
-
-
 
 int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 {
 	int		fd;
 	char	*line;
 	char	*tmp;
-	int		is_map_started = 0;
+	int		is_map_started;
 	int		res_texture;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (free(*map_text), perror("Failed to open .cub"), -1);
-
+	is_map_started = 0;
 	while ((line = get_next_line(fd)))
 	{
 		if (!is_map_started)
@@ -159,8 +175,8 @@ int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 		}
 		free(line);
 	}
-	close(fd);
-	return (0);
+	
+	return (close(fd), 0);
 }
 
 int	check_config_complete(t_path *config)
