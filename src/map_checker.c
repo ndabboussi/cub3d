@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:50:07 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/07/01 11:32:28 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/02 15:30:13 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	check_player(t_game *game)
 	int	nb_p;
 
 	nb_p = 0;
-	y = 0;
-	while (game->map.map[y])
+	y = -1;
+	while (game->map.map[++y])
 	{
-		x = 0;
-		while (game->map.map[y][x])
+		x = -1;
+		while (game->map.map[y][++x])
 		{
 			if (game->map.map[y][x] == 'N' || game->map.map[y][x] == 'S' \
 				|| game->map.map[y][x] == 'E' || game->map.map[y][x] == 'W')
@@ -33,9 +33,7 @@ int	check_player(t_game *game)
 				game->map.player_x = x;
 				game->map.player_y = y;
 			}
-			x++;
 		}
-		y++;
 	}
 	if (nb_p != 1)
 		return (ft_puterr_fd(ERR_PLAYER, 2), -1);

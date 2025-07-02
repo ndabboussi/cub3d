@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:28:46 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/07/01 15:28:19 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/02 15:55:43 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,10 @@ int	render_frame(t_game *game)
 		render_column(game, x, ray);
 		x++;
 	}
+	draw_map2d(game);
+	draw_player(game);
+	draw_rays(game);
+	
 	mlx_put_image_to_window(game->window.mlx_ptr,
 		game->window.mlx_window, game->window.img, 0, 0);
 	return (0);

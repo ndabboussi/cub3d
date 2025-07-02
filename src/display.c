@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:02:16 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/06/30 15:37:00 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/02 16:01:19 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,9 +155,9 @@ void	draw_map2d(t_game *game)
 			if (game->map.map[y][x] == '1')
 				draw_square(game, x * TILE_SIZE, y * TILE_SIZE, \
 					0xFFFFFF); //white for walls
-			else if (game->map.map[y][x] == '0' || game->map.map[y][x] == ' ')
-				draw_square(game, x * TILE_SIZE, y * TILE_SIZE, \
-					0x000000); //black for floor
+			// else if (game->map.map[y][x] == '0' || game->map.map[y][x] == ' ')
+			// 	draw_square(game, x * TILE_SIZE, y * TILE_SIZE, \
+			// 		0x000000); //black for floor
 			x++;
 		}
 		y++;
