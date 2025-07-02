@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/02 16:02:11 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:37:04 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@
 # define WIN_HEIGHT 1080
 # define TEXTURE_W 64
 # define TEXTURE_H 64
-# define TILE_SIZE 10
+#define PLAYER_SIZE 20
+# define TILE_SIZE 16
 
 # define FOV 60
 # define PI 3.14159265358979323846
