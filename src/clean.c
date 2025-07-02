@@ -12,6 +12,23 @@
 
 #include "cub3d.h"
 
+void	ft_puterr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	printf("Error\n");
+	if (fd < 0)
+		return ;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+
 void	free_double_tab(char **map)
 {
 	int	j;

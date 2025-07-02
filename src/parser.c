@@ -139,7 +139,10 @@ int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (free(*map_text), perror("Failed to open .cub"), -1);
+	{
+		free(*map_text);
+		return (ft_puterr_fd(ERR_OPEN, 2), -1);
+	}
 	is_map_started = 0;
 	while ((line = get_next_line(fd)))
 	{
@@ -147,8 +150,13 @@ int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 		{
 			res_texture = parse_till_map(line, &game->path);
 			if (res_texture == -1)
-				return (printf("Error\nInvalid config line: %s\n", line), free(line)
-					, close(fd), free(*map_text), -1);
+			{
+				printf("Error\nInvalid config line: %s\n", line);
+				free(line);
+				close(fd);
+				free(*map_text);
+				return (-1);
+			}
 			else if (res_texture == 2)
 				is_map_started = 1;
 		}
@@ -168,12 +176,14 @@ int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 
 int	check_config_complete(t_path *config)
 {
-	if (!config->no_texture || !config->so_texture || !config->we_texture || !config->ea_texture)
-		return (printf("Error\nMissing texture path\n"), -1);
+	if (!config->no_texture || !config->so_texture || !config->we_texture
+		|| !config->ea_texture)
+		return (ft_puterr_fd(ERR_NO_T_PATH, 2), -1);
 	if (config->floor.r == -1 || config->floor.g == -1 || config->floor.b == -1)
-		return (printf("Error\nMissing floor color\n"), -1);
-	if (config->ceiling.r == -1 || config->ceiling.g == -1 || config->ceiling.b == -1)
-		return (printf("Error\nMissing ceiling color\n"), -1);
+		return (ft_puterr_fd(ERR_NO_F_COLOR, 2), -1);
+	if (config->ceiling.r == -1 || config->ceiling.g == -1 \
+		|| config->ceiling.b == -1)
+		return (ft_puterr_fd(ERR_NO_C_COLOR, 2), -1);
 	return (0);
 }
 
@@ -183,13 +193,13 @@ int	parse_file(char *filename, t_game *game)
 
 	map_text = ft_calloc(1, sizeof(char));
 	if (!map_text)
-		return (perror("Memory allocation failed"), -1);
+		return (ft_puterr_fd(ERR_ALLOC, 2), -1);
 	if (parse_line_by_line(filename, game, &map_text) != 0)
 		return (-1);
 	game->map.map = ft_split(map_text, '\n');
 	free(map_text);
 	if (!game->map.map)
-		return (printf("Error\nFailed to allocate map\n"), -1);
+		return (ft_puterr_fd(ERR_MAP, 2), -1);
 	if (check_config_complete(&game->path) < 0)
 		ft_exit_all(game, 1);
 	return (0);
