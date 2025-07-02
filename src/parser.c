@@ -62,18 +62,16 @@ int	assign_texture(char *line, char *prefix, char **dest)
 	char	*trimmed;
 	char	*stripped;
 
-	if (ft_strncmp(line, prefix, ft_strlen(prefix)) == 0)
-	{
-		if (*dest != NULL)
-			return (-1); // Already assigned
-		trimmed = trim_prefix(line, prefix);
-		stripped = ft_strtrim(trimmed, " \n\t");
-		if (!stripped)
-			return (-1); // Trim or allocation failed
-		*dest = stripped;
-		return (1); // Match and assignment successful
-	}
-	return (0); // Not a match
+	if (ft_strncmp(line, prefix, ft_strlen(prefix)) != 0)
+		return (0);
+	if (*dest != NULL)
+		return (-1); // Already assigned
+	trimmed = trim_prefix(line, prefix);
+	stripped = ft_strtrim(trimmed, " \n\t");
+	if (!stripped || *stripped == '\0')
+		return (free(trimmed), -1); // Trim or allocation failed
+	*dest = stripped;
+	return (1); // Match and assignment successful
 }
 
 int	assign_color(char *line, char *prefix, t_color *dest)
