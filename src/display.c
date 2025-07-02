@@ -22,37 +22,25 @@ void	my_mlx_pixel_put(t_window *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_square(t_game *game, int x, int y, int color)
+void	draw_square(t_game *game, int x, int y, int color, double scale)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (i < TILE_SIZE)
+	while (i < MINIMAP_TILE_SIZE *scale)
 	{
-		while (j < TILE_SIZE)
+		while (j < MINIMAP_TILE_SIZE *scale)
 		{
 			my_mlx_pixel_put(&game->window, \
-				x + j, y + i, color);
+				MINIMAP_MARGIN + x + j,MINIMAP_MARGIN + y + i, color);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
 }
-
-void	draw_player(t_game *game)
-{
-	int	player_map_x;
-	int	player_map_y;
-
-	player_map_x = game->player.pos.x * TILE_SIZE;
-	player_map_y = game->player.pos.y * TILE_SIZE;
-	draw_square(game, player_map_x, player_map_y, \
-					0xff00ff);
-}
-
 
 void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
 {
@@ -68,7 +56,6 @@ void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
 		// Check bounds before drawing
 		if (x0 >= 0 && x0 < WIN_WIDTH && y0 >= 0 && y0 < WIN_HEIGHT)
 			my_mlx_pixel_put(&game->window, x0, y0, color);
-		
 		if (x0 == x1 && y0 == y1)
 			break;
 		
@@ -86,15 +73,14 @@ void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
 	}
 }
 
-
 void draw_rays(t_game *game)
 {
 	int i;
 		
 	int num_rays = WIN_WIDTH / 4; // Draw every 4th ray to avoid clutter
 	double ray_angle;
-	double start_x = game->player.pos.x * TILE_SIZE;
-	double start_y = game->player.pos.y * TILE_SIZE;
+	double start_x = game->player.pos.x * MINIMAP_TILE_SIZE;
+	double start_y = game->player.pos.y * MINIMAP_TILE_SIZE;
 	t_rays distance;
 		
 	i = 0;
@@ -108,8 +94,8 @@ void draw_rays(t_game *game)
 		distance = cast_ray(game, ray_angle);
 		
 		// Convert distance to 2D map coordinates
-		double end_x = start_x + cos(ray_angle) * distance.distance * TILE_SIZE;
-		double end_y = start_y + sin(ray_angle) * distance.distance * TILE_SIZE;
+		double end_x = start_x + cos(ray_angle) * distance.distance * MINIMAP_TILE_SIZE;
+		double end_y = start_y + sin(ray_angle) * distance.distance * MINIMAP_TILE_SIZE;
 		
 		// Draw the ray line
 		draw_line(game, (int)start_x, (int)start_y, (int)end_x, (int)end_y, 0x00FF00);
@@ -123,29 +109,40 @@ void draw_rays(t_game *game)
 }
 
 
-// void	draw_ray(t_game *game)
+// void	draw_player(t_game *game)
 // {
-// 	int		ray_length;
-// 	double	end_x;
-// 	double	end_y;
+// 	int	player_map_x;
+// 	int	player_map_y;
 
-// 	ray_length = 50;
-// 	end_x = game->player.pos.x * TILE_SIZE \
-// 				+ cos(game->player.angle) * ray_length;
-// 	end_y = game->player.pos.y * TILE_SIZE \
-// 					+ sin(game->player.angle) * ray_length;
-// 	// while ()
-// 	// {
-// 		my_mlx_pixel_put(&game->window, \
-// 				(int)end_x, (int)end_y, 0x00FF00);
-// 	// }
+// 	player_map_x = game->player.pos.x * MINIMAP_TILE_SIZE;
+// 	player_map_y = game->player.pos.y * MINIMAP_TILE_SIZE;
+// 	draw_square(game, player_map_x, player_map_y, \
+// 					0xff00ff);
 // }
+
+void draw_player_minimap(t_game *game, double scale)
+{
+	int player_x = game->player.pos.x * MINIMAP_TILE_SIZE * scale;
+	int player_y = game->player.pos.y * MINIMAP_TILE_SIZE * scale;
+
+	draw_square(game, player_x, player_y, 0xFF0000, scale);
+}
+
 
 void	draw_map2d(t_game *game)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	double	scale_x;
+	double	scale_y;
+	double	scale;
 
+	scale_x = (double)MINIMAP_WIDTH / (game->map.width * MINIMAP_TILE_SIZE);
+	scale_y = (double)MINIMAP_HEIGHT / (game->map.height * MINIMAP_TILE_SIZE);
+	if (scale_x < scale_y)
+		scale = scale_x;
+	else 
+		scale = scale_y;	
 	y = 0;
 	while (game->map.map[y])
 	{
@@ -153,16 +150,40 @@ void	draw_map2d(t_game *game)
 		while (game->map.map[y][x])
 		{
 			if (game->map.map[y][x] == '1')
-				draw_square(game, x * TILE_SIZE, y * TILE_SIZE, \
-					0xFFFFFF); //white for walls
+				draw_square(game, x * MINIMAP_TILE_SIZE * scale, y * MINIMAP_TILE_SIZE * scale, \
+					0xFFFFFF, scale); //white for walls
 			// else if (game->map.map[y][x] == '0' || game->map.map[y][x] == ' ')
-			// 	draw_square(game, x * TILE_SIZE, y * TILE_SIZE, \
+			// 	draw_square(game, x * MINIMAP_TILE_SIZE, y * MINIMAP_TILE_SIZE, \
 			// 		0x000000); //black for floor
 			x++;
 		}
 		y++;
 	}
+	draw_player_minimap(game, scale);
 }
+
+// // void	draw_map2d(t_game *game)
+// // {
+// // 	int	x;
+// // 	int	y;
+
+// // 	y = 0;
+// // 	while (game->map.map[y])
+// // 	{
+// // 		x = 0;
+// // 		while (game->map.map[y][x])
+// // 		{
+// // 			if (game->map.map[y][x] == '1')
+// // 				draw_square(game, x * MINIMAP_TILE_SIZE, y * MINIMAP_TILE_SIZE, \
+// // 					0xFFFFFF); //white for walls
+// // 			// else if (game->map.map[y][x] == '0' || game->map.map[y][x] == ' ')
+// // 			// 	draw_square(game, x * MINIMAP_TILE_SIZE, y * MINIMAP_TILE_SIZE, \
+// // 			// 		0x000000); //black for floor
+// // 			x++;
+// // 		}
+// // 		y++;
+// // 	}
+// // }
 
 void	clear_image(t_window *win)
 {
@@ -183,26 +204,26 @@ void	clear_image(t_window *win)
 }
 // meilleure version ??
 
-// void clear_image(t_window *win) 
-// {
-// 	int i;
-// 	int total_pixels;
-// 	int *pixels;
+// // void clear_image(t_window *win) 
+// // {
+// // 	int i;
+// // 	int total_pixels;
+// // 	int *pixels;
 
-// 	i = 0;
-// 	total_pixels = WIN_WIDTH * WIN_HEIGHT;
-// 	pixels = (int *)win->addr;
-// 	while (i < total_pixels)
-// 		pixels[i++] = 0x000000;
-// }
+// // 	i = 0;
+// // 	total_pixels = WIN_WIDTH * WIN_HEIGHT;
+// // 	pixels = (int *)win->addr;
+// // 	while (i < total_pixels)
+// // 		pixels[i++] = 0x000000;
+// // }
 
-int	print_map_2d(t_game *game)
-{
-	clear_image(&game->window);
-	draw_map2d(game);
-	draw_player(game);
-	draw_rays(game);
-	mlx_put_image_to_window(game->window.mlx_ptr, \
-		game->window.mlx_window, game->window.img, 0, 0);
-	return (0);
-}
+// // int	print_map_2d(t_game *game)
+// // {
+// // 	clear_image(&game->window);
+// // 	draw_map2d(game);
+// // 	draw_player(game);
+// // 	draw_rays(game);
+// // 	mlx_put_image_to_window(game->window.mlx_ptr, \
+// // 		game->window.mlx_window, game->window.img, 0, 0);
+// // 	return (0);
+// // }

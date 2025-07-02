@@ -44,9 +44,16 @@
 
 # define WIN_WIDTH 2048
 # define WIN_HEIGHT 1080
+
+# define MINIMAP_TILE_SIZE 10
+# define MINIMAP_SIZE 10
+
+#define MINIMAP_WIDTH  200
+#define MINIMAP_HEIGHT 200
+#define MINIMAP_MARGIN 10
+
 # define TEXTURE_W 64
 # define TEXTURE_H 64
-# define TILE_SIZE 10
 
 # define FOV 60
 # define PI 3.14159265358979323846
@@ -184,6 +191,8 @@ int		print_map_2d(t_game *game);
 int		render_frame(t_game *game);
 void	clear_image(t_window *win);
 void	my_mlx_pixel_put(t_window *img, int x, int y, int color);
+void	draw_minimap(t_game *game);
+void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
 
 //CLEAN & ERRORS
 void	ft_puterr_fd(char *s, int fd);

@@ -199,10 +199,10 @@ int	render_frame(t_game *game)
 		render_column(game, x, ray);
 		x++;
 	}
+	//draw_minimap(game);
 	draw_map2d(game);
-	draw_player(game);
-	draw_rays(game);
-	
+	// draw_player(game);
+	// draw_rays(game);
 	mlx_put_image_to_window(game->window.mlx_ptr,
 		game->window.mlx_window, game->window.img, 0, 0);
 	return (0);
