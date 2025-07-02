@@ -72,9 +72,9 @@ int	check_map_validity(t_game *game)
 	if (!game || !game->map.map)
 		return (perror("Error : no map send to check_map_validity.\n"), -1);
 	if (check_player(game) == -1)
-		return (free_map(game->map.map), -1);
+		return (free_double_tab(game->map.map), -1);
 	if (check_forbidden_char(game) == -1)
-		return (free_map(game->map.map), -1);
+		return (free_double_tab(game->map.map), -1);
 	if (!flood_fill(game))
 		return (perror("Error : invalid map.\n"), -1);
 	return (0);

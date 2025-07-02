@@ -165,7 +165,7 @@ void	render_column(t_game *game, int x, t_rays ray)
 	if (wall_bottom >= WIN_HEIGHT)
 		wall_bottom = WIN_HEIGHT - 1;
 	draw_vertical_line(&game->window, x, 0, \
-		wall_top, color_to_int(game->texture.ceiling));
+		wall_top, color_to_int(game->path.ceiling));
 	step = 1.0 * TEXTURE_H / line_height;
 	texture_pos = (wall_top - WIN_HEIGHT / 2 + line_height / 2) * step;
 	y = wall_top;
@@ -177,7 +177,7 @@ void	render_column(t_game *game, int x, t_rays ray)
 		my_mlx_pixel_put(&game->window, x, y, color);
 		y++;
 	}
-	draw_vertical_line(&game->window, x, wall_bottom, WIN_HEIGHT, color_to_int(game->texture.floor));
+	draw_vertical_line(&game->window, x, wall_bottom, WIN_HEIGHT, color_to_int(game->path.floor));
 }
 
 int	render_frame(t_game *game)

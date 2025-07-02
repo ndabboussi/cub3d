@@ -48,15 +48,15 @@ int	parse_color(char *str, t_color *color)
 	while (components[i])
 		i++;
 	if (!components[0] || !components[1] || !components[2] || components[3])
-		return (free_map(components), 1);
+		return (free_double_tab(components), 1);
 	if (i != 3)
-		return (free_map(components), 1);
+		return (free_double_tab(components), 1);
 	color->r = ft_atoi(components[0]);
 	color->g = ft_atoi(components[1]);
 	color->b = ft_atoi(components[2]);
-	free_map(components);
-	if (color->r < 0 || color->r > 255 || \
-		color->g < 0 || color->g > 255 || \
+	free_double_tab(components);
+	if (color->r < 0 || color->r > 255 ||
+		color->g < 0 || color->g > 255 ||
 		color->b < 0 || color->b > 255)
 		return (-1);
 	return (0);
@@ -139,9 +139,6 @@ int	parse_till_map(char *line, t_path *config)
 	return (2);
 }
 
-
-
-
 int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 {
 	int		fd;
@@ -158,10 +155,16 @@ int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 	{
 		if (!is_map_started)
 		{
-			res_texture = parse_till_map(line, &game->texture);
+			res_texture = parse_till_map(line, &game->path);
 			if (res_texture == -1)
-				return (printf("Error\nInvalid config line: %s\n", line), free(line), close(fd), free(*map_text), -1);
-			else if (res_texture == 2)
+			{
+				printf("Error\nInvalid config line: %s\n", line);
+				free(line);
+				close(fd);
+				free(*map_text);
+				return (-1);
+			}
+				else if (res_texture == 2)
 				is_map_started = 1;
 		}
 		if (is_map_started)
@@ -201,7 +204,7 @@ int	parse_file(char *filename, t_game *game)
 
 	game->map.map = ft_split(map_text, '\n');
 	free(map_text);
-	if (check_config_complete(&game->texture) < 0)
+	if (check_config_complete(&game->path) < 0)
 		return (-1);
 	if (!game->map.map)
 		return (printf("Error\nFailed to allocate map\n"), -1);

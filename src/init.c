@@ -33,16 +33,31 @@ void	get_textures(t_game *game, t_texture *texture, char *path)
 	}
 }
 
+int	check_textures_path(t_path path)
+{
+	if (open(path.no_texture, O_RDONLY) < 0)
+		return (-1);
+	if (open(path.so_texture, O_RDONLY) < 0)
+		return (-1);
+	if (open(path.ea_texture, O_RDONLY) < 0)
+		return (-1);
+	if (open(path.we_texture, O_RDONLY) < 0)
+		return (-1);
+	return (0);
+}
+
 void	init_textures(t_game *game)
 {
-	game->texture.no_texture = ft_strtrim(game->texture.no_texture, " \n\t");
-	game->texture.so_texture = ft_strtrim(game->texture.so_texture, " \n\t");
-	game->texture.we_texture = ft_strtrim(game->texture.we_texture, " \n\t");
-	game->texture.ea_texture = ft_strtrim(game->texture.ea_texture, " \n\t");
-	get_textures(game, &game->no_texture, game->texture.no_texture);
-	get_textures(game, &game->so_texture, game->texture.so_texture);
-	get_textures(game, &game->we_texture, game->texture.we_texture);
-	get_textures(game, &game->ea_texture, game->texture.ea_texture);
+	game->path.no_texture = ft_strtrim(game->path.no_texture, " \n\t");
+	game->path.so_texture = ft_strtrim(game->path.so_texture, " \n\t");
+	game->path.we_texture = ft_strtrim(game->path.we_texture, " \n\t");
+	game->path.ea_texture = ft_strtrim(game->path.ea_texture, " \n\t");
+	if (check_textures_path(game->path) < 0)
+		return (ft_exit_all(game, 0));
+	get_textures(game, &game->no_texture, game->path.no_texture);
+	get_textures(game, &game->so_texture, game->path.so_texture);
+	get_textures(game, &game->we_texture, game->path.we_texture);
+	get_textures(game, &game->ea_texture, game->path.ea_texture);
 }
 
 void	init_window(t_game *game)
@@ -72,7 +87,5 @@ void	init_window(t_game *game)
 	game->window.addr = mlx_get_data_addr(game->window.img, \
 		&game->window.bits_per_pixel, &game->window.line_length, \
 		&game->window.endian);
-	//init_map_textures(game);
 	init_textures(game);
-	//init_colors(game);
 }

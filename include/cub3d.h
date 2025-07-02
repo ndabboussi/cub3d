@@ -82,7 +82,6 @@ typedef struct s_texture
 {
 	void	*img;
 	char	*addr;
-	int		*texture_buffer;
 	int		width;
 	int		height;
 	int		bits_per_pixel;
@@ -136,7 +135,6 @@ typedef struct s_dda
 	int		step_x; //direction dans laquelle on avance (gauche -1 ou droite +1)
 	int		step_y;
 	int		side; //0 si collision sur un mur vertical, 1 si sur un mur horizontal (utile pour la texture plus tard)
-	int		*texture_buffer;
 }	t_dda;
 
 typedef struct s_game
@@ -146,7 +144,7 @@ typedef struct s_game
 	t_texture	we_texture;
 	t_texture	ea_texture;
 	t_player	player;
-	t_path		texture;
+	t_path		path;
 	t_window	window;
 	t_map		map;
 }	t_game;
@@ -158,12 +156,11 @@ typedef struct s_game
 int		parse_file(char *filename, t_game *game);
 int		check_map_validity(t_game *game);
 int		flood_fill(t_game *game);
-void	free_map(char **map);
 
 //INIT
 void	init_window(t_game *game);
 int		ft_key_handler(int keycode, t_game *game);
-void init_colors(t_color *floor, t_color *ceiling);
+void	init_colors(t_color *floor, t_color *ceiling);
 
 void	init_player(t_game *game);
 
@@ -174,6 +171,7 @@ void	clear_image(t_window *win);
 void	my_mlx_pixel_put(t_window *img, int x, int y, int color);
 
 //CLEAN
+void	free_double_tab(char **map);
 int		ft_close_window(t_game *game);
 void	ft_exit_all(t_game *game, int d);
 
