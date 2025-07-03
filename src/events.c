@@ -12,14 +12,20 @@
 
 #include "cub3d.h"
 
+// int	ft_close_window(t_game *game)
+// {
+// 	if (game->window.mlx_window)
+// 		mlx_destroy_window(game->window.mlx_ptr, game->window.mlx_window);
+// 	if (game->window.img)
+// 		mlx_destroy_image(game->window.mlx_ptr, game->window.img);
+// 	mlx_loop_end(game->window.mlx_ptr);
+// 	exit(0);
+// }
+
 int	ft_close_window(t_game *game)
 {
-	if (game->window.mlx_window)
-		mlx_destroy_window(game->window.mlx_ptr, game->window.mlx_window);
-	if (game->window.img)
-		mlx_destroy_image(game->window.mlx_ptr, game->window.img);
-	mlx_loop_end(game->window.mlx_ptr);
-	exit(0);
+	ft_exit_all(game, 1);
+	return (-1);
 }
 
 int	ft_key_handler(int keycode, t_game *game)
