@@ -169,6 +169,7 @@ typedef struct s_game
 	t_path		path;
 	t_window	window;
 	t_map		map;
+	float		minimap_scale;
 }	t_game;
 
 # define RED "\033[31;01m"
