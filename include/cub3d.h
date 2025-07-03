@@ -48,8 +48,8 @@
 # define TILE_SIZE 16
 # define MINIMAP_SIZE 10
 
-#define MINIMAP_WIDTH  200
-#define MINIMAP_HEIGHT 200
+#define MINIMAP_WIDTH  300
+#define MINIMAP_HEIGHT 300
 #define MINIMAP_MARGIN 10
 
 # define TEXTURE_W 64
@@ -169,6 +169,7 @@ typedef struct s_game
 	t_path		path;
 	t_window	window;
 	t_map		map;
+	float		minimap_scale;
 }	t_game;
 
 # define RED "\033[31;01m"

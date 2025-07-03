@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_window *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_square(t_game *game, int x, int y, int size, int color)
+void	draw_square(t_game *game, float x, float y, float size, int color)
 {
 	int	i;
 	int	j;
@@ -46,9 +46,10 @@ void	draw_player(t_game *game)
 	int	player_map_x;
 	int	player_map_y;
 
-	player_map_x = game->player.pos.x * TILE_SIZE ;
-	player_map_y = game->player.pos.y * TILE_SIZE;
-	draw_square(game, player_map_x - PLAYER_SIZE / 2, player_map_y - PLAYER_SIZE / 2, PLAYER_SIZE, 0xff00ff);
+	player_map_x = game->player.pos.x * TILE_SIZE * game->minimap_scale;
+	player_map_y = game->player.pos.y * TILE_SIZE * game->minimap_scale;
+	draw_square(game, player_map_x - PLAYER_SIZE / 2, \
+		player_map_y - PLAYER_SIZE / 2, PLAYER_SIZE, 0xff00ff);
 }
 
 
@@ -93,8 +94,8 @@ void draw_rays(t_game *game)
 	double	ray_angle;
 
 	// Starting point of all rays: player's pixel position
-	double start_x = game->player.pos.x * TILE_SIZE;
-	double start_y = game->player.pos.y * TILE_SIZE;
+	double start_x = game->player.pos.x * TILE_SIZE * game->minimap_scale;
+	double start_y = game->player.pos.y * TILE_SIZE * game->minimap_scale;
 
 	t_rays distance;
 		
@@ -109,19 +110,33 @@ void draw_rays(t_game *game)
 		// Cast the ray to get distance
 		distance = cast_ray(game, ray_angle);
 		// Convert distance to 2D map coordinates
-		double end_x = start_x + cos(ray_angle) * distance.distance * TILE_SIZE;
-		double end_y = start_y + sin(ray_angle) * distance.distance * TILE_SIZE;
+		double end_x = start_x + cos(ray_angle) * distance.distance * TILE_SIZE * game->minimap_scale;
+		double end_y = start_y + sin(ray_angle) * distance.distance * TILE_SIZE * game->minimap_scale;
 
-		draw_line(game, (int)start_x, (int)start_y, (int)end_x, (int)end_y, 0x00FF00);// Draw the ray line
+		//draw_line(game, (int)start_x, (int)start_y, (int)end_x, (int)end_y, 0x00FF00);// Draw the ray line
+		if (start_x >= 0 && start_x < MINIMAP_WIDTH \
+			&& start_y >= 0 && start_y < MINIMAP_HEIGHT \
+			&& end_x >= 0 && end_x < MINIMAP_WIDTH \
+			&& end_y >= 0 && end_y < MINIMAP_HEIGHT)
+			draw_line(game, (int)start_x, (int)start_y, \
+						(int)end_x, (int)end_y, 0x00FF00);
 		i++;
 	}
 }
 
 void	draw_map2d(t_game *game)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	float	scale_x;
+	float	scale_y;
 
+	scale_x = (float)MINIMAP_WIDTH / (game->map.width * TILE_SIZE);
+	scale_y = (float)MINIMAP_HEIGHT / (game->map.height * TILE_SIZE);
+	if (scale_x < scale_y)
+		game->minimap_scale = scale_x;
+	else
+		game->minimap_scale = scale_y;
 	y = 0;
 	while (game->map.map[y])
 	{
@@ -129,7 +144,7 @@ void	draw_map2d(t_game *game)
 		while (game->map.map[y][x])
 		{
 			if (game->map.map[y][x] == '1')
-				draw_square(game, x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, 0xFFFFFF); //white for walls
+				draw_square(game, x * TILE_SIZE * game->minimap_scale, y * TILE_SIZE * game->minimap_scale, TILE_SIZE * game->minimap_scale, 0xFFFFFF); //white for walls
 			// else if (game->map.map[y][x] == '0' || game->map.map[y][x] == ' ')
 			// 	draw_square(game, x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, 0x000000); //black for floor
 			x++;
