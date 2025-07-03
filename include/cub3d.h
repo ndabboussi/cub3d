@@ -48,8 +48,8 @@
 # define TILE_SIZE 16
 # define MINIMAP_SIZE 10
 
-#define MINIMAP_WIDTH  200
-#define MINIMAP_HEIGHT 200
+#define MINIMAP_WIDTH  300
+#define MINIMAP_HEIGHT 300
 #define MINIMAP_MARGIN 10
 
 # define TEXTURE_W 64

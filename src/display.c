@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_window *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_square(t_game *game, int x, int y, int size, int color)
+void	draw_square(t_game *game, float x, float y, float size, int color)
 {
 	int	i;
 	int	j;
