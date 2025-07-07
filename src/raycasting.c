@@ -31,7 +31,7 @@ void	draw_floor(t_game *game, int x, int wall_bottom)
 	draw_vertical_line(&game->window, x, range, color_to_int(game->path.floor));
 }
 
-void	draw_wall(t_game *game, int x, int top, int bottom, t_rays ray)
+void	draw_wall(t_game *game, int x, int *range, t_rays ray)
 {
 	double	step;
 	double	texture_pos;
@@ -39,11 +39,11 @@ void	draw_wall(t_game *game, int x, int top, int bottom, t_rays ray)
 	int		texture_y;
 	int		color;
 
-	step = 1.0 * TEXTURE_H / ((bottom - top));
-	texture_pos = (top - WIN_HEIGHT / 2 \
-					+ (bottom - top) / 2) * step;
-	y = top;
-	while (y < bottom)
+	step = 1.0 * TEXTURE_H / ((range[0] - range[1]));
+	texture_pos = (range[1] - WIN_HEIGHT / 2 \
+					+ (range[0] - range[1]) / 2) * step;
+	y = range[1];
+	while (y < range[0])
 	{
 		texture_y = (int)texture_pos & (TEXTURE_H - 1);
 		texture_pos += step;
@@ -58,6 +58,7 @@ void	render_column(t_game *game, int x, t_rays ray)
 	int	line_height;
 	int	wall_top;
 	int	wall_bottom;
+	int	range[2];
 
 	line_height = (int)(WIN_HEIGHT / ray.distance);
 	wall_top = (WIN_HEIGHT / 2) - (line_height / 2);
@@ -67,7 +68,9 @@ void	render_column(t_game *game, int x, t_rays ray)
 	if (wall_bottom >= WIN_HEIGHT)
 		wall_bottom = WIN_HEIGHT - 1;
 	draw_ceiling(game, x, wall_top);
-	draw_wall(game, x, wall_top, wall_bottom, ray);
+	range[0] = wall_bottom;
+	range[1] = wall_top;
+	draw_wall(game, x, range, ray);
 	draw_floor(game, x, wall_bottom);
 }
 
