@@ -40,3 +40,4 @@ int	main(int ac, char **av)
 	ft_exit_all(&game, 0);
 	return (0);
 }
+
