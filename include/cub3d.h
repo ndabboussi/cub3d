@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/07 13:00:54 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:45:09 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,11 @@ typedef struct s_game
 int		parse_file(char *filename, t_game *game);
 int		check_map_validity(t_game *game);
 int		flood_fill(t_game *game);
+int		parse_till_map(char *line, t_path *config);
+int		check_config_complete(t_path *config);
+int		is_empty_line(const char *line);
+int		count_commas(const char *str);
+char	*trim_prefix(char *line, char *prefix);
 
 //INIT
 void	init_window(t_game *game);
