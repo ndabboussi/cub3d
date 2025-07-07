@@ -33,11 +33,27 @@ static int	is_empty_line(const char *line)
 	return (result);
 }
 
+int	count_commas(const char *str)
+{
+	int	count;
+
+	count = 0;
+	while (*str)
+	{
+		if (*str == ',')
+			count++;
+		str++;
+	}
+	return (count);
+}
+
 int	parse_color(char *str, t_color *color)
 {
 	int		i;
 	char	**components;
 
+	if (count_commas(str) != 2)
+		return (1);
 	components = ft_split(str, ',');
 	if (!components)
 		return (-1);
@@ -136,10 +152,7 @@ int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-	{
-		free(*map_text);
-		return (ft_puterr_fd(ERR_OPEN, 2), -1);
-	}
+		return (free(*map_text), ft_puterr_fd(ERR_OPEN, 2), -1);
 	is_map_started = 0;
 	line = get_next_line(fd);
 	while (line)

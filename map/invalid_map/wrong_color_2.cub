@@ -1,7 +1,7 @@
 NO ./textures/azulejo.xpm
 SO ./textures/flowers.xpm
 EA ./textures/planches.xpm
-WE ./texture/pics/color.xpm
+WE ./textures/window.xpm
 
 C 20,20,,,,,,,,,,,,,,,,,,,,,,20
 

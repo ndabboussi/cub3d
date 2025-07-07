@@ -1,7 +1,7 @@
 NO ./textures/azulejo.xpm
 SO ./textures/flowers.xpm
 EA ./textures/planches.xpm
-WE ./texture/pics/color.xpm
+WE ./textures/window.xpm
 
 F 220,100,0
 
