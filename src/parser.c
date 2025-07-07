@@ -39,7 +39,8 @@ static int	handle_texture_line(char *line, t_game *game, int *map_started)
 	return (0);
 }
 
-static int	process_line(char *line, t_game *game, int *map_started, char **map_text)
+static int	process_line(char *line, t_game *game,
+		int *map_started, char **map_text)
 {
 	if (!*map_started)
 	{
@@ -52,6 +53,18 @@ static int	process_line(char *line, t_game *game, int *map_started, char **map_t
 			return (-1);
 	}
 	return (0);
+}
+
+void	cleanup_get_next_line(int fd)
+{
+	char	*dummy;
+
+	dummy = get_next_line(fd);
+	while (dummy != NULL)
+	{
+		free(dummy);
+		dummy = get_next_line(fd);
+	}
 }
 
 int	parse_line_by_line(char *filename, t_game *game, char **map_text)
@@ -71,6 +84,7 @@ int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 		{
 			free(line);
 			free(*map_text);
+			cleanup_get_next_line(fd);
 			return (close(fd), -1);
 		}
 		free(line);
