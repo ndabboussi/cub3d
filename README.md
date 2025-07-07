@@ -27,8 +27,8 @@ Option :  transfert de la texture de la porte a l'interieur du passage cree pour
 
 PIERRE 
 	- color prend pas tous les cas en compte : map/invalid_map/wrong_color_2.cub
+	- si le fichier est vide, renvoyer "empty file" : en testant avec map/invalid_map/vide.cub on renvoie "Check_config_complete: Missing texture path"
 
 NINA 
 	- si la map est vide on devrait direct renvoyer une erreur, pas celle du player
 	- map/invalid_map/wrong_border.cub fonctionne pas
-

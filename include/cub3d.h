@@ -37,6 +37,7 @@
 # define ERR_NO_F_COLOR "Check_config_complete: Missing floor color\n"
 # define ERR_NO_C_COLOR "Check_config_complete: Missing ceiling color\n"
 # define ERR_MAP_VALIDITY "Check_map_validity : no map send\n"
+# define ERR_EMPTY_MAP "Check_map_validity : map is empty\n"
 # define ERR_PLAYER "Check_player : 0 or more than 1 player found\n"
 # define ERR_MAP_CHAR "Check_forbidden_char : invalid char found\n"
 # define ERR_FLOOD "Flood_fill: invalid map (blank space or missing wall)\n"
