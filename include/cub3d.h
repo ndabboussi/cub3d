@@ -37,10 +37,22 @@
 # define ERR_NO_F_COLOR "Check_config_complete: Missing floor color\n"
 # define ERR_NO_C_COLOR "Check_config_complete: Missing ceiling color\n"
 # define ERR_MAP_VALIDITY "Check_map_validity : no map send\n"
+# define ERR_EMPTY_MAP "Check_map_validity : map is empty\n"
 # define ERR_PLAYER "Check_player : 0 or more than 1 player found\n"
 # define ERR_MAP_CHAR "Check_forbidden_char : invalid char found\n"
+# define ERR_FLOOD "Flood_fill: invalid map (blank space or missing wall)\n"
+
+# define ERR_TEXT_PATH "Check_textures_path: invalid texture path(s)\n"
+# define ERR_TEXT_IMG "Get_textures: mlx_xpm_file_to_image failed\n"
+# define ERR_TEXT_ADDR "Get_textures: mlx_get_data_addr failed\n"
+
+# define MLX_PTR "Ft_init_mlx: mlx_init failed\n"
+# define MLX_WIN "Ft_init_mlx: mlx_new_window failed\n"
+# define MLX_IMAGE "Ft_init_mlx: mlx_new_image failed\n"
+# define MLX_DATA "Ft_init_mlx: mlx_get_data_addr failed\n"
 
 # define ERR_ALLOC "Memory allocation failed\n"
+# define ERR_COPY_ALLOC "Flood_fill: Memory allocation failed\n"
 
 # define WIN_WIDTH 2048
 # define WIN_HEIGHT 1080
@@ -48,13 +60,13 @@
 # define TILE_SIZE 16
 # define MINIMAP_SIZE 10
 
-#define MINIMAP_WIDTH  300
-#define MINIMAP_HEIGHT 300
-#define MINIMAP_MARGIN 10
+# define MINIMAP_WIDTH  300
+# define MINIMAP_HEIGHT 300
+# define MINIMAP_MARGIN 10
 
 # define TEXTURE_W 64
 # define TEXTURE_H 64
-#define PLAYER_SIZE 8
+# define PLAYER_SIZE 8
 
 # define FOV 60
 # define PI 3.14159265358979323846

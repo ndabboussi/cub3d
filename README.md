@@ -6,56 +6,29 @@ Raycasting
 - https://www.youtube.com/watch?v=gYRrGTC7GtA&list=PLCWsH9Tj9oWyDM4W43VMj5yo2PdyYMGst
 - https://reactive.so/post/42-a-comprehensive-guide-to-cub3d/
 
-Parsing de la Map
-
-	OK - Fichier .cub au bon format et avec les bonnes autorisations.
-
-	Format des textures.
-
-	Couleurs de sol et de plafond.
-
-	OK - Validité des caractères (0, 1, N, S, E, W, etc.).
-
-	OK - Fermeture de la map avec un système de flood fill.
-
+To do Nina :
 	Gérer les erreurs correctement avec des messages clairs.
 
-Initialiser la MinilibX
+GESTION DES PORTES
 
-	OK - Créer une fenêtre.
+Parsing
+	Ajouter une texture specifique pour les portes
+	Reconnaitre le charactere D et vcerifier s'il est entoure de murs et pas sur le bord de la map
+(ou bien considerer qu'une porte en bords de map ne s'ouvre pas)
 
-	Charger les textures 
+Implémenter leS PORTES
+	Calculer une distance minimum a laquelle le player doit se tenir de la porte pour l''ouvrir
+	Mis en place de reception du sugnall "H" pour ouvrir la porte
+	Tranformer le P ou 0 pour permettre le passage
+	Possibilite de refermer la porte
 
-Gestion des Événements
-
-	OK - Gestion de la fermeture de la fenêtre.
-
-	OK - Gestion propre de l'ESC et des touches directionnelles.
-
-	OK - Libération de la mémoire.
-
-Implémenter le Raycasting
-
-	Calculer les distances aux murs à chaque "rayon" projeté.
-
-	Dessiner les murs en vertical slice.
-
-	Gérer les textures correctement sur les murs.
-
-Afficher le Sol et le Plafond
-
-	Soit en remplissant simplement de couleur.
-
-	Soit via des textures (bonus).
-
-Gestion des Mouvements
-
-	Avancer, reculer.
-
-	Rotation gauche/droite.
+Option :  transfert de la texture de la porte a l'interieur du passage cree pour donner l'illusion qu'elle est ouverte
 
 
-- fenetre dynamique
-- afficher le player
-- bouger dans la map
-- calculer les rayons
+PIERRE 
+	- color prend pas tous les cas en compte : map/invalid_map/wrong_color_2.cub
+	- si le fichier est vide, renvoyer "empty file" : en testant avec map/invalid_map/vide.cub on renvoie "Check_config_complete: Missing texture path"
+
+NINA 
+	- si la map est vide on devrait direct renvoyer une erreur, pas celle du player
+	- map/invalid_map/wrong_border.cub fonctionne pas

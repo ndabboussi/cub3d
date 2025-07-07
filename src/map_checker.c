@@ -44,9 +44,7 @@ int	check_forbidden_char(t_game *game)
 {
 	int	x;
 	int	y;
-	int	nb_p;
 
-	nb_p = 0;
 	y = 0;
 	while (game->map.map[y])
 	{
@@ -65,15 +63,39 @@ int	check_forbidden_char(t_game *game)
 	return (0);
 }
 
+int	is_empty_map(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (game->map.map[y])
+	{
+		x = 0;
+		while (game->map.map[y][x])
+		{
+			if ((game->map.map[y][x] >= 9 && game->map.map[y][x] <= 13) \
+						|| game->map.map[y][x] == 32)
+				x++;
+			else
+				return (0);
+		}
+		y++;
+	}
+	return (ft_puterr_fd(ERR_EMPTY_MAP, 2), -1);
+}
+
 int	check_map_validity(t_game *game)
 {
 	if (!game || !game->map.map)
 		return (ft_puterr_fd(ERR_MAP_VALIDITY, 2), -1);
+	if (is_empty_map(game) == -1)
+		return (-1);
 	if (check_player(game) == -1)
 		return (-1);
 	if (check_forbidden_char(game) == -1)
 		return (-1);
-	if (!flood_fill(game))
-		return (perror("Error : invalid map.\n"), -1);
+	if (flood_fill(game) < 0)
+		return (-1);
 	return (0);
 }
