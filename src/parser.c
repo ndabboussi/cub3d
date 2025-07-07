@@ -55,18 +55,6 @@ static int	process_line(char *line, t_game *game,
 	return (0);
 }
 
-void	cleanup_get_next_line(int fd)
-{
-	char	*dummy;
-
-	dummy = get_next_line(fd);
-	while (dummy != NULL)
-	{
-		free(dummy);
-		dummy = get_next_line(fd);
-	}
-}
-
 int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 {
 	int		fd;

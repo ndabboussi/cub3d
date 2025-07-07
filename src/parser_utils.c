@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:37:45 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/07 17:43:58 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:30:12 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,18 @@ int	is_empty_line(const char *line)
 	result = (ft_strlen(trimmed) == 0);
 	free(trimmed);
 	return (result);
+}
+
+void	cleanup_get_next_line(int fd)
+{
+	char	*dummy;
+
+	dummy = get_next_line(fd);
+	while (dummy != NULL)
+	{
+		free(dummy);
+		dummy = get_next_line(fd);
+	}
 }
 
 int	count_commas(const char *str)

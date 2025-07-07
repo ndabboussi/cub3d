@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/07 17:45:09 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:32:28 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ int		check_config_complete(t_path *config);
 int		is_empty_line(const char *line);
 int		count_commas(const char *str);
 char	*trim_prefix(char *line, char *prefix);
+void	cleanup_get_next_line(int fd);
 
 //INIT
 void	init_window(t_game *game);
@@ -261,6 +262,7 @@ void	print_player(t_player *player);
 void	draw_map2d(t_game *game);
 void	draw_player(t_game *game);
 void	draw_rays(t_game *game);
-void	draw_square(t_game *game, float x, float y, float size, int color);
+void	draw_square(t_game *game, float x, float y, float size);
+void	draw_square_wall(t_game *game, float x, float y, float size);
 
 #endif
