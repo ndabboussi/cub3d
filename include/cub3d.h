@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/02 18:37:04 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/07 13:00:54 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,16 @@ typedef struct s_dda
 	int		side; //0 si collision sur un mur vertical, 1 si sur un mur horizontal (utile pour la texture plus tard)
 }	t_dda;
 
+typedef struct s_line_data
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
+}	t_line_data;
+
 typedef struct s_game
 {
 	t_texture	no_texture;
@@ -194,7 +204,7 @@ int		render_frame(t_game *game);
 void	clear_image(t_window *win);
 void	my_mlx_pixel_put(t_window *img, int x, int y, int color);
 void	draw_minimap(t_game *game);
-void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
+void	draw_line(t_game *game, t_coordinates p0, t_coordinates p1, int color);
 
 //CLEAN & ERRORS
 void	ft_puterr_fd(char *s, int fd);
@@ -230,5 +240,6 @@ void	print_player(t_player *player);
 void	draw_map2d(t_game *game);
 void	draw_player(t_game *game);
 void	draw_rays(t_game *game);
+void	draw_square(t_game *game, float x, float y, float size, int color);
 
 #endif
