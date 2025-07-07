@@ -12,6 +12,29 @@
 
 #include "cub3d.h"
 
+int	check_textures_path(t_path path)
+{
+	int	fd;
+
+	fd = open(path.no_texture, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	close(fd);
+	fd = open(path.so_texture, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	close(fd);
+	fd = open(path.ea_texture, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	close(fd);
+	fd = open(path.we_texture, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	close(fd);
+	return (0);
+}
+
 int	check_player(t_game *game)
 {
 	int	x;
