@@ -111,7 +111,6 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
-
 typedef struct s_texture
 {
 	void	*img;
@@ -206,7 +205,7 @@ int		flood_fill(t_game *game);
 void	init_window(t_game *game);
 int		ft_key_handler(int keycode, t_game *game);
 int		ft_mouse_hook(int x, int y, void *data);
-void	init_colors(t_color *floor, t_color *ceiling);
+int		check_textures_path(t_path path);
 
 void	init_player(t_game *game);
 
@@ -236,10 +235,15 @@ void	rotate_left_mouse(t_game *g);
 void	rotate_right_mouse(t_game *g);
 
 //RAYCASTING
-void	draw_vertical_line(t_window *win, int x, int start, int end, int color);
+//void	draw_vertical_line(t_window *win, int x, int start, int end, int color);
+void	draw_vertical_line(t_window *win, int x, int range[2], int color);
 int		color_to_int(t_color color);
 int		perform_dda(t_game *game, t_dda *d);
 t_rays	cast_ray(t_game *game, float ray_angle);
+int		get_texture_pixel(t_texture *texture, int x, int y);
+void	init_ray_position_and_direction(t_game *game, t_dda *d, \
+			float ray_angle);
+void	init_dda_steps_and_sidedist(t_dda *d);
 
 //UTILS PRINT
 void	print_map(char **map);
