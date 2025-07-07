@@ -96,15 +96,15 @@ int	flood_fill(t_game *game)
 
 	i = 0;
 	if (!game || !game->map.map)
-		return (0);
+		return (-1);
 	get_map_borders(game);
 	map_copy = create_map_copy(game, game->map.map);
 	if (!map_copy)
-		return (perror("Error : alloc failure.\n"), 1);
+		return (ft_puterr_fd(ERR_COPY_ALLOC, 2), -1);
 	if (!fill(game, map_copy, game->map.player_x, game->map.player_y))
 	{
 		free_double_tab(map_copy);
-		return (0);
+		return (ft_puterr_fd(ERR_FLOOD, 2), -1);
 	}
 	free_double_tab(map_copy);
 	return (1);

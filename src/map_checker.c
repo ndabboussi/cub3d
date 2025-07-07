@@ -73,7 +73,7 @@ int	check_map_validity(t_game *game)
 		return (-1);
 	if (check_forbidden_char(game) == -1)
 		return (-1);
-	if (!flood_fill(game))
-		return (perror("Error : invalid map.\n"), -1);
+	if (flood_fill(game) < 0)
+		return (-1);
 	return (0);
 }

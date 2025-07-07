@@ -28,7 +28,7 @@ int	main(int ac, char **av)
 	game.path.ceiling = (t_color){-1, -1, -1};
 	if (parse_file(av[1], &game) < 0)
 		ft_exit_all(&game, 1);
-	if (check_map_validity(&game) != 0)
+	if (check_map_validity(&game) < 0)
 		ft_exit_all(&game, 1);
 	init_window(&game);
 	init_player(&game);
@@ -40,4 +40,3 @@ int	main(int ac, char **av)
 	ft_exit_all(&game, 0);
 	return (0);
 }
-
