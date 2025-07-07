@@ -12,12 +12,6 @@
 
 #include "cub3d.h"
 
-
-int color_to_int(t_color color)
-{
-    return (color.r << 16) | (color.g << 8) | color.b;
-}
-
 int	get_texture_pixel(t_texture *texture, int x, int y)
 {
 	int	offset;
@@ -28,18 +22,6 @@ int	get_texture_pixel(t_texture *texture, int x, int y)
 		return (0xFF00FF);
 	offset = (y * texture->line_length) + (x * (texture->bits_per_pixel / 8));
 	return (*(unsigned int *)(texture->addr + offset));
-}
-
-void	draw_vertical_line(t_window *win, int x, int start, int end, int color)
-{
-	int	y;
-
-	y = start;
-	while (y < end)
-	{
-		my_mlx_pixel_put(win, x, y, color);
-		y++;
-	}
 }
 
 // Step 1: Ray start position and direction setup
