@@ -1,6 +1,6 @@
-NO ./texture/pics/greystone.xpm
-SO ./texture/pics/bluestone.xpm
-EA ./texture/pics/purplestone.xpm
+NO ./textures/azulejo.xpm
+SO ./textures/flowers.xpm
+EA /textures/planches.xpm
 WE ./texture/pics/color.xpm
 
 F 42,42,42

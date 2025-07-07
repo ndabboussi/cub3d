@@ -1,7 +1,7 @@
-NO ./texture/pics/greystone.xpm
-SO ./texture/pics/bluestone.xpm
-WE ./texture/pics/colorstone.xpm
-EA ./texture/pics/purplestone.xpm
+NO ./textures/azulejo.xpm
+SO ./textures/flowers.xpm
+WE ./textures/window.xpm
+EA ./textures/planches.xpm
 
 F 220,100,0
 C 225,30,0
