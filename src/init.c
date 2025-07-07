@@ -38,29 +38,6 @@ void	init_textures(t_game *game)
 	get_textures(game, &game->ea_texture, game->path.ea_texture);
 }
 
-int	check_textures_path(t_path path)
-{
-	int	fd;
-
-	fd = open(path.no_texture, O_RDONLY);
-	if (fd < 0)
-		return (-1);
-	close(fd);
-	fd = open(path.so_texture, O_RDONLY);
-	if (fd < 0)
-		return (-1);
-	close(fd);
-	fd = open(path.ea_texture, O_RDONLY);
-	if (fd < 0)
-		return (-1);
-	close(fd);
-	fd = open(path.we_texture, O_RDONLY);
-	if (fd < 0)
-		return (-1);
-	close(fd);
-	return (0);
-}
-
 int	ft_init_mlx(t_game	*game)
 {
 	game->window.mlx_ptr = mlx_init();
@@ -94,4 +71,18 @@ void	init_window(t_game *game)
 	if (ft_init_mlx(game) < 0)
 		ft_exit_all(game, 1);
 	init_textures(game);
+}
+
+void	init_player(t_game *game)
+{
+	game->player.pos.x = game->map.player_x;
+	game->player.pos.y = game->map.player_y;
+	if (game->map.player_dir == 'S')
+		game->player.angle = PI / 2;
+	else if (game->map.player_dir == 'N')
+		game->player.angle = 3 * PI / 2;
+	else if (game->map.player_dir == 'E')
+		game->player.angle = 0;
+	else if (game->map.player_dir == 'W')
+		game->player.angle = PI;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting_try.c                                   :+:      :+:    :+:   */
+/*   map2d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndabbous <ndabbous@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 18:02:16 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/07/07 12:59:27 by pde-vara         ###   ########.fr       */
+/*   Created: 2025-07-07 12:33:35 by ndabbous          #+#    #+#             */
+/*   Updated: 2025-07-07 12:33:35 by ndabbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@ void	my_mlx_pixel_put(t_window *img, int x, int y, int color)
 		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-void	draw_vertical_line(t_window *win, int x, int start, int end, int color)
-{
-	int	y;
-
-	y = start;
-	while (y < end)
-	{
-		my_mlx_pixel_put(win, x, y, color);
-		y++;
-	}
 }
 
 void	draw_square(t_game *game, float x, float y, float size, int color)

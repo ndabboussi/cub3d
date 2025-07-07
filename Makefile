@@ -13,8 +13,9 @@ INC_DIR = ./include/
 MLX_DIR = ./minilibx-linux/
 
 FILES = print.c main.c parser.c map_checker.c flood_fill.c \
-		init.c events.c player.c display.c clean.c raycasting_try.c \
-		movement.c DDA_textures.c
+		init.c events.c map2d.c clean.c map2d_utils.c \
+		movement.c raycasting.c raycasting_utils.c \
+		cast_rays.c cast_rays_utils.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
