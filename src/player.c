@@ -6,11 +6,29 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 16:12:42 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/07/01 15:04:31 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/07 13:00:18 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	clear_image(t_window *win)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < WIN_HEIGHT)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
+		{
+			my_mlx_pixel_put(win, x, y, 0x000000);
+			x++;
+		}
+		y++;
+	}
+}
 
 void	init_player(t_game *game)
 {
