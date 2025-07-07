@@ -6,84 +6,56 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:37:45 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/07 16:40:13 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:43:58 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-
-static int	handle_texture_line(char *line, t_game *game, int *map_started)
+char	*trim_prefix(char *line, char *prefix)
 {
-	int	res_texture;
+	line += ft_strlen(prefix);
+	while (*line == ' ' || *line == '\t')
+		line++;
+	return (line);
+}
 
-	res_texture = parse_till_map(line, &game->path);
-	if (res_texture == -1)
-	{
-		printf("Error\nInvalid config line: %s\n", line);
+int	is_empty_line(const char *line)
+{
+	char	*trimmed;
+	int		result;
+
+	trimmed = ft_strtrim(line, " \t\n");
+	if (!trimmed)
 		return (-1);
-	}
-	if (res_texture == 2)
-		*map_started = 1;
-	return (0);
+	result = (ft_strlen(trimmed) == 0);
+	free(trimmed);
+	return (result);
 }
 
-static int	process_line(char *line, t_game *game, int *map_started, char **map_text)
+int	count_commas(const char *str)
 {
-	if (!*map_started)
+	int	count;
+
+	count = 0;
+	while (*str)
 	{
-		if (handle_texture_line(line, game, map_started) == -1)
-			return (-1);
+		if (*str == ',')
+			count++;
+		str++;
 	}
-	if (*map_started)
-	{
-		if (accumulate_map_text(line, map_text) == -1)
-			return (-1);
-	}
-	return (0);
+	return (count);
 }
 
-int	parse_line_by_line(char *filename, t_game *game, char **map_text)
+int	check_config_complete(t_path *config)
 {
-	int		fd;
-	char	*line;
-	int		map_started;
-
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (free(*map_text), ft_puterr_fd(ERR_OPEN, 2), -1);
-	map_started = 0;
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (process_line(line, game, &map_started, map_text) == -1)
-		{
-			free(line);
-			free(*map_text);
-			return (close(fd), -1);
-		}
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (0);
-}
-
-int	parse_file(char *filename, t_game *game)
-{
-	char	*map_text;
-
-	map_text = ft_calloc(1, sizeof(char));
-	if (!map_text)
-		return (ft_puterr_fd(ERR_ALLOC, 2), -1);
-	if (parse_line_by_line(filename, game, &map_text) != 0)
-		return (-1);
-	game->map.map = ft_split(map_text, '\n');
-	free(map_text);
-	if (!game->map.map)
-		return (ft_puterr_fd(ERR_MAP, 2), -1);
-	if (check_config_complete(&game->path) < 0)
-		ft_exit_all(game, 1);
+	if (!config->no_texture || !config->so_texture || !config->we_texture
+		|| !config->ea_texture)
+		return (ft_puterr_fd(ERR_NO_T_PATH, 2), -1);
+	if (config->floor.r == -1 || config->floor.g == -1 || config->floor.b == -1)
+		return (ft_puterr_fd(ERR_NO_F_COLOR, 2), -1);
+	if (config->ceiling.r == -1 || config->ceiling.g == -1 \
+		|| config->ceiling.b == -1)
+		return (ft_puterr_fd(ERR_NO_C_COLOR, 2), -1);
 	return (0);
 }
