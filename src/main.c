@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 11:55:38 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/07 13:00:12 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:19:04 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_puterr_fd(ERR_USAGE, 2), 1);
 	len = ft_strlen(av[1]);
-	if (av[1][len - 1] != 'b' || av[1][len - 2] != 'u'
-		|| av[1][len - 3] != 'c' || av[1][len - 4] != '.')
+	if (len < 4 || ft_strncmp(av[1] + len - 4, ".cub", 4) != 0)
 		return (ft_puterr_fd(ERR_FORMAT, 2), 1);
 	ft_memset(&game, 0, sizeof(t_game));
 	game.path.floor = (t_color){-1, -1, -1};
