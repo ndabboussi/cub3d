@@ -70,11 +70,9 @@ void	render_column(t_game *game, int x, t_rays ray)
 	if (wall_bottom >= WIN_HEIGHT)
 		wall_bottom = WIN_HEIGHT - 1;
 	draw_ceiling(game, x, wall_top);
-
 	range[0] = wall_bottom;
 	range[1] = wall_top;
 	draw_wall(game, x, range, ray);
-
 	draw_floor(game, x, wall_bottom);
 }
 
