@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 12:13:22 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/07/07 18:31:35 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:03:24 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,8 @@ void	draw_line(t_game *game, t_coordinates p0, t_coordinates p1, int color)
 // 	}
 // }
 
-// static void	draw_single_ray(t_game *game, int i, double start_x, double start_y)
+// static void	draw_single_ray(t_game *game,
+// 		int i, double start_x, double start_y)
 // {
 // 	double	ray_angle;
 // 	t_rays	distance;
@@ -185,22 +186,25 @@ void	draw_line(t_game *game, t_coordinates p0, t_coordinates p1, int color)
 // 	// Calculate ray angle (same logic as in render_frame)
 // 	ray_angle = game->player.angle
 // 		- (FOV * PI / 180.0 / 2.0)  // Start at leftmost FOV angle
-// 		+ ((double)(i * 4) / WIN_WIDTH) * (FOV * PI / 180.0); // Step toward right
+// 		+ ((double)(i * 4) / WIN_WIDTH)
+	// * (FOV * PI / 180.0); // Step toward right
 
 // 	distance = cast_ray(game, ray_angle);// Cast the ray to get distance
 // 	// Convert distance to 2D map coordinates
-// 	end_x = start_x + cos(ray_angle) * distance.distance * TILE_SIZE * game->minimap_scale;
-// 	end_y = start_y + sin(ray_angle) * distance.distance * TILE_SIZE * game->minimap_scale;
+// 	end_x = start_x + cos(ray_angle) *
+	// distance.distance * TILE_SIZE * game->minimap_scale;
+// 	end_y = start_y + sin(ray_angle) * 
+	// distance.distance * TILE_SIZE * game->minimap_scale;
 
-// 	//draw_line(game, (int)start_x, (int)start_y, (int)end_x, (int)end_y, 0x00FF00);// Draw the ray line
-// 	if (start_x >= 0 && start_x < MINIMAP_WIDTH \
-// 		&& start_y >= 0 && start_y < MINIMAP_HEIGHT \
-// 		&& end_x >= 0 && end_x < MINIMAP_WIDTH \
+// 	//draw_line(game, (int)start_x, (int)start_y,
+		// (int)end_x, (int)end_y, 0x00FF00);// Draw the ray line
+// 	if (start_x >= 0 && start_x < MINIMAP_WIDTH
+// 		&& start_y >= 0 && start_y < MINIMAP_HEIGHT
+// 		&& end_x >= 0 && end_x < MINIMAP_WIDTH
 // 		&& end_y >= 0 && end_y < MINIMAP_HEIGHT)
 // 		draw_line(game, (int)start_x, (int)start_y,
 // 			(int)end_x, (int)end_y, 0x00FF00);
 // }
-
 
 // void draw_rays(t_game *game)
 // {
