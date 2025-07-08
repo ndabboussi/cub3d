@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndabbous <ndabbous@student.42.fr>          #+#  +:+       +#+        */
+/*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-07 12:33:35 by ndabbous          #+#    #+#             */
-/*   Updated: 2025-07-07 12:33:35 by ndabbous         ###   ########.fr       */
+/*   Created: 2025/07/07 12:33:35 by ndabbous          #+#    #+#             */
+/*   Updated: 2025/07/07 18:33:03 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_window *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_square(t_game *game, float x, float y, float size, int color)
+void	draw_square(t_game *game, float x, float y, float size)
 {
 	int	i;
 	int	j;
@@ -33,7 +33,26 @@ void	draw_square(t_game *game, float x, float y, float size, int color)
 	{
 		while (j < size)
 		{
-			my_mlx_pixel_put(&game->window, x + j, y + i, color);
+			my_mlx_pixel_put(&game->window, x + j, y + i, 0xff00ff);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
+void	draw_square_wall(t_game *game, float x, float y, float size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < size)
+	{
+		while (j < size)
+		{
+			my_mlx_pixel_put(&game->window, x + j, y + i, 0xFFFFFF);
 			j++;
 		}
 		j = 0;
@@ -54,5 +73,5 @@ void	draw_player(t_game *game)
 	player_map_x = game->player.pos.x * TILE_SIZE * game->minimap_scale;
 	player_map_y = game->player.pos.y * TILE_SIZE * game->minimap_scale;
 	draw_square(game, player_map_x - PLAYER_SIZE / 2, \
-		player_map_y - PLAYER_SIZE / 2, PLAYER_SIZE, 0xff00ff);
+		player_map_y - PLAYER_SIZE / 2, PLAYER_SIZE);
 }

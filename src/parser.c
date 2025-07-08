@@ -72,6 +72,7 @@ int	parse_line_by_line(char *filename, t_game *game, char **map_text)
 		{
 			free(line);
 			free(*map_text);
+			cleanup_get_next_line(fd);
 			return (close(fd), -1);
 		}
 		free(line);

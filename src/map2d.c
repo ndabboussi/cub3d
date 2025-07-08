@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndabbous <ndabbous@student.42.fr>          #+#  +:+       +#+        */
+/*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-07 12:13:22 by ndabbous          #+#    #+#             */
-/*   Updated: 2025-07-07 12:13:22 by ndabbous         ###   ########.fr       */
+/*   Created: 2025/07/07 12:13:22 by ndabbous          #+#    #+#             */
+/*   Updated: 2025/07/07 18:31:35 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	draw_map2d(t_game *game)
 		while (game->map.map[y][x])
 		{
 			if (game->map.map[y][x] == '1')
-				draw_square(game, x * TILE_SIZE * game->minimap_scale,
+				draw_square_wall(game, x * TILE_SIZE * game->minimap_scale,
 					y * TILE_SIZE * game->minimap_scale,
-					TILE_SIZE * game->minimap_scale, 0xFFFFFF);
+					TILE_SIZE * game->minimap_scale);
 			x++;
 		}
 		y++;
