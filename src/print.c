@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:26:47 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/08 16:08:49 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:41:34 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,16 @@ void	print_map(char **map)
 // 	int		map_y;
 // 	float	ray_x; //direction du rayon
 // 	float	ray_y;
-// 	float	ray_dir_x; //distance nécessaire pour parcourir une case entière en x
+// 	float	ray_dir_x; //distance nécessaire 
+// pour parcourir une case entière en x
 // 	float	ray_dir_y;
 // 	float	delta_dist_x;
 // 	float	delta_dist_y;
-// 	float	side_dist_x; //distance actuelle entre le rayon et le premier mur potentiel en x
+// 	float	side_dist_x; //distance actuelle entre le rayon 
+// et le premier mur potentiel en x
 // 	float	side_dist_y;
 // 	int		step_x; //direction dans laquelle on avance (gauche -1 ou droite +1)
 // 	int		step_y;
-// 	int		side; //0 si collision sur un mur vertical, 1 si sur un mur horizontal (utile pour la texture plus tard)
+// 	int		side; //0 si collision sur un mur vertical, 1 si 
+// sur un mur horizontal (utile pour la texture plus tard)
 // }	t_dda;
