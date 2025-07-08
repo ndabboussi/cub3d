@@ -84,6 +84,7 @@ int	render_frame(t_game *game)
 
 	x = 0;
 	clear_image(&game->window);
+	handle_movement(game);
 	while (x < WIN_WIDTH)
 	{
 		ray_angle = game->player.angle - (FOV * PI / 180.0 / 2.0) \

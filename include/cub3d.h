@@ -92,6 +92,7 @@ typedef struct s_player
 {
 	t_coordinates	pos;
 	double			angle;
+	bool			k_pressed[6];
 }			t_player;
 
 typedef struct s_map
@@ -193,9 +194,6 @@ typedef struct s_game
 	float		minimap_scale;
 }	t_game;
 
-# define RED "\033[31;01m"
-# define RESET "\033[00m"
-
 //PARSING
 int		parse_file(char *filename, t_game *game);
 int		check_map_validity(t_game *game);
@@ -210,6 +208,8 @@ void	cleanup_get_next_line(int fd);
 //INIT
 void	init_window(t_game *game);
 int		ft_key_handler(int keycode, t_game *game);
+int		ft_key_press(int keycode, t_game *game);
+int		ft_key_release(int keycode, t_game *game);
 int		ft_mouse_hook(int x, int y, void *data);
 int		check_textures_path(t_path path);
 
@@ -230,6 +230,7 @@ int		ft_close_window(t_game *game);
 void	ft_exit_all(t_game *game, int status);
 
 //MOVEMENT
+void	handle_movement(t_game *game);
 int		is_walkable(t_game *g, float x, float y);
 void	move_forward(t_game *g);
 void	move_backward(t_game *g);
