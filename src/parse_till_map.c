@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:43:53 by ndabbous          #+#    #+#             */
-/*   Updated: 2025/07/08 15:52:11 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:04:10 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int	assign_texture(char *line, char *prefix, char **dest)
 	if (ft_strncmp(line, prefix, ft_strlen(prefix)) != 0)
 		return (0);
 	if (*dest != NULL)
-		return (-1); // Already assigned
+		return (-1);
 	trimmed = trim_prefix(line, prefix);
 	stripped = ft_strtrim(trimmed, " \n\t");
 	if (!stripped || *stripped == '\0')
-		return (free(trimmed), -1); // Trim or allocation failed
+		return (free(trimmed), -1);
 	*dest = stripped;
-	return (1); // Match and assignment successful
+	return (1);
 }
 
 int	assign_color(char *line, char *prefix, t_color *dest)
@@ -64,11 +64,11 @@ int	assign_color(char *line, char *prefix, t_color *dest)
 	trimmed = ft_strtrim(line, " \t\n");
 	if (!trimmed)
 		return (-1);
-	if (ft_strncmp(trimmed, prefix, ft_strlen(prefix)) != 0)// Check prefix match
+	if (ft_strncmp(trimmed, prefix, ft_strlen(prefix)) != 0)
 		return (free(trimmed), 0);
-	if (dest->r != -1 || dest->g != -1 || dest->b != -1) // Already assigned
+	if (dest->r != -1 || dest->g != -1 || dest->b != -1)
 		return (free(trimmed), -1);
-	content = ft_strtrim(trimmed + ft_strlen(prefix), " \t\n"); // Extract and trim the part after prefix
+	content = ft_strtrim(trimmed + ft_strlen(prefix), " \t\n");
 	free(trimmed);
 	if (!content)
 		return (-1);
@@ -79,6 +79,7 @@ int	assign_color(char *line, char *prefix, t_color *dest)
 	else
 		return (-1);
 }
+
 int	parse_till_map(char *line, t_path *config)
 {
 	int	res;
