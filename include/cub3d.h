@@ -71,9 +71,6 @@
 # define FOV 60
 # define PI 3.14159265358979323846
 
-# define MOVE_SPEED 0.1
-# define ROT_SPEED (PI / 30)
-
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
@@ -81,6 +78,9 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
+
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.1
 
 typedef struct s_coordinates
 {
