@@ -70,31 +70,3 @@ void	move_right(t_game *g)
 	if (is_walkable(g, g->player.pos.x, new_y))
 		g->player.pos.y = new_y;
 }
-
-void	rotate_left(t_game *g)
-{
-	g->player.angle -= ROT_SPEED;
-	if (g->player.angle < 0)
-		g->player.angle += 2 * PI;
-}
-
-void	rotate_right(t_game *g)
-{
-	g->player.angle += ROT_SPEED;
-	if (g->player.angle > 2 * PI)
-		g->player.angle -= 2 * PI;
-}
-
-void	rotate_left_mouse(t_game *g)
-{
-	g->player.angle -= ROT_SPEED / 10;
-	if (g->player.angle < 0)
-		g->player.angle += 2 * PI;
-}
-
-void	rotate_right_mouse(t_game *g)
-{
-	g->player.angle += ROT_SPEED / 10;
-	if (g->player.angle > 2 * PI)
-		g->player.angle -= 2 * PI;
-}

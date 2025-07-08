@@ -39,8 +39,8 @@ static int	handle_texture_line(char *line, t_game *game, int *map_started)
 	return (0);
 }
 
-static int	process_line(char *line, t_game *game,
-		int *map_started, char **map_text)
+static int	process_line(char *line, t_game *game, \
+			int *map_started, char **map_text)
 {
 	if (!*map_started)
 	{
