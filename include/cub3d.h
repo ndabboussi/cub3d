@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/07 18:32:28 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:15:18 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,19 +155,19 @@ typedef struct s_window
 
 typedef struct s_dda
 {
-	int		map_x; //position actuelle du rayon dans la grille (map)
+	int		map_x;
 	int		map_y;
-	float	ray_x; //direction du rayon
+	float	ray_x;
 	float	ray_y;
-	float	ray_dir_x; //distance nécessaire pour parcourir une case entière en x
+	float	ray_dir_x;
 	float	ray_dir_y;
 	float	delta_dist_x;
 	float	delta_dist_y;
-	float	side_dist_x; //distance actuelle entre le rayon et le premier mur potentiel en x
+	float	side_dist_x;
 	float	side_dist_y;
-	int		step_x; //direction dans laquelle on avance (gauche -1 ou droite +1)
+	int		step_x;
 	int		step_y;
-	int		side; //0 si collision sur un mur vertical, 1 si sur un mur horizontal (utile pour la texture plus tard)
+	int		side;
 }	t_dda;
 
 typedef struct s_line_data
