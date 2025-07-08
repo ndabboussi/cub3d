@@ -1,9 +1,9 @@
-NO ./textures/azulejo.xpm
-SO ./textures/flowers.xpm
+NO ./textures/eagle64.xpm
+SO ./textures/mossy64.xpm
 WE ./textures/window.xpm
-EA ./textures/planches.xpm
+EA ./textures/wood64.xpm
 
-F 0,0,255
+F 255,0,255
 C 0,35,155
 
 11111
