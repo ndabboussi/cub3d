@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:26:47 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/08 16:05:19 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:56:01 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	accumulate_map_text(char *line, char **map_text)
 {
 	char	*tmp;
 
+	if (is_empty_line(line))
+		return (0);
 	tmp = *map_text;
 	*map_text = ft_strjoin(*map_text, line);
 	free(tmp);

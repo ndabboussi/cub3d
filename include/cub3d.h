@@ -6,7 +6,7 @@
 /*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/08 16:15:18 by pde-vara         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:41:13 by pde-vara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@
 # define PI 3.14159265358979323846
 
 # define MOVE_SPEED 0.1
-# define ROT_SPEED (PI / 30)
+# define ROT_SPEED 0.1
 
 # define KEY_W 119
 # define KEY_A 97
