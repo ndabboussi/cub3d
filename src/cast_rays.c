@@ -41,8 +41,8 @@ int	calculate_texture_x(t_dda *d, double distance)
 		wall_x = d->ray_y + distance * d->ray_dir_y;
 	else
 		wall_x = d->ray_x + distance * d->ray_dir_x;
-	if (wall_x < 0)
-		wall_x += 1.0;
+	// if (wall_x < 0)
+	// 	wall_x += 1.0;
 	wall_x -= (int)wall_x;
 	texture_x = (int)(wall_x * (double)TEXTURE_W);
 	if (d->side == 0 && d->ray_dir_x > 0)
@@ -77,3 +77,4 @@ t_rays	cast_ray(t_game *game, float ray_angle)
 	ray.side = d.side;
 	return (ray);
 }
+
