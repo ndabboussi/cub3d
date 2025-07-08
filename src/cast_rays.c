@@ -77,4 +77,3 @@ t_rays	cast_ray(t_game *game, float ray_angle)
 	ray.side = d.side;
 	return (ray);
 }
-
