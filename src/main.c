@@ -32,8 +32,8 @@ int	main(int ac, char **av)
 	init_window(&game);
 	init_player(&game);
 	mlx_hook(game.window.mlx_window, 17, 0, ft_close_window, &game);
-	mlx_hook(game.window.mlx_window, KeyPress, KeyPressMask, &ft_key_press, &game);
-	mlx_hook(game.window.mlx_window, KeyRelease, KeyReleaseMask, &ft_key_release, &game);
+	mlx_hook(game.window.mlx_window, 2, 1L << 0, &ft_key_press, &game);
+	mlx_hook(game.window.mlx_window, 3, 1L << 1, &ft_key_release, &game);
 	mlx_hook(game.window.mlx_window, 6, 1L << 6, ft_mouse_hook, &game);
 	mlx_loop_hook(game.window.mlx_ptr, render_frame, &game);
 	mlx_loop(game.window.mlx_ptr);
