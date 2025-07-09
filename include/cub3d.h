@@ -252,12 +252,6 @@ void	init_ray_position_and_direction(t_game *game, t_dda *d, \
 			float ray_angle);
 void	init_dda_steps_and_sidedist(t_dda *d);
 
-//UTILS PRINT
-void	print_map(char **map);
-void	print_texture(t_path *tex);
-void	print_path(t_path *path);
-void	print_coordinates(t_coordinates *coord, const char *label);
-void	print_player(t_player *player);
 
 //2D
 void	draw_map2d(t_game *game);

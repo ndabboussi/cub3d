@@ -21,14 +21,12 @@ DIRS = minimap parsing raycasting utils
 
 # -------------------- SRC Mandatory --------------------
 FILES = main.c
-MINIMAP_FILES = map2d.c map2d_utils.c
 PARSING_FILES = parser.c map_checker.c flood_fill.c init.c parser_utils.c parse_till_map.c
-RAYCASTING_FILES = raycasting.c raycasting_utils.c cast_rays.c cast_rays_utils.c
+RAYCASTING_FILES = raycasting.c raycasting_utils.c cast_rays.c cast_rays_utils.c drawing_utils.c
 UTILS_FILES = events.c clean.c movement.c rotation.c
 
 SRC_FILES = \
 	$(addprefix src/, $(FILES)) \
-	$(addprefix src/minimap/, $(MINIMAP_FILES)) \
 	$(addprefix src/parsing/, $(PARSING_FILES)) \
 	$(addprefix src/raycasting/, $(RAYCASTING_FILES)) \
 	$(addprefix src/utils/, $(UTILS_FILES))
