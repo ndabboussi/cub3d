@@ -62,7 +62,6 @@
 
 # define MINIMAP_WIDTH  300
 # define MINIMAP_HEIGHT 300
-# define MINIMAP_MARGIN 10
 
 # define TEXTURE_W 64
 # define TEXTURE_H 64
@@ -242,7 +241,6 @@ void	rotate_left_mouse(t_game *g);
 void	rotate_right_mouse(t_game *g);
 
 //RAYCASTING
-//void	draw_vertical_line(t_window *win, int x, int start, int end, int color);
 void	draw_vertical_line(t_window *win, int x, int range[2], int color);
 int		color_to_int(t_color color);
 int		perform_dda(t_game *game, t_dda *d);

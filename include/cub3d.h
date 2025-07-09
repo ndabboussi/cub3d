@@ -62,7 +62,6 @@
 
 # define MINIMAP_WIDTH  300
 # define MINIMAP_HEIGHT 300
-# define MINIMAP_MARGIN 10
 
 # define TEXTURE_W 64
 # define TEXTURE_H 64
@@ -210,17 +209,14 @@ void	init_window(t_game *game);
 int		ft_key_handler(int keycode, t_game *game);
 int		ft_key_press(int keycode, t_game *game);
 int		ft_key_release(int keycode, t_game *game);
-int		ft_mouse_hook(int x, int y, void *data);
 int		check_textures_path(t_path path);
 
 void	init_player(t_game *game);
 
 //DISPLAY
-int		print_map_2d(t_game *game);
 int		render_frame(t_game *game);
 void	clear_image(t_window *win);
 void	my_mlx_pixel_put(t_window *img, int x, int y, int color);
-void	draw_minimap(t_game *game);
 void	draw_line(t_game *game, t_coordinates p0, t_coordinates p1, int color);
 
 //CLEAN & ERRORS
@@ -238,11 +234,9 @@ void	move_left(t_game *g);
 void	move_right(t_game *g);
 void	rotate_left(t_game *g);
 void	rotate_right(t_game *g);
-void	rotate_left_mouse(t_game *g);
-void	rotate_right_mouse(t_game *g);
 
 //RAYCASTING
-//void	draw_vertical_line(t_window *win, int x, int start, int end, int color);
+
 void	draw_vertical_line(t_window *win, int x, int range[2], int color);
 int		color_to_int(t_color color);
 int		perform_dda(t_game *game, t_dda *d);
