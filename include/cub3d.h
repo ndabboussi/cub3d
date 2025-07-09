@@ -246,7 +246,6 @@ void	init_ray_position_and_direction(t_game *game, t_dda *d, \
 			float ray_angle);
 void	init_dda_steps_and_sidedist(t_dda *d);
 
-
 //2D
 void	draw_map2d(t_game *game);
 void	draw_player(t_game *game);
