@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pde-vara <pde-vara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndabbous <ndabbous@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/23 13:59:54 by pde-vara          #+#    #+#             */
-/*   Updated: 2025/07/08 17:41:13 by pde-vara         ###   ########.fr       */
+/*   Created: 2025-07-09 10:26:15 by ndabbous          #+#    #+#             */
+/*   Updated: 2025-07-09 10:26:15 by ndabbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "mlx.h"
 # include "libft.h"
