@@ -57,7 +57,6 @@ BONUS_DEP = $(BONUS_OBJ:.o=.d)
 INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 
 # Compilation mode
-=======
 
 DIRS = 	minimap parsing raycasting utils
 
@@ -160,84 +159,7 @@ fclean: clean
 
 re: fclean all
 
-# -------------------- Tests --------------------
-INVALID_MAPS = \
-	map/invalid_map/additionnal_element.cub \
-	map/invalid_map/doople_element.cub \
-	map/invalid_map/doople_F_C.cub \
-	map/invalid_map/invalid_path.cub \
-	map/invalid_map/invalid_path_2.cub \
-	map/invalid_map/lower_case.cub \
-	map/invalid_map/missing_F_C.cub \
-	map/invalid_map/missing_link.cub \
-	map/invalid_map/missing_player.cub \
-	map/invalid_map/wrong_border.cub \
-	map/invalid_map/wrong_border_2.cub \
-	map/invalid_map/wrong_char.cub \
-	map/invalid_map/wrong_color.cub \
-	map/invalid_map/map.txt \
-	map/invalid_map/inexistant_map.cub \
-	map/invalid_map/invalid_texture.cub \
-	map/invalid_map/vide.cub \
-	map/invalid_map/wrong_color_2.cub 
-
 all: $(OBJ_DIR) $(MLX_DIR) $(LIBFT) $(NAME_EXE)
-
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-	@for dir in $(DIRS); do mkdir -p $(OBJ_DIR)/$$dir; done
-
-# Dependencies
-DEP = $(OBJ:.o=.d)
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
-
-	@mkdir -p $(dir $@)
-	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-	$(V)$(CC) $(CFLAGS) $(INCLUDES) -MMD -MP -c $< -o $@
-
--include $(DEP)
-
-$(NAME_EXE): $(OBJ) $(LIBFT)
-	$(V)$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) -L$(LIBFT_DIR) -L$(MLX_DIR) -lft -o $(NAME_EXE) $(MLXFLAG)
-	$(V)echo "$(GREEN)[$(NAME_EXE)] Executable created ✅$(RESET)"
-
-# Libft
-$(LIBFT):
-	$(V)$(MAKE) --silent -C $(LIBFT_DIR)
-	$(V)echo "[$(NAME_EXE)] Libft build successfully"
-
-# MiniLibX
-$(MLX_DIR):
-	$(V)echo "[$(NAME_EXE)] Downloading MiniLibX from github.com...$(RESET)"
-	@git clone https://github.com/42Paris/minilibx-linux.git $(MLX_DIR) > /dev/null 2>&1
-	$(V)echo "[$(NAME_EXE)] Compiling MiniLibX...$(RESET)"
-	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
-	$(V)echo "[$(NAME_EXE)] MiniLibX installed successfully$(RESET)"
-
-clean:
-	$(V)echo "$(RED)[$(NAME_EXE)] Cleaning objects$(RESET)"
-	$(V)rm -rf $(OBJ_DIR)
-	$(V)$(MAKE) clean -C $(LIBFT_DIR) > /dev/null
-	$(V)echo "$(GREEN)$(NAME_EXE) object files cleaned!$(DEFAULT)"
-
-fclean: clean
-	$(V)echo "$(RED)[$(NAME_EXE)] Cleaning all files$(RESET)"
-	$(V)rm -f $(NAME_EXE)
-	$(V)$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
-	$(V)echo "$(RED)[mlx] Remove directory$(RESET)"
-	@rm -rf $(MLX_DIR)
-	$(V)echo "$(CYAN)$(NAME_EXE) executables and objects removed successfully!$(DEFAULT)"
-
-re: fclean all
-
-test: all
-	@for file in $(INVALID_MAPS); do \
-		echo ""; \
-		echo "Testing $$file..."; \
-		./$(NAME_EXE) $$file || true; \
-	done
-	@echo ""; echo "Testing without arguments..."; \
-	./$(NAME_EXE) || true
 
 go: all
 	@./$(NAME_EXE) $(ARGS)
@@ -247,4 +169,4 @@ gov: all
 	@valgrind --leak-check=full ./$(NAME_EXE) $(ARGS)
 	@rm -rf $(NAME_EXE)
 
-.PHONY: all bonus clean fclean re go gov test
+.PHONY: all bonus clean fclean re go gov
