@@ -69,18 +69,3 @@ void	handle_movement(t_game *game)
 	if (game->player.k_pressed[5])
 		rotate_right(game);
 }
-
-int	ft_mouse_hook(int x, int y, void *data)
-{
-	t_game	*game;
-
-	(void)y;
-	game = (t_game *)data;
-	if (x > WIN_WIDTH / 2)
-		rotate_right_mouse(game);
-	if (x < WIN_WIDTH / 2)
-		rotate_left_mouse(game);
-	mlx_mouse_move(game->window.mlx_ptr, game->window.mlx_window, \
-			WIN_WIDTH / 2, WIN_HEIGHT / 2);
-	return (0);
-}
