@@ -32,3 +32,4 @@ PIERRE
 NINA 
 	- si la map est vide on devrait direct renvoyer une erreur, pas celle du player
 	- map/invalid_map/wrong_border.cub fonctionne pas
+
