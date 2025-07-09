@@ -11,22 +11,16 @@ SRC_DIR = ./src/
 OBJ_DIR = ./obj/
 INC_DIR = ./include/
 MLX_DIR = ./minilibx-linux/
+
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx.a
 
-DIRS = 	minimap parsing raycasting utils
-
-FILES = 			main.c
-MINIMAP_FILES = 	map2d.c map2d_utils.c
-PARSING_FILES = 	parser.c map_checker.c flood_fill.c init.c parser_utils.c parse_till_map.c
-RAYCASTING_FILES =	raycasting.c raycasting_utils.c cast_rays.c cast_rays_utils.c
-UTILS_FILES = 		events.c clean.c movement.c rotation.c
-		
 SRC_FILES = 	$(addprefix src/, $(FILES)) \
 				$(addprefix src/minimap/, $(MINIMAP_FILES)) \
 				$(addprefix src/parsing/, $(PARSING_FILES)) \
 				$(addprefix src/raycasting/, $(RAYCASTING_FILES)) \
 				$(addprefix src/utils/, $(UTILS_FILES))
+
 
 OBJ = $(patsubst src/%.c, obj/%.o, $(SRC_FILES))
 INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
@@ -77,6 +71,7 @@ $(OBJ_DIR):
 # Dependencies
 DEP = $(OBJ:.o=.d)
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+
 	@mkdir -p $(dir $@)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 	$(V)$(CC) $(CFLAGS) $(INCLUDES) -MMD -MP -c $< -o $@
