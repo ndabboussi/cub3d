@@ -57,6 +57,28 @@ BONUS_DEP = $(BONUS_OBJ:.o=.d)
 INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 
 # Compilation mode
+=======
+
+DIRS = 	minimap parsing raycasting utils
+
+FILES = 			main.c
+MINIMAP_FILES = 	map2d.c map2d_utils.c
+PARSING_FILES = 	parser.c map_checker.c flood_fill.c init.c parser_utils.c parse_till_map.c
+RAYCASTING_FILES =	raycasting.c raycasting_utils.c cast_rays.c cast_rays_utils.c
+UTILS_FILES = 		events.c clean.c movement.c rotation.c
+
+
+SRC_FILES = 	$(addprefix src/, $(FILES)) \
+				$(addprefix src/minimap/, $(MINIMAP_FILES)) \
+				$(addprefix src/parsing/, $(PARSING_FILES)) \
+				$(addprefix src/raycasting/, $(RAYCASTING_FILES)) \
+				$(addprefix src/utils/, $(UTILS_FILES))
+
+
+OBJ = $(patsubst src/%.c, obj/%.o, $(SRC_FILES))
+INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
+
+# Compilation mode (silent by default, set VERBOSE=1 to show commands)
 VERBOSE ?= 0
 ifeq ($(VERBOSE),1)
 V :=
@@ -157,7 +179,56 @@ INVALID_MAPS = \
 	map/invalid_map/inexistant_map.cub \
 	map/invalid_map/invalid_texture.cub \
 	map/invalid_map/vide.cub \
-	map/invalid_map/wrong_color_2.cub
+	map/invalid_map/wrong_color_2.cub 
+
+all: $(OBJ_DIR) $(MLX_DIR) $(LIBFT) $(NAME_EXE)
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+	@for dir in $(DIRS); do mkdir -p $(OBJ_DIR)/$$dir; done
+
+# Dependencies
+DEP = $(OBJ:.o=.d)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+
+	@mkdir -p $(dir $@)
+	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+	$(V)$(CC) $(CFLAGS) $(INCLUDES) -MMD -MP -c $< -o $@
+
+-include $(DEP)
+
+$(NAME_EXE): $(OBJ) $(LIBFT)
+	$(V)$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) -L$(LIBFT_DIR) -L$(MLX_DIR) -lft -o $(NAME_EXE) $(MLXFLAG)
+	$(V)echo "$(GREEN)[$(NAME_EXE)] Executable created ✅$(RESET)"
+
+# Libft
+$(LIBFT):
+	$(V)$(MAKE) --silent -C $(LIBFT_DIR)
+	$(V)echo "[$(NAME_EXE)] Libft build successfully"
+
+# MiniLibX
+$(MLX_DIR):
+	$(V)echo "[$(NAME_EXE)] Downloading MiniLibX from github.com...$(RESET)"
+	@git clone https://github.com/42Paris/minilibx-linux.git $(MLX_DIR) > /dev/null 2>&1
+	$(V)echo "[$(NAME_EXE)] Compiling MiniLibX...$(RESET)"
+	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
+	$(V)echo "[$(NAME_EXE)] MiniLibX installed successfully$(RESET)"
+
+clean:
+	$(V)echo "$(RED)[$(NAME_EXE)] Cleaning objects$(RESET)"
+	$(V)rm -rf $(OBJ_DIR)
+	$(V)$(MAKE) clean -C $(LIBFT_DIR) > /dev/null
+	$(V)echo "$(GREEN)$(NAME_EXE) object files cleaned!$(DEFAULT)"
+
+fclean: clean
+	$(V)echo "$(RED)[$(NAME_EXE)] Cleaning all files$(RESET)"
+	$(V)rm -f $(NAME_EXE)
+	$(V)$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
+	$(V)echo "$(RED)[mlx] Remove directory$(RESET)"
+	@rm -rf $(MLX_DIR)
+	$(V)echo "$(CYAN)$(NAME_EXE) executables and objects removed successfully!$(DEFAULT)"
+
+re: fclean all
 
 test: all
 	@for file in $(INVALID_MAPS); do \

@@ -18,5 +18,3 @@ Implémenter leS PORTES
 	Mis en place de reception du sugnall "H" pour ouvrir la porte
 	Tranformer le P ou 0 pour permettre le passage
 	Possibilite de refermer la porte
-
-Option :  transfert de la texture de la porte a l'interieur du passage cree pour donner l'illusion qu'elle est ouverte
