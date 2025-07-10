@@ -17,7 +17,7 @@ static int	accumulate_map_text(char *line, char **map_text)
 	char	*tmp;
 
 	if (is_empty_line(line))
-		return (0);
+		return (-1);
 	tmp = *map_text;
 	*map_text = ft_strjoin(*map_text, line);
 	free(tmp);
@@ -47,12 +47,12 @@ static int	process_line(char *line, t_game *game, \
 	if (!*map_started)
 	{
 		if (handle_texture_line(line, game, map_started) == -1)
-			return (-1);
+			return (ft_puterr_fd(ERR_CONFIG_MAP, 2), -1);
 	}
 	if (*map_started)
 	{
 		if (accumulate_map_text(line, map_text) == -1)
-			return (-1);
+			return (ft_puterr_fd(ERR_CONFIG_MAP, 2), -1);
 	}
 	return (0);
 }

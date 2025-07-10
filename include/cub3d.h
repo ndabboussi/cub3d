@@ -41,6 +41,7 @@
 # define ERR_PLAYER "Check_player : 0 or more than 1 player found\n"
 # define ERR_MAP_CHAR "Check_forbidden_char : invalid char found\n"
 # define ERR_FLOOD "Flood_fill: invalid map (blank space or missing wall)\n"
+# define ERR_CONFIG_MAP "Accumulate_map_text: incorrect map\n"
 
 # define ERR_TEXT_PATH "Check_textures_path: invalid texture path(s)\n"
 # define ERR_TEXT_IMG "Get_textures: mlx_xpm_file_to_image failed\n"
