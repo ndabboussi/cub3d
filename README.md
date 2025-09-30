@@ -83,18 +83,18 @@ This project gives you hands-on experience with:
 
 ## 🗺 Example Map File Format (`.cub`)
 
-NO ./textures/north.xpm
-SO ./textures/south.xpm
-WE ./textures/west.xpm
-EA ./textures/east.xpm
-F 220,100,0
-C 225,30,0
+NO ./textures/north.xpm  
+SO ./textures/south.xpm  
+WE ./textures/west.xpm  
+EA ./textures/east.xpm  
+F 220,100,0  
+C 225,30,0  
 
-111111111111
-100000000001
-101100000101
-100N00000001
-111111111111
+111111111111  
+100000000001  
+101100000101  
+100N00000001  
+111111111111  
 
 - NO, SO, WE, EA = wall texture file paths
 - F = RGB color for the floor	
